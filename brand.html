@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand — Licit</title>
+  <link rel="preconnect" href="https://api.fontshare.com/v2/"/>
+  <link href="https://api.fontshare.com/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0A2FFF;
+      --primary-hover: rgba(10, 47, 255, 0.85);
+      --text: #0A0A0A;
+      --text-2: #5C6170;
+      --text-3: #8A90A0;
+      --border: #E7E9F0;
+      --surface: #FFFFFF;
+      --bg: #FAFAFA;
+      --success: #0F9F6E;
+      --shadow-sm: 0 10px 28px rgba(10, 10, 10, 0.05);
+      --shadow-md: 0 24px 56px rgba(10, 10, 10, 0.08);
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 18px;
+      --max: 960px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { width: min(var(--max), calc(100vw - 48px)); margin: 0 auto; }
+    header {
+      padding: 64px 0 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+    header .wrap { display: flex; align-items: center; gap: 16px; padding-bottom: 24px; }
+    header h1 { margin: 0; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; }
+    header span { color: var(--text-3); font-weight: 400; }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 4px;
+    }
+    h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+    }
+    .section-desc { color: var(--text-2); margin: 0 0 24px; font-size: 0.95rem; }
+    .section { padding: 40px 0; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+
+    .label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-3); margin-bottom: 8px; }
+
+    /* Logo section */
+    .logo-grid {
+      display: grid;
+      gap: 32px;
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-symbol {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+    }
+    .logo-wordmark {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+    .logo-horizontal {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-variants {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo-variant {
+      display: grid;
+      gap: 8px;
+      text-align: center;
+    }
+    .logo-variant .label { text-align: center; }
+    .logo-preview {
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 160px;
+      min-height: 80px;
+    }
+    .logo-preview.dark { background: var(--text); }
+
+    .signal-icon {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 24px;
+    }
+    .signal-icon .bar {
+      width: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .signal-icon .bar:nth-child(1) { height: 8px; }
+    .signal-icon .bar:nth-child(2) { height: 14px; }
+    .signal-icon .bar:nth-child(3) { height: 20px; }
+
+    /* Color palette */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .color-swatch {
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .color-swatch .swatch {
+      height: 80px;
+    }
+    .color-swatch .info {
+      padding: 10px 12px;
+    }
+    .color-swatch .info .name { font-weight: 700; font-size: 0.85rem; }
+    .color-swatch .info .hex { color: var(--text-3); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-top: 2px; }
+    .color-swatch .info .usage { color: var(--text-2); font-size: 0.78rem; margin-top: 4px; }
+
+    /* Typography */
+    .type-grid {
+      display: grid;
+      gap: 20px;
+    }
+    .type-sample {
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+    }
+    .type-sample .preview { margin: 8px 0 4px; }
+    .type-sample .preview.h1 { font-size: 2.8rem; font-weight: 900; letter-spacing: -0.055em; line-height: 1.01; margin: 0; }
+    .type-sample .preview.h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.04em; margin: 0; }
+    .type-sample .preview.h3 { font-weight: 700; letter-spacing: -0.03em; font-size: 1rem; margin: 0; }
+    .type-sample .preview.body { margin: 0; }
+    .type-sample .preview.mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin: 0; }
+    .type-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.78rem; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
+
+    /* Spacing tokens */
+    .token-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .token {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      font-size: 0.85rem;
+    }
+    .token .name { font-weight: 700; }
+    .token .value { color: var(--text-3); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-top: 2px; }
+    .radius-demo {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .radius-box {
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+    }
+    .radius-label { font-size: 0.75rem; color: var(--text-3); text-align: center; margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
+
+    /* Voice */
+    .voice-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .voice-example {
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      border: 1px solid var(--border);
+    }
+    .voice-example.good {
+      background: #F0FDF4;
+      border-color: #BBF7D0;
+    }
+    .voice-example.good::before {
+      content: "✓  ";
+      font-weight: 700;
+      color: var(--success);
+    }
+    .voice-example.bad {
+      background: #FEF2F2;
+      border-color: #FECACA;
+    }
+    .voice-example.bad::before {
+      content: "✗  ";
+      font-weight: 700;
+      color: #EF4444;
+    }
+    .voice-context { color: var(--text-2); font-size: 0.8rem; margin-top: 4px; }
+
+    /* UI Components */
+    .component-grid {
+      display: grid;
+      gap: 24px;
+    }
+    .component-shell {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+    }
+    .component-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: default;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-sm {
+      min-height: 34px;
+      padding: 0 12px;
+      font-size: 0.85rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-2);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .pill-live {
+      color: var(--success);
+      border-color: rgba(15, 159, 110, 0.18);
+      background: rgba(15, 159, 110, 0.07);
+    }
+    .pill-live::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-right: 8px;
+      background: var(--success);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      padding: 20px;
+    }
+
+    /* Application examples */
+    .app-grid {
+      display: grid;
+      gap: 20px;
+    }
+    .whatsapp-mock {
+      max-width: 360px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .wa-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .wa-header .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+    }
+    .wa-body {
+      padding: 16px;
+    }
+    .wa-body .wa-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .wa-body .wa-desc {
+      color: var(--text-2);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    .wa-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-3);
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .wa-meta span { padding: 2px 8px; border-radius: 4px; background: var(--bg); }
+
+    .nav-demo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      min-height: 60px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.9);
+    }
+    .nav-demo .brand {
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: 1.2rem;
+    }
+    .nav-demo .links {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--text-2);
+      font-weight: 600;
+    }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    .nav { position: static; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="logo-symbol">
+        <div class="signal-icon">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+      <h1>Brand <span>/ Licit</span></h1>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- LOGO -->
+    <section class="section">
+      <h2>Logo</h2>
+      <p class="section-desc">Symbol + wordmark lockups. No outline versions, no shadows, no gradients, no tagline inside the logo.</p>
+      <div class="logo-grid">
+        <div>
+          <div class="label">Primary horizontal</div>
+          <div class="logo-preview">
+            <div class="logo-horizontal">
+              <div class="signal-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+              <span class="logo-wordmark">licit</span>
+            </div>
+          </div>
+        </div>
+        <div class="logo-variants">
+          <div class="logo-variant">
+            <div class="label">Symbol only</div>
+            <div class="logo-preview">
+              <div class="signal-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
+          </div>
+          <div class="logo-variant">
+            <div class="label">Wordmark only</div>
+            <div class="logo-preview">
+              <span class="logo-wordmark" style="font-size:1.2rem">licit</span>
+            </div>
+          </div>
+          <div class="logo-variant">
+            <div class="label">On dark</div>
+            <div class="logo-preview dark">
+              <div class="logo-horizontal">
+                <div class="signal-icon" style="--primary:#FFFFFF">
+                  <div class="bar" style="background:#FFFFFF"></div>
+                  <div class="bar" style="background:#FFFFFF"></div>
+                  <div class="bar" style="background:#FFFFFF"></div>
+                </div>
+                <span class="logo-wordmark" style="color:#FFFFFF">licit</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOR PALETTE -->
+    <section class="section">
+      <h2>Color palette</h2>
+      <p class="section-desc">Single accent color. No secondary. No gradients in UI elements. Hover = primary at 85% opacity.</p>
+      <div class="color-grid">
+        <div class="color-swatch">
+          <div class="swatch" style="background:#0A2FFF"></div>
+          <div class="info">
+            <div class="name">Primary</div>
+            <div class="hex">#0A2FFF</div>
+            <div class="usage">Buttons, links, accents, symbol</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch" style="background:#0A0A0A"></div>
+          <div class="info">
+            <div class="name">Text</div>
+            <div class="hex">#0A0A0A</div>
+            <div class="usage">Headings, body</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch" style="background:#5C6170"></div>
+          <div class="info">
+            <div class="name">Text-secondary</div>
+            <div class="hex">#5C6170</div>
+            <div class="usage">Metadata, descriptions</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch" style="background:#8A90A0"></div>
+          <div class="info">
+            <div class="name">Text-tertiary</div>
+            <div class="hex">#8A90A0</div>
+            <div class="usage">Tiny text, placeholders</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch" style="background:#E7E9F0"></div>
+          <div class="info">
+            <div class="name">Border</div>
+            <div class="hex">#E7E9F0</div>
+            <div class="usage">Cards, inputs, dividers</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch" style="background:#FFFFFF; border-bottom: 1px solid #E7E9F0;"></div>
+          <div class="info">
+            <div class="name">Surface</div>
+            <div class="hex">#FFFFFF</div>
+            <div class="usage">Card backgrounds, panels</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch" style="background:#FAFAFA"></div>
+          <div class="info">
+            <div class="name">Bg</div>
+            <div class="hex">#FAFAFA</div>
+            <div class="usage">Page background</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch" style="background:#0F9F6E"></div>
+          <div class="info">
+            <div class="name">Success</div>
+            <div class="hex">#0F9F6E</div>
+            <div class="usage">Live pills, success states</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section class="section">
+      <h2>Typography</h2>
+      <p class="section-desc">Satoshi via Fontshare for all UI. JetBrains Mono via Google Fonts for code and IDs. Never use Satoshi Light or Thin.</p>
+      <div class="type-grid">
+        <div class="type-sample">
+          <div class="label">H1 · Satoshi Black 900</div>
+          <div class="type-meta">clamp(2.8rem, 5vw, 4.7rem) / -0.055em tracking / 1.01 line-height</div>
+          <p class="preview h1">Entérate de las licitaciones antes que los demás</p>
+        </div>
+        <div class="type-sample">
+          <div class="label">H2 · Satoshi Bold 700</div>
+          <div class="type-meta">clamp(1.75rem, 3vw, 2.45rem) / -0.04em tracking</div>
+          <p class="preview h2">Lo que hace Licit</p>
+        </div>
+        <div class="type-sample">
+          <div class="label">H3 · Satoshi Bold 700</div>
+          <div class="type-meta">1rem / -0.03em tracking</div>
+          <p class="preview h3">Alertas tempranas</p>
+        </div>
+        <div class="type-sample">
+          <div class="label">Body · Satoshi Medium 500</div>
+          <div class="type-meta">1rem / 1.6 line-height</div>
+          <p class="preview body">Licit monitorea el SEACE y te envía alertas con las convocatorias que matchean con tu negocio.</p>
+        </div>
+        <div class="type-sample">
+          <div class="label">Monospace · JetBrains Mono</div>
+          <div class="type-meta">0.85rem / for codes, IDs, tender numbers</div>
+          <p class="preview mono">LP-ABR-2-2025-MDH/CS-1 · S/ 420,000 · RUC 20538243079</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPACING TOKENS -->
+    <section class="section">
+      <h2>Spacing & layout tokens</h2>
+      <p class="section-desc">Consistent, minimal. No decorative excess.</p>
+      <div class="token-grid">
+        <div class="token">
+          <div class="name">Max width</div>
+          <div class="value">1180px</div>
+        </div>
+        <div class="token">
+          <div class="name">Card padding</div>
+          <div class="value">20px</div>
+        </div>
+        <div class="token">
+          <div class="name">Element gap</div>
+          <div class="value">12–16px</div>
+        </div>
+        <div class="token">
+          <div class="name">Section gap</div>
+          <div class="value">24px</div>
+        </div>
+        <div class="token">
+          <div class="name">--shadow-sm</div>
+          <div class="value">0 10px 28px rgba(0,0,0,0.05)</div>
+        </div>
+        <div class="token">
+          <div class="name">--shadow-md</div>
+          <div class="value">0 24px 56px rgba(0,0,0,0.08)</div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <div class="label">Border radius</div>
+        <div class="radius-demo">
+          <div>
+            <div class="radius-box" style="border-radius:10px"></div>
+            <div class="radius-label">10px (sm)</div>
+          </div>
+          <div>
+            <div class="radius-box" style="border-radius:14px"></div>
+            <div class="radius-label">14px (md)</div>
+          </div>
+          <div>
+            <div class="radius-box" style="border-radius:18px"></div>
+            <div class="radius-label">18px (lg)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VOICE & TONE -->
+    <section class="section">
+      <h2>Voice & tone</h2>
+      <p class="section-desc">Direct, professional, sin jargon legal. "Usted" pero no formal. Frases cortas. Sin anglicismos innecesarios.</p>
+      <div class="voice-grid">
+        <div class="voice-example good">
+          Licit monitorea el SEACE y te avisa cuando aparece una convocatoria relevante.
+          <div class="voice-context">Directo, claro, beneficioso.</div>
+        </div>
+        <div class="voice-example bad">
+          Nuestra plataforma de inteligencia de contrataciones gubernamentales facilita la detección temprana de oportunidades comerciales en el mercado público.
+          <div class="voice-context">Jargon pesado, suena a burocracia.</div>
+        </div>
+        <div class="voice-example good">
+          Elige tu plan y empieza a recibir alertas en menos de 5 minutos.
+          <div class="voice-context">Acción concreta, sin rodeos.</div>
+        </div>
+        <div class="voice-example bad">
+          Complete el formulario de registro para dar inicio al periodo de prueba gratuito de nuestra solución.
+          <div class="voice-context">Demasiadas palabras, suena a trámite.</div>
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <div class="label">Anglicismos: preferir español</div>
+        <div class="token-grid" style="margin-top:8px">
+          <div class="token"><span class="name">feedback</span> → <span class="value">retroalimentación</span></div>
+          <div class="token"><span class="name">onboarding</span> → <span class="value">registro</span></div>
+          <div class="token"><span class="name">deadline</span> → <span class="value">fecha límite</span></div>
+          <div class="token"><span class="name">email</span> → <span class="value">correo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UI COMPONENTS -->
+    <section class="section">
+      <h2>UI components</h2>
+      <p class="section-desc">Reusable UI primitives.</p>
+      <div class="component-grid">
+        <div class="component-shell">
+          <div class="label" style="margin-bottom:12px">Buttons</div>
+          <div class="component-row">
+            <span class="btn btn-primary">Primary</span>
+            <span class="btn btn-secondary">Secondary</span>
+            <span class="btn btn-primary btn-sm">Small primary</span>
+            <span class="btn btn-secondary btn-sm">Small secondary</span>
+          </div>
+        </div>
+        <div class="component-shell">
+          <div class="label" style="margin-bottom:12px">Pills & tags</div>
+          <div class="component-row">
+            <span class="pill">Categoría</span>
+            <span class="pill pill-live">Producto piloto</span>
+            <span class="pill" style="background:var(--surface-accent, #EEF2FF);color:var(--primary);border-color:rgba(10,47,255,0.12)">Prioridad: alta</span>
+          </div>
+        </div>
+        <div class="component-shell">
+          <div class="label" style="margin-bottom:12px">Navigation bar</div>
+          <div class="nav-demo">
+            <div class="logo-horizontal" style="gap:8px">
+              <div class="signal-icon" style="height:18px">
+                <div class="bar" style="height:6px"></div>
+                <div class="bar" style="height:10px"></div>
+                <div class="bar" style="height:14px"></div>
+              </div>
+              <span class="brand">licit</span>
+            </div>
+            <div class="links">
+              <span>Producto</span>
+              <span>Señales</span>
+              <span>Planes</span>
+              <span>FAQ</span>
+            </div>
+          </div>
+        </div>
+        <div class="component-shell">
+          <div class="label" style="margin-bottom:12px">Cards</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="card">
+              <h3 style="margin:0 0 8px">Básico</h3>
+              <div style="font-size:1.6rem;font-weight:900;letter-spacing:-0.04em">S/49 <span style="font-size:0.85rem;color:var(--text-3);font-weight:700">/mes</span></div>
+            </div>
+            <div class="card" style="border-color:rgba(10,47,255,0.24)">
+              <h3 style="margin:0 0 8px">Pro</h3>
+              <div style="font-size:1.6rem;font-weight:900;letter-spacing:-0.04em">S/149 <span style="font-size:0.85rem;color:var(--text-3);font-weight:700">/mes</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLICATION EXAMPLES -->
+    <section class="section" style="border-bottom:none">
+      <h2>Application examples</h2>
+      <p class="section-desc">How the brand system is applied in real product contexts.</p>
+      <div class="app-grid">
+        <div>
+          <div class="label" style="margin-bottom:12px">WhatsApp alert simulation</div>
+          <div class="whatsapp-mock">
+            <div class="wa-header">
+              <div class="dot"></div>
+              Licit
+            </div>
+            <div class="wa-body">
+              <div class="wa-title">Nueva licitación · Equipos médicos</div>
+              <div class="wa-desc">Hospital Regional abre proceso por S/420,000. Plazo: 15 días.</div>
+              <div class="pill pill-live" style="font-size:0.8rem;min-height:26px;padding:4px 10px">Alta prioridad</div>
+              <div class="wa-meta">
+                <span>SEACE V3</span>
+                <span>Gob. Regional Lambayeque</span>
+                <span>Bienes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="label" style="margin-bottom:12px">Signal feed card</div>
+          <div class="card" style="margin-top:0">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+              <span class="pill pill-live" style="font-size:0.8rem;min-height:26px;padding:4px 10px">Nueva convocatoria</span>
+              <span class="pill" style="font-size:0.8rem;min-height:26px;padding:4px 10px;background:#EEF2FF;color:var(--primary);border-color:rgba(10,47,255,0.12)">Prioridad: alta</span>
+            </div>
+            <h3 style="margin:0 0 8px;font-size:1rem">Adjudicación Simplificada · Consultoría ambiental</h3>
+            <p style="margin:0 0 12px;color:var(--text-2);font-size:0.9rem">Gobierno Regional de Cusco publica proceso por S/95,000. Plazo: 12 días.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:0.78rem;color:var(--text-3)">
+              <span>Fuente: SEACE V3</span>
+              <span>Entidad: GR Cusco</span>
+              <span>Objeto: servicios</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

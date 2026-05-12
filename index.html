@@ -742,12 +742,16 @@
         if (!email) return;
         var st = document.getElementById('subStatus');
         st.textContent = '...';
-        fetch(API_BASE + '/api/subscribe', {
+        // Check if they chose annual
+        var isYearly = document.getElementById('pricingGrid')?.classList.contains('show-yearly');
+        var interval = isYearly ? 'yearly' : 'monthly';
+        fetch(API_BASE + '/api/checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email }),
+          body: JSON.stringify({ plan: 'basico', interval: interval, email: email }),
         }).then(function(r){ return r.json(); }).then(function(d){
-          st.textContent = (subTexts[lang] || subTexts.es).sent;
+          if (d.url) { window.location.href = d.url; }
+          else { st.textContent = d.error || 'Error'; }
         }).catch(function(){
           st.textContent = (subTexts[lang] || subTexts.es).error;
         });

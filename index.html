@@ -6,43 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)" />
-  <title>Licit — Alertas de Licitaciones SEACE para Proveedores del Estado</title>
+  <title>Licit — Alertas de Licitaciones SEACE</title>
   <link rel="preconnect" href="https://api.fontshare.com/v2/"/>
   <link href="https://api.fontshare.com/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fafafa;
+      --bg: #f5f5f5;
       --surface: #ffffff;
-      --surface-alt: #f5f6fb;
-      --surface-accent: #eef2ff;
+      --surface-hover: #f0f0f0;
       --text: #0a0a0a;
-      --text-2: #5c6170;
-      --text-3: #8a90a0;
-      --border: #e7e9f0;
+      --text-2: #6b6f7a;
+      --text-3: #9ca0ab;
+      --border: #e4e4e7;
       --accent: #0A2FFF;
-      --accent-soft: rgba(10, 47, 255, 0.08);
+      --accent-soft: rgba(10,47,255,0.08);
       --success: #0f9f6e;
-      --shadow-sm: 0 10px 28px rgba(10, 10, 10, 0.05);
-      --shadow-md: 0 24px 56px rgba(10, 10, 10, 0.08);
-      --radius-sm: 10px;
-      --radius-md: 14px;
-      --radius-lg: 18px;
-      --max: 1180px;
-      --nav-h: 72px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --max: 1100px;
+      --nav-h: 64px;
     }
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #0A0A0A;
         --surface: #141414;
-        --surface-alt: #1A1A1A;
-        --surface-accent: rgba(10, 47, 255, 0.15);
+        --surface-hover: #1C1C1C;
         --text: #EDEDED;
         --text-2: #888888;
         --text-3: #555555;
         --border: #222222;
-        --accent-soft: rgba(10, 47, 255, 0.15);
-        --shadow-sm: 0 10px 28px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 24px 56px rgba(0, 0, 0, 0.4);
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
       }
     }
     * { box-sizing: border-box; }
@@ -56,428 +53,326 @@
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
-    .wrap { width: min(var(--max), calc(100vw - 32px)); margin: 0 auto; }
+
+    .wrap { width: min(var(--max), calc(100vw - 48px)); margin: 0 auto; }
 
     .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: sticky; top: 0; z-index: 50;
       height: var(--nav-h);
-      background: rgba(250, 250, 250, 0.85);
+      background: rgba(245,245,245,0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(231, 233, 240, 0.8);
+      border-bottom: 1px solid rgba(228,228,231,0.7);
     }
     @media (prefers-color-scheme: dark) {
       .nav {
-        background: rgba(10, 10, 10, 0.85);
-        border-bottom-color: rgba(34, 34, 34, 0.8);
+        background: rgba(10,10,10,0.85);
+        border-bottom-color: rgba(34,34,34,0.7);
       }
     }
     .nav-inner {
       height: var(--nav-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-start { display: flex; align-items: center; gap: 32px; }
-    .nav-links { display: flex; align-items: center; gap: 20px; color: var(--text-2); font-size: 0.9rem; font-weight: 600; }
+    .nav-l {
+      display: flex; align-items: center; gap: 28px;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 20px;
+      color: var(--text-2); font-size: 0.88rem; font-weight: 600;
+    }
     .nav-links a:hover { color: var(--text); }
-    .nav-end { display: flex; align-items: center; gap: 12px; }
+    .nav-r { display: flex; align-items: center; gap: 12px; }
 
     .lang-toggle {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px;
-      border-radius: 8px;
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      user-select: none;
+      display: flex; align-items: center; gap: 3px;
+      padding: 3px; border-radius: 7px;
+      background: var(--surface); border: 1px solid var(--border);
+      font-size: 0.78rem; font-weight: 700; cursor: pointer; user-select: none;
     }
     .lang-toggle span {
-      padding: 4px 8px;
-      border-radius: 6px;
-      color: var(--text-3);
-      transition: 0.15s;
+      padding: 3px 7px; border-radius: 5px;
+      color: var(--text-3); transition: 0.15s;
     }
-    .lang-toggle span.active {
-      background: var(--surface);
-      color: var(--text);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    }
-
+    .lang-toggle span.active { background: var(--accent); color: white; }
     [data-lang="en"] { display: none; }
     .lang-en [data-lang="en"] { display: inherit; }
     .lang-en [data-lang="es"] { display: none; }
 
-    .button {
-      display: inline-flex;
-      align-items: center; justify-content: center; gap: 8px;
-      min-height: 44px; padding: 0 18px;
-      border-radius: var(--radius-sm);
-      border: 1px solid transparent;
-      font-size: 0.92rem; font-weight: 700;
-      cursor: pointer; transition: 0.15s;
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      min-height: 38px; padding: 0 14px;
+      border-radius: 8px; border: 1px solid transparent;
+      font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: 0.12s;
       text-align: center;
     }
-    .button-primary {
-      background: var(--accent); color: white;
-    }
-    .button-primary:hover { opacity: 0.85; }
-    .button-secondary {
-      background: var(--surface);
-      border-color: var(--border);
-      color: var(--text);
-    }
-    .button-secondary:hover { background: var(--surface-alt); }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary { background: var(--surface); border-color: var(--border); color: var(--text); }
+    .btn-secondary:hover { background: var(--surface-hover); }
+    .btn-sm { min-height: 32px; padding: 0 10px; font-size: 0.82rem; }
 
-    main { padding-bottom: 60px; }
-    section { padding: 40px 0; }
+    section { padding: 80px 0; }
+    section + section { border-top: 1px solid var(--border); }
 
-    .hero {
-      padding: 60px 0 40px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
-      gap: 28px;
-      align-items: start;
+    .hero-wrap {
+      padding: 100px 0 80px;
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
     .hero-bg {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
     }
     .hero-bg .dot-grid {
-      position: absolute;
-      width: 100%; height: 100%;
+      position: absolute; width: 100%; height: 100%;
       background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
-      background-size: 32px 32px;
-      opacity: 0.4;
+      background-size: 40px 40px; opacity: 0.35;
     }
-    .hero-bg .radar-ring {
-      position: absolute;
-      top: -120px; right: -80px;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      opacity: 0.3;
-    }
-    .hero-bg .radar-ring:nth-child(2) { width: 350px; height: 350px; top: -60px; right: -40px; opacity: 0.2; }
-    .hero-bg .radar-ring:nth-child(3) { width: 200px; height: 200px; top: 0; right: 0; opacity: 0.15; }
-
-    @keyframes signal-pulse {
-      0%, 100% { transform: scaleY(1); }
-      50% { transform: scaleY(0.7); }
-    }
-    @keyframes signal-pulse-delayed {
-      0%, 100% { transform: scaleY(1); }
-      50% { transform: scaleY(0.6); }
+    @keyframes pulse-bar {
+      0%,100%{transform:scaleY(1)}50%{transform:scaleY(0.55)}
     }
     .hero-signal {
-      display: flex;
-      align-items: flex-end;
-      gap: 4px;
-      height: 32px;
-      margin-bottom: 16px;
+      display: flex; align-items: flex-end; justify-content: center; gap: 5px;
+      height: 40px; margin-bottom: 20px;
     }
     .hero-signal .bar {
-      width: 5px;
-      background: var(--accent);
-      border-radius: 3px;
-      transform-origin: bottom;
+      width: 6px; background: var(--accent); border-radius: 3px; transform-origin: bottom;
     }
-    .hero-signal .bar:nth-child(1) { height: 12px; animation: signal-pulse 2s ease-in-out infinite; }
-    .hero-signal .bar:nth-child(2) { height: 20px; animation: signal-pulse-delayed 2.2s ease-in-out infinite; }
-    .hero-signal .bar:nth-child(3) { height: 28px; animation: signal-pulse 1.8s ease-in-out infinite; }
-
-    .eyebrow {
-      display: inline-flex; align-items: center;
-      padding: 6px 12px; border-radius: 999px;
-      background: var(--accent-soft); color: var(--accent);
-      border: 1px solid rgba(10,47,255,0.14);
-      text-transform: uppercase; letter-spacing: 0.06em;
-      font-size: 11px; font-weight: 800;
+    .hero-signal .bar:nth-child(1){height:14px;animation:pulse-bar 2s ease-in-out infinite}
+    .hero-signal .bar:nth-child(2){height:24px;animation:pulse-bar 2.2s ease-in-out infinite}
+    .hero-signal .bar:nth-child(3){height:34px;animation:pulse-bar 1.8s ease-in-out infinite}
+    .hero-wrap h1 {
+      margin: 0 auto 16px;
+      max-width: 800px;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
     }
-    h1 {
-      margin: 14px 0 16px;
-      font-size: clamp(2.6rem, 4.5vw, 4.2rem);
-      line-height: 1.01;
-      letter-spacing: -0.055em;
-      max-width: 720px;
+    .hero-wrap .lead {
+      margin: 0 auto;
+      max-width: 560px;
+      color: var(--text-2);
+      font-size: 1.05rem;
+      line-height: 1.6;
     }
-    .lead {
-      margin: 0; max-width: 680px;
-      color: var(--text-2); font-size: 1.08rem;
-      line-height: 1.55;
-    }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-    .hero-meta, .report-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .hero-chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
     .chip {
-      display: inline-flex; align-items: center;
-      min-height: 32px; padding: 6px 11px;
-      border-radius: 999px; border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text-2); font-size: 0.85rem; font-weight: 600;
+      padding: 6px 12px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-2); font-size: 0.82rem; font-weight: 600;
     }
 
-    .card {
+    .hero-panel-wrap {
+      max-width: 520px; margin: 32px auto 0;
+    }
+    .hero-card {
       background: var(--surface);
-      border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
+      padding: 20px;
+      box-shadow: var(--shadow-md);
     }
-
-    .hero-panel {
-      position: sticky; top: calc(var(--nav-h) + 24px);
-      padding: 20px; display: grid; gap: 14px;
-      overflow: hidden;
-    }
-    .panel-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .hero-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
     .pill {
       display: inline-flex; align-items: center;
-      min-height: 30px; padding: 6px 11px;
-      border-radius: 999px; border: 1px solid var(--border);
-      background: var(--surface); color: var(--text-2);
-      font-size: 0.85rem; font-weight: 600;
+      min-height: 28px; padding: 5px 10px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-2); font-size: 0.8rem; font-weight: 600;
     }
-    .pill-live {
-      color: var(--success);
-      border-color: rgba(15,159,110,0.18);
-      background: rgba(15,159,110,0.07);
-    }
-    .pill-live::before {
-      content: "";
-      width: 7px; height: 7px; border-radius: 999px;
-      margin-right: 7px;
-      background: var(--success);
-    }
-    .snapshot {
-      padding: 16px;
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-    .snapshot h3 { margin: 0 0 6px; font-size: 0.95rem; }
-    .snapshot p { margin: 0; font-size: 0.85rem; color: var(--text-2); }
-    .tiny { color: var(--text-3); font-size: 0.85rem; }
-    .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .metric { padding: 14px; background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-md); }
-    .metric .label { color: var(--text-3); font-size: 0.78rem; font-weight: 600; }
-    .metric .value { margin-top: 4px; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.04em; }
+    .pill-live { color: var(--success); border-color: rgba(15,159,110,0.2); background: rgba(15,159,110,0.07); }
+    .pill-live::before { content: ""; width: 6px; height: 6px; border-radius: 999px; margin-right: 6px; background: var(--success); }
 
-    /* whatsapp notification */
-    @keyframes slide-in {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .wa-notif {
-      display: flex; gap: 12px; padding: 14px;
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      animation: slide-in 0.4s ease-out;
-    }
-    .wa-avatar {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--accent);
-      display: grid; place-items: center;
-      flex-shrink: 0;
-    }
-    .wa-avatar svg { width: 20px; height: 20px; }
-    .wa-content { flex: 1; min-width: 0; }
-    .wa-head { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
-    .wa-sender { font-weight: 700; }
-    .wa-time { color: var(--text-3); font-size: 0.75rem; }
-    .wa-msg { margin-top: 3px; font-size: 0.85rem; color: var(--text-2); line-height: 1.4; }
-    .wa-badge {
-      display: inline-flex; align-items: center; gap: 4px;
-      margin-top: 8px; padding: 3px 8px;
-      border-radius: 6px; font-size: 0.72rem; font-weight: 700;
-      background: rgba(15,159,110,0.1); color: var(--success);
-    }
-    .wa-badge::before { content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--success); }
-
-    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
-    .sidebar { display: grid; gap: 14px; position: sticky; top: calc(var(--nav-h) + 24px); }
-    .sidebar-card { padding: 18px; }
-    .sidebar-card h3 { margin: 0 0 8px; font-size: 0.95rem; }
-    .sidebar-card p { margin: 0; font-size: 0.85rem; color: var(--text-2); }
-    .sidebar-card ul { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; }
-    .sidebar-card li { position: relative; padding-left: 16px; color: var(--text-2); font-size: 0.85rem; }
-    .sidebar-card li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 999px; background: var(--accent); }
-
-    .section-head { margin-bottom: 20px; }
-    .section-head h2 { margin: 0; font-size: clamp(1.6rem, 2.8vw, 2.2rem); letter-spacing: -0.04em; }
-    .section-head p { margin: 8px 0 0; color: var(--text-2); max-width: 680px; font-size: 0.95rem; }
-
-    .features-asymmetric { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; }
-    .features-asymmetric .span-2 { grid-column: span 2; }
-    .feature { padding: 20px; }
-    .feature h3 { margin: 0 0 6px; font-size: 1rem; }
-    .feature p { margin: 0; font-size: 0.88rem; color: var(--text-2); }
-    .icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; margin-bottom: 12px; background: var(--surface-accent); color: var(--accent); border: 1px solid rgba(10,47,255,0.12); font-weight: 800; font-size: 0.85rem; }
-
-    .workflow-asymmetric { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 14px; }
-    .workflow-asymmetric .span-2 { grid-column: span 2; }
-    .step { padding: 20px; }
-    .step h3 { margin: 0 0 6px; font-size: 1rem; }
-    .step p { margin: 0; font-size: 0.88rem; color: var(--text-2); }
-    .num { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; margin-bottom: 12px; background: var(--surface-accent); color: var(--accent); border: 1px solid rgba(10,47,255,0.12); font-weight: 800; }
-
-    .report-shell { display: grid; gap: 12px; }
-    .report-card { padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
-    .report-card h3 { margin: 0 0 6px; font-size: 0.95rem; }
-    .report-card p { margin: 0; font-size: 0.85rem; color: var(--text-2); }
-    .report-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; font-size: 0.75rem; color: var(--text-3); }
-    .report-meta span { padding: 2px 8px; border-radius: 4px; background: var(--bg); }
-
-    /* filter mockup */
-    .filter-mock {
+    .wa-line {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 12px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
+    }
+    .wa-avatar {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: var(--accent); flex-shrink: 0;
+      display: grid; place-items: center;
+    }
+    .wa-avatar svg { width: 18px; height: 18px; }
+    .wa-content { flex: 1; min-width: 0; }
+    .wa-head { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; }
+    .wa-sender { font-weight: 700; }
+    .wa-time { color: var(--text-3); }
+    .wa-msg { margin-top: 2px; font-size: 0.83rem; color: var(--text-2); }
+    .wa-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 6px; padding: 2px 7px; border-radius: 5px;
+      font-size: 0.7rem; font-weight: 700;
+      background: rgba(15,159,110,0.1); color: var(--success);
+    }
+    .wa-tag::before { content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--success); }
+    .signal-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    .signal-metric { text-align: center; padding: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+    .signal-metric .lbl { color: var(--text-3); font-size: 0.72rem; font-weight: 600; }
+    .signal-metric .val { margin-top: 2px; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.03em; }
+
+    .sec-header { text-align: center; margin-bottom: 48px; }
+    .sec-header h2 { margin: 0; font-size: clamp(1.5rem, 2.5vw, 2rem); letter-spacing: -0.04em; }
+    .sec-header p { margin: 8px 0 0; color: var(--text-2); font-size: 0.95rem; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .tile { padding: 0; }
+    .tile .ico {
+      width: 34px; height: 34px; display: grid; place-items: center;
+      border-radius: 9px; margin-bottom: 14px;
+      background: var(--accent-soft); color: var(--accent);
+      font-weight: 800; font-size: 0.8rem;
+    }
+    .tile h3 { margin: 0 0 6px; font-size: 1rem; }
+    .tile p { margin: 0; color: var(--text-2); font-size: 0.88rem; line-height: 1.55; }
+
+    .steps { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 20px; }
+    .step { padding: 0; }
+    .step .num {
+      width: 34px; height: 34px; display: grid; place-items: center;
+      border-radius: 9px; margin-bottom: 14px;
+      background: var(--accent-soft); color: var(--accent);
+      font-weight: 800; font-size: 0.85rem;
+    }
+    .step h3 { margin: 0 0 6px; font-size: 1rem; }
+    .step p { margin: 0; color: var(--text-2); font-size: 0.88rem; line-height: 1.55; }
+
+    .alt-section {
+      background: var(--surface);
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .alt-section + section { border-top: none; }
+    .alt-section + .alt-section { border-top: 1px solid var(--border); }
+    .alt-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .alt-inner.rev { direction: rtl; }
+    .alt-inner.rev > * { direction: ltr; }
+    .alt-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 8px; }
+    .alt-inner h2 { margin: 0 0 12px; font-size: clamp(1.3rem, 2vw, 1.7rem); letter-spacing: -0.04em; }
+    .alt-inner p { margin: 0; color: var(--text-2); font-size: 0.92rem; line-height: 1.6; }
+
+    .filter-demo {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
       overflow: hidden;
     }
-    .filter-toolbar {
-      display: flex; gap: 10px; padding: 16px;
-      border-bottom: 1px solid var(--border);
-      flex-wrap: wrap;
+    .filter-bar {
+      display: flex; gap: 8px; padding: 14px;
+      border-bottom: 1px solid var(--border); flex-wrap: wrap;
     }
-    .filter-select {
-      padding: 8px 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: 600;
-      min-width: 130px;
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238A90A0' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      padding-right: 28px;
+    .filter-bar select {
+      padding: 7px 10px; border: 1px solid var(--border); border-radius: 7px;
+      background: var(--bg); color: var(--text);
+      font-family: inherit; font-size: 0.8rem; font-weight: 600;
+      appearance: none; cursor: pointer; flex: 1; min-width: 120px;
     }
-    .filter-results { padding: 12px 16px; display: grid; gap: 8px; min-height: 120px; }
+    .filter-list { padding: 8px 14px 4px; }
     .filter-row {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 0;
+      padding: 10px 0; font-size: 0.82rem;
       border-bottom: 1px solid var(--border);
-      font-size: 0.82rem;
     }
     .filter-row:last-child { border-bottom: none; }
-    .filter-row .ent { color: var(--text-2); }
-    .filter-row .mon { font-weight: 700; font-variant-numeric: tabular-nums; }
-    .filter-row .obj {
-      padding: 2px 7px; border-radius: 4px;
-      font-size: 0.7rem; font-weight: 700;
-      background: var(--surface-accent); color: var(--accent);
+    .filter-row .tag {
+      padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700;
+      background: var(--accent-soft); color: var(--accent);
     }
-    .filter-count {
-      padding: 8px 16px 12px;
-      font-size: 0.78rem; color: var(--text-3);
+    .filter-row .tag.green { background: rgba(15,159,110,0.1); color: var(--success); }
+    .filter-count { padding: 8px 14px 12px; font-size: 0.76rem; color: var(--text-3); }
+
+    .changelog { display: grid; gap: 0; }
+    .cl-item {
+      display: grid; grid-template-columns: 80px 1fr; gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cl-item:last-child { border-bottom: none; }
+    .cl-date { color: var(--text-3); font-size: 0.82rem; font-weight: 600; padding-top: 2px; }
+    .cl-content h3 { margin: 0 0 4px; font-size: 0.95rem; }
+    .cl-content p { margin: 0; color: var(--text-2); font-size: 0.85rem; }
+    .cl-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .cl-tags span {
+      padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 600;
+      background: var(--accent-soft); color: var(--accent);
     }
 
-    .pricing-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 24px; flex-wrap: wrap; gap: 16px;
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .pc {
+      padding: 28px;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
     }
-    .toggle-wrap {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 0.88rem; font-weight: 600; color: var(--text-2);
+    .pc.highlight { border-color: var(--accent); }
+    .pc .pname { font-size: 0.8rem; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+    .pc h3 { margin: 0 0 16px; font-size: 1rem; }
+    .pc .price {
+      font-size: 1.9rem; font-weight: 900; letter-spacing: -0.04em;
     }
+    .pc .price small { font-size: 0.82rem; color: var(--text-3); font-weight: 700; }
+    .pc .py { display: none; font-size: 0.8rem; color: var(--text-3); margin-top: 2px; }
+    .show-yearly .py { display: block; }
+    .show-yearly .pm { display: none; }
+    .pc ul { list-style: none; padding: 0; margin: 16px 0; display: grid; gap: 7px; }
+    .pc li { position: relative; padding-left: 16px; color: var(--text-2); font-size: 0.83rem; }
+    .pc li::before { content: ""; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 999px; background: var(--accent); }
+    .pc .btn { margin-top: 8px; }
+
+    .pricing-toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 32px; font-size: 0.85rem; font-weight: 600; color: var(--text-2); }
     .toggle-track {
-      width: 44px; height: 24px; border-radius: 999px;
-      background: var(--border);
-      cursor: pointer; position: relative; transition: 0.2s; flex-shrink: 0;
+      width: 40px; height: 22px; border-radius: 999px;
+      background: var(--border); cursor: pointer; position: relative; transition: 0.2s; flex-shrink: 0;
     }
     .toggle-track.active { background: var(--accent); }
     .toggle-track::after {
-      content: ""; position: absolute;
-      top: 3px; left: 3px;
-      width: 18px; height: 18px; border-radius: 999px;
+      content: ""; position: absolute; top: 3px; left: 3px;
+      width: 16px; height: 16px; border-radius: 999px;
       background: white; transition: 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     }
-    .toggle-track.active::after { left: 23px; }
-    .toggle-save {
-      padding: 2px 8px; border-radius: 6px;
-      background: var(--accent-soft); color: var(--accent);
-      font-size: 0.75rem; font-weight: 700;
-    }
-    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .price-card { padding: 24px; display: grid; gap: 16px; }
-    .price-card .pill { align-self: start; }
-    .price-card h3 { margin: 0; font-size: 1rem; }
-    .price-card .price-desc { margin: 0; font-size: 0.85rem; color: var(--text-2); }
-    .price-card.highlight { border-color: rgba(10,47,255,0.2); box-shadow: var(--shadow-md); }
-    .price-amount {
-      font-size: 2rem; font-weight: 900; letter-spacing: -0.04em;
-    }
-    .price-amount small { font-size: 0.85rem; color: var(--text-3); font-weight: 700; }
-    .price-yearly { display: none; font-size: 0.82rem; color: var(--text-3); }
-    .show-yearly .price-yearly { display: block; }
-    .show-yearly .price-monthly { display: none; }
-    .clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-    .clean li { position: relative; padding-left: 18px; color: var(--text-2); font-size: 0.85rem; }
-    .clean li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 999px; background: var(--accent); }
-    .price-card .button { margin-top: 8px; }
+    .toggle-track.active::after { left: 21px; }
+    .toggle-save { padding: 2px 8px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); font-size: 0.72rem; font-weight: 700; }
 
-    .faq-zigzag { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .faq-zigzag .offset { margin-top: 40px; }
-    .faq-item { padding: 20px; }
-    .faq-item h3 { margin: 0 0 8px; font-size: 0.95rem; }
-    .faq-item p { margin: 0; font-size: 0.85rem; color: var(--text-2); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .faq-item { padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .faq-item:nth-child(odd) { padding-right: 24px; }
+    .faq-item:nth-child(even) { padding-left: 24px; border-left: 1px solid var(--border); }
+    .faq-item h3 { margin: 0 0 6px; font-size: 0.92rem; }
+    .faq-item p { margin: 0; color: var(--text-2); font-size: 0.85rem; line-height: 1.55; }
 
-    .cta-card {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 20px; flex-wrap: wrap;
-      padding: 28px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
+    .cta-block {
+      text-align: center;
+      padding: 60px 0;
     }
-    .cta-card h2 { margin: 0 0 6px; letter-spacing: -0.04em; }
-    .cta-card .tiny { color: var(--text-3); font-size: 0.9rem; }
-    .cta-card .hero-actions { margin-top: 0; }
+    .cta-block h2 { margin: 0 0 8px; font-size: clamp(1.4rem, 2.5vw, 1.8rem); letter-spacing: -0.04em; }
+    .cta-block .tiny { color: var(--text-2); font-size: 0.92rem; margin-bottom: 24px; }
 
-    footer { padding: 12px 0 40px; color: var(--text-3); font-size: 0.85rem; }
+    footer { padding: 24px 0 48px; color: var(--text-3); font-size: 0.82rem; text-align: center; border-top: 1px solid var(--border); }
 
-    @media (max-width: 1080px) {
-      .hero, .layout, .pricing, .metric-grid { grid-template-columns: 1fr; }
-      .features-asymmetric, .workflow-asymmetric, .faq-zigzag { grid-template-columns: 1fr; }
-      .features-asymmetric .span-2, .workflow-asymmetric .span-2, .faq-zigzag .offset { grid-column: auto; margin-top: 0; }
-      .hero-panel, .sidebar { position: static; }
-    }
-    @media (max-width: 720px) {
-      .wrap { width: min(var(--max), calc(100vw - 20px)); }
+    @media (max-width: 860px) {
+      .grid-3, .steps, .pricing-grid, .alt-inner, .faq-grid, .cl-item { grid-template-columns: 1fr; }
+      .alt-inner { gap: 32px; }
+      .alt-inner.rev { direction: ltr; }
+      .faq-item:nth-child(even) { padding-left: 0; border-left: none; }
+      .cl-item { gap: 6px; }
       .nav-links { display: none; }
-      .button { width: 100%; }
-      .hero-actions { flex-direction: column; }
     }
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="wrap nav-inner">
-      <div class="nav-start">
-        <a href="#" style="display:flex;align-items:center;gap:10px">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <div class="nav-l">
+        <a href="#" style="display:flex;align-items:center;gap:8px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
             <rect x="2" y="10" width="4" height="12" rx="1.5" fill="#0A2FFF"/>
             <rect x="8" y="6" width="4" height="16" rx="1.5" fill="#0A2FFF"/>
             <rect x="14" y="2" width="4" height="20" rx="1.5" fill="#0A2FFF"/>
           </svg>
-          <span style="font-size:1.2rem;font-weight:900;letter-spacing:-0.04em">licit</span>
+          <span style="font-size:1.1rem;font-weight:900;letter-spacing:-0.04em">licit</span>
         </a>
         <div class="nav-links">
           <a href="#features"><span data-lang="es">Producto</span><span data-lang="en">Product</span></a>
@@ -486,477 +381,322 @@
           <a href="#faq"><span data-lang="es">FAQ</span><span data-lang="en">FAQ</span></a>
         </div>
       </div>
-      <div class="nav-end">
+      <div class="nav-r">
         <div class="lang-toggle" id="langToggle">
           <span class="active">ES</span>
           <span>EN</span>
         </div>
-        <a class="button button-primary" href="#pricing" style="min-height:36px;font-size:0.85rem;padding:0 14px">
-          <span data-lang="es">Probar gratis</span><span data-lang="en">Free trial</span>
-        </a>
+        <a class="btn btn-primary btn-sm" href="#pricing"><span data-lang="es">Probar gratis</span><span data-lang="en">Free trial</span></a>
       </div>
     </div>
   </nav>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero-bg">
-        <div class="dot-grid"></div>
-        <div class="radar-ring"></div>
-        <div class="radar-ring"></div>
-        <div class="radar-ring"></div>
+  <main>
+    <div class="wrap hero-wrap">
+      <div class="hero-bg"><div class="dot-grid"></div></div>
+      <div class="hero-signal"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+      <h1><span data-lang="es">Nunca te pierdas una licitación del Estado</span><span data-lang="en">Never miss a state tender again</span></h1>
+      <p class="lead"><span data-lang="es">Licit monitorea el SEACE y te envía alertas con las convocatorias que coinciden con tu negocio. En WhatsApp, Telegram o email.</span><span data-lang="en">Licit monitors SEACE and sends you alerts for tenders that match your business. Via WhatsApp, Telegram or email.</span></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#feed"><span data-lang="es">Ver señales de ejemplo</span><span data-lang="en">See sample signals</span></a>
+        <a class="btn btn-secondary" href="#pricing"><span data-lang="es">Ver planes</span><span data-lang="en">View plans</span></a>
       </div>
-      <div>
-        <div class="hero-signal">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-        </div>
-        <span class="eyebrow"><span data-lang="es">Licit · inteligencia de compras públicas</span><span data-lang="en">Licit · public procurement intelligence</span></span>
-        <h1><span data-lang="es">Entérate de las licitaciones del Estado antes que los demás</span><span data-lang="en">Get state tender alerts before your competitors</span></h1>
-        <p class="lead">
-          <span data-lang="es">Licit monitorea el SEACE y te envía alertas con las convocatorias que coinciden con tu negocio. Deja de revisar el portal a mano y empieza a ganar.</span>
-          <span data-lang="en">Licit monitors SEACE and sends you alerts for tenders that match your business. Stop checking the portal manually and start winning.</span>
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#feed"><span data-lang="es">Ver señales de ejemplo</span><span data-lang="en">See sample signals</span></a>
-          <a class="button button-secondary" href="#pricing"><span data-lang="es">Ver planes</span><span data-lang="en">View plans</span></a>
-        </div>
-        <div class="hero-meta">
-          <span class="chip" data-lang="es">Para proveedores de bienes, servicios, consultoría y obras</span>
-          <span class="chip" data-lang="en">For goods, services, consulting and works suppliers</span>
-          <span class="chip" data-lang="es">Alertas por WhatsApp, Telegram o email</span>
-          <span class="chip" data-lang="en">Alerts via WhatsApp, Telegram or email</span>
-        </div>
+      <div class="hero-chips">
+        <span class="chip" data-lang="es">Bienes, servicios, obras y consultoría</span>
+        <span class="chip" data-lang="en">Goods, services, works & consulting</span>
+        <span class="chip" data-lang="es">Alertas en tiempo real</span>
+        <span class="chip" data-lang="en">Real-time alerts</span>
       </div>
 
-      <aside class="card hero-panel">
-        <div class="panel-top">
-          <span class="pill pill-live"><span data-lang="es">Producto piloto</span><span data-lang="en">Pilot product</span></span>
-          <span class="pill"><span data-lang="es">Alertas tempranas</span><span data-lang="en">Early alerts</span></span>
-        </div>
-        <div class="wa-notif">
-          <div class="wa-avatar">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="10" width="4" height="12" rx="1.5" fill="white"/><rect x="8" y="6" width="4" height="16" rx="1.5" fill="white"/><rect x="14" y="2" width="4" height="20" rx="1.5" fill="white"/></svg>
+      <div class="hero-panel-wrap">
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="pill pill-live"><span data-lang="es">En vivo</span><span data-lang="en">Live</span></span>
+            <span class="pill"><span data-lang="es">Alerta reciente</span><span data-lang="en">Recent alert</span></span>
           </div>
-          <div class="wa-content">
-            <div class="wa-head">
-              <span class="wa-sender">Licit</span>
-              <span class="wa-time">11:24</span>
+          <div class="wa-line">
+            <div class="wa-avatar">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="10" width="4" height="12" rx="1.5" fill="white"/><rect x="8" y="6" width="4" height="16" rx="1.5" fill="white"/><rect x="14" y="2" width="4" height="20" rx="1.5" fill="white"/></svg>
             </div>
-            <div class="wa-msg" data-lang="es">Nueva licitación por S/420,000. Equipos biomédicos. Plazo: 15 días.</div>
-            <div class="wa-msg" data-lang="en">New tender for S/420,000. Biomedical equipment. Deadline: 15 days.</div>
-            <div class="wa-badge"><span data-lang="es">Alta prioridad</span><span data-lang="en">High priority</span></div>
+            <div class="wa-content">
+              <div class="wa-head">
+                <span class="wa-sender">Licit</span>
+                <span class="wa-time">11:24</span>
+              </div>
+              <div class="wa-msg" data-lang="es">Nueva licitación por S/420,000. Equipos biomédicos. Plazo: 15 días.</div>
+              <div class="wa-msg" data-lang="en">New tender for S/420,000. Biomedical equipment. Deadline: 15 days.</div>
+              <div class="wa-tag"><span data-lang="es">Alta prioridad</span><span data-lang="en">High priority</span></div>
+            </div>
+          </div>
+          <div class="signal-metrics">
+            <div class="signal-metric"><div class="lbl" data-lang="es">Fuentes</div><div class="lbl" data-lang="en">Sources</div><div class="val">3</div></div>
+            <div class="signal-metric"><div class="lbl" data-lang="es">Señales/día</div><div class="lbl" data-lang="en">Signals/day</div><div class="val">24</div></div>
+            <div class="signal-metric"><div class="lbl" data-lang="es">Latencia</div><div class="lbl" data-lang="en">Latency</div><div class="val" style="font-size:0.9rem"><span data-lang="es">Minutos</span><span data-lang="en">Minutes</span></div></div>
           </div>
         </div>
-        <div class="snapshot">
-          <div class="tiny" data-lang="es">Señal en vivo</div>
-          <div class="tiny" data-lang="en">Live signal</div>
-          <h3 data-lang="es">Licitación Pública · Equipos médicos</h3>
-          <h3 data-lang="en">Public Tender · Medical equipment</h3>
-          <p data-lang="es">Hospital Regional de Lambayeque abre proceso para adquisición de equipos biomédicos. Presupuesto: S/ 420,000.</p>
-          <p data-lang="en">Regional Hospital of Lambayeque opens procurement for biomedical equipment. Budget: S/ 420,000.</p>
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="sec-header">
+          <h2><span data-lang="es">Lo que hace Licit</span><span data-lang="en">What Licit does</span></h2>
+          <p data-lang="es">Monitorea el SEACE por ti. Solo te avisa cuando aparece algo relevante.</p>
+          <p data-lang="en">Monitors SEACE for you. Only alerts you when something relevant appears.</p>
         </div>
-        <div class="metric-grid">
-          <div class="metric">
-            <div class="label" data-lang="es">Fuentes</div><div class="label" data-lang="en">Sources</div>
-            <div class="value">3</div>
+        <div class="grid-3">
+          <div class="tile">
+            <div class="ico">01</div>
+            <h3 data-lang="es">Alertas tempranas</h3>
+            <h3 data-lang="en">Early alerts</h3>
+            <p data-lang="es">Entérate de las convocatorias nuevas antes que se llenen de competidores. Recibe el enlace directo al SEACE.</p>
+            <p data-lang="en">Get notified of new tenders before they fill with competitors. Receive the direct SEACE link.</p>
           </div>
-          <div class="metric">
-            <div class="label" data-lang="es">Señales</div><div class="label" data-lang="en">Signals</div>
-            <div class="value">3</div>
+          <div class="tile">
+            <div class="ico">02</div>
+            <h3 data-lang="es">Con fuente directa</h3>
+            <h3 data-lang="en">Source-linked</h3>
+            <p data-lang="es">Cada alerta incluye entidad convocante, objeto, monto y enlace. Nada de links rotos.</p>
+            <p data-lang="en">Every alert includes buyer, category, amount and link. No broken links.</p>
           </div>
-          <div class="metric">
-            <div class="label" data-lang="es">Entrega</div><div class="label" data-lang="en">Delivery</div>
-            <div class="value" style="font-size:0.95rem"><span data-lang="es">Tiempo real</span><span data-lang="en">Real-time</span></div>
+          <div class="tile">
+            <div class="ico">03</div>
+            <h3 data-lang="es">Filtros por rubro</h3>
+            <h3 data-lang="en">Filter by segment</h3>
+            <p data-lang="es">Filtra por objeto, departamento, entidad o monto. Solo ves lo que te sirve.</p>
+            <p data-lang="en">Filter by category, region, buyer or amount. See only what matters.</p>
           </div>
         </div>
-      </aside>
+      </div>
     </section>
 
-    <div class="layout">
-      <div>
-        <section id="features">
-          <div class="section-head">
-            <h2><span data-lang="es">Lo que hace Licit</span><span data-lang="en">What Licit does</span></h2>
-            <p data-lang="es">Monitorea el SEACE por ti y te avisa solo cuando aparece algo relevante para tu negocio. Sin ruido, sin revisar manualmente.</p>
-            <p data-lang="en">Monitors SEACE for you and alerts you only when something relevant appears. No noise, no manual checking.</p>
+    <div class="alt-section">
+      <div class="wrap alt-inner">
+        <div>
+          <div class="alt-label" data-lang="es">Monitoreo inteligente</div>
+          <div class="alt-label" data-lang="en">Smart monitoring</div>
+          <h2><span data-lang="es">Cómo funciona</span><span data-lang="en">How it works</span></h2>
+          <p data-lang="es">Licit revisa el SEACE V3 varias veces al día vía la API oficial de Contrataciones Abiertas del OECE. Comparamos cada nuevo aviso con tu perfil, filtramos el ruido y te enviamos solo lo que te sirve por tu canal favorito.</p>
+          <p data-lang="en">Licit checks SEACE V3 multiple times a day via the official OECE Open Contracting API. We compare each new notice with your profile, filter the noise, and send only what matters to your preferred channel.</p>
+        </div>
+        <div class="steps" style="grid-template-columns:1fr;gap:16px">
+          <div class="step" style="border-bottom:1px solid var(--border);padding-bottom:16px">
+            <div class="num">1</div>
+            <h3 data-lang="es">Monitorear</h3><h3 data-lang="en">Monitor</h3>
+            <p data-lang="es">Revisamos SEACE V3 + Contratos Menores + Perú Compras.</p>
+            <p data-lang="en">We check SEACE V3 + Minor Contracts + Peru Procurement.</p>
           </div>
-          <div class="features-asymmetric">
-            <div class="card feature span-2">
-              <div class="icon">01</div>
-              <h3 data-lang="es">Alertas tempranas</h3>
-              <h3 data-lang="en">Early alerts</h3>
-              <p data-lang="es">Entérate de las convocatorias nuevas antes que se llenen de competidores. Recibe la alerta con el enlace directo a la convocatoria en el SEACE.</p>
-              <p data-lang="en">Get notified of new tenders before they fill with competitors. Receive the alert with a direct link to the SEACE notice.</p>
-            </div>
-            <div class="card feature">
-              <div class="icon">02</div>
-              <h3 data-lang="es">Con fuente directa</h3>
-              <h3 data-lang="en">Source-linked</h3>
-              <p data-lang="es">Cada alerta incluye el enlace a la convocatoria, la entidad y el objeto. Nada de links rotos.</p>
-              <p data-lang="en">Every alert includes the link, buyer and category. No broken links.</p>
-            </div>
-            <div class="card feature">
-              <div class="icon">03</div>
-              <h3 data-lang="es">Filtros por rubro</h3>
-              <h3 data-lang="en">Filter by segment</h3>
-              <p data-lang="es">Filtra por objeto, departamento, entidad o monto. Solo ves lo que te sirve.</p>
-              <p data-lang="en">Filter by category, department, buyer or amount. See only what matters.</p>
-            </div>
+          <div class="step" style="border-bottom:1px solid var(--border);padding-bottom:16px">
+            <div class="num">2</div>
+            <h3 data-lang="es">Filtrar</h3><h3 data-lang="en">Filter</h3>
+            <p data-lang="es">Quitamos duplicados y priorizamos por objeto, entidad y monto.</p>
+            <p data-lang="en">We remove duplicates and rank by category, buyer and amount.</p>
           </div>
-        </section>
+          <div class="step">
+            <div class="num">3</div>
+            <h3 data-lang="es">Alertar</h3><h3 data-lang="en">Alert</h3>
+            <p data-lang="es">Te enviamos la oportunidad por WhatsApp, Telegram o email.</p>
+            <p data-lang="en">We send the opportunity via WhatsApp, Telegram or email.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <section>
-          <div class="section-head">
-            <h2><span data-lang="es">Cómo funciona</span><span data-lang="en">How it works</span></h2>
-            <p data-lang="es">Licit revisa el SEACE varias veces al día, compara con lo último que viste, extrae los datos y te manda un resumen claro por tu canal favorito.</p>
-            <p data-lang="en">Licit checks SEACE multiple times a day, compares with what you last saw, extracts the data and sends a clear summary to your preferred channel.</p>
+    <div class="alt-section">
+      <div class="wrap alt-inner rev">
+        <div>
+          <div class="alt-label" data-lang="es">Configuración simple</div>
+          <div class="alt-label" data-lang="en">Simple setup</div>
+          <h2><span data-lang="es">Filtros inteligentes</span><span data-lang="en">Smart filters</span></h2>
+          <p data-lang="es">Elige qué tipo de convocatorias quieres recibir, en qué regiones y desde qué montos. En menos de 2 minutos tienes tu primer alerta configurada.</p>
+          <p data-lang="en">Choose what type of tenders you want to receive, in which regions and from what amounts. In less than 2 minutes you'll have your first alert configured.</p>
+        </div>
+        <div class="filter-demo">
+          <div class="filter-bar">
+            <select id="fObj"><option data-lang="es" selected>Todos los objetos</option><option data-lang="en" selected>All categories</option><option data-lang="es">Bienes</option><option data-lang="en">Goods</option><option data-lang="es">Servicios</option><option data-lang="en">Services</option></select>
+            <select id="fDept"><option data-lang="es" selected>Todos los departamentos</option><option data-lang="en" selected>All regions</option><option>Lima</option><option>Arequipa</option><option>Cusco</option></select>
+            <select id="fMin"><option data-lang="es" selected>Cualquier monto</option><option data-lang="en" selected>Any amount</option><option data-lang="es">Desde S/50,000</option><option data-lang="en">From S/50,000</option><option data-lang="es">Desde S/200,000</option><option data-lang="en">From S/200,000</option></select>
           </div>
-          <div class="workflow-asymmetric">
-            <div class="card step">
-              <div class="num">1</div>
-              <h3 data-lang="es">Monitorear</h3>
-              <h3 data-lang="en">Monitor</h3>
-              <p data-lang="es">Revisamos el SEACE V3 vía la API de Contrataciones Abiertas del OECE y los buscadores públicos.</p>
-              <p data-lang="en">We check SEACE V3 via the OECE Open Contracting API and public search tools.</p>
-            </div>
-            <div class="card step span-2">
-              <div class="num">2</div>
-              <h3 data-lang="es">Filtrar y priorizar</h3>
-              <h3 data-lang="en">Filter & rank</h3>
-              <p data-lang="es">Quitamos duplicados y priorizamos por objeto, entidad, departamento y monto. Ves primero lo más relevante.</p>
-              <p data-lang="en">We remove duplicates and rank by category, buyer, region and amount. The most relevant signals appear first.</p>
-            </div>
-            <div class="card step">
-              <div class="num">3</div>
-              <h3 data-lang="es">Alertar</h3>
-              <h3 data-lang="en">Alert</h3>
-              <p data-lang="es">Te enviamos la oportunidad por WhatsApp, Telegram o email con resumen y enlace directo al SEACE.</p>
-              <p data-lang="en">We send the opportunity via WhatsApp, Telegram or email with a summary and direct SEACE link.</p>
-            </div>
+          <div class="filter-list">
+            <div class="filter-row"><span class="tag">Bien</span><span data-lang="es">Equipos médicos · Hospital Regional</span><span data-lang="en">Medical equip. · Regional Hospital</span><span style="font-weight:700">S/ 420,000</span></div>
+            <div class="filter-row"><span class="tag green">Servicio</span><span data-lang="es">Consultoría ambiental · GR Cusco</span><span data-lang="en">Env. consulting · GR Cusco</span><span style="font-weight:700">S/ 95,000</span></div>
+            <div class="filter-row"><span class="tag">Bien</span><span data-lang="es">Materiales ferretería · Hospital</span><span data-lang="en">Hardware supplies · Hospital</span><span style="font-weight:700">S/ 25,000</span></div>
           </div>
-        </section>
+          <div class="filter-count"><span data-lang="es">3 de 24 convocatorias activas</span><span data-lang="en">3 of 24 active tenders</span></div>
+        </div>
+      </div>
+    </div>
 
-        <section>
-          <div class="section-head">
-            <h2><span data-lang="es">Filtros inteligentes</span><span data-lang="en">Smart filters</span></h2>
-            <p data-lang="es">Configura qué convocatorias quieres recibir. Así de simple.</p>
-            <p data-lang="en">Set which tenders you want to receive. That simple.</p>
-          </div>
-          <div class="filter-mock" id="filterMock">
-            <div class="filter-toolbar">
-              <select class="filter-select" id="filterObj">
-                <option value="all" data-lang="es" selected>Todos los objetos</option>
-                <option value="all" data-lang="en" selected>All categories</option>
-                <option value="bien" data-lang="es">Bienes</option>
-                <option value="bien" data-lang="en">Goods</option>
-                <option value="servicio" data-lang="es">Servicios</option>
-                <option value="servicio" data-lang="en">Services</option>
-                <option value="obra" data-lang="es">Obras</option>
-                <option value="obra" data-lang="en">Works</option>
-                <option value="consultoria" data-lang="es">Consultoría</option>
-                <option value="consultoria" data-lang="en">Consulting</option>
-              </select>
-              <select class="filter-select" id="filterDept">
-                <option value="all" data-lang="es" selected>Todos los departamentos</option>
-                <option value="all" data-lang="en" selected>All regions</option>
-                <option value="lima" data-lang="es">Lima</option>
-                <option value="lima" data-lang="en">Lima</option>
-                <option value="arequipa">Arequipa</option>
-                <option value="cusco">Cusco</option>
-                <option value="lambayeque">Lambayeque</option>
-                <option value="la_libertad">La Libertad</option>
-              </select>
-              <select class="filter-select" id="filterMin">
-                <option value="0" data-lang="es" selected>Cualquier monto</option>
-                <option value="0" data-lang="en" selected>Any amount</option>
-                <option value="50000" data-lang="es">Desde S/50,000</option>
-                <option value="50000" data-lang="en">From S/50,000</option>
-                <option value="200000" data-lang="es">Desde S/200,000</option>
-                <option value="200000" data-lang="en">From S/200,000</option>
-              </select>
-            </div>
-            <div class="filter-results" id="filterResults">
-              <div class="filter-row">
-                <div><span class="obj">Bien</span></div>
-                <div class="ent" data-lang="es">Equipos médicos · Hospital Regional</div>
-                <div class="ent" data-lang="en">Medical equip. · Regional Hospital</div>
-                <div class="mon">S/ 420,000</div>
-              </div>
-              <div class="filter-row">
-                <div><span class="obj" style="background:rgba(15,159,110,0.1);color:var(--success)">Servicio</span></div>
-                <div class="ent" data-lang="es">Consultoría ambiental · Gobierno Regional</div>
-                <div class="ent" data-lang="en">Env. consulting · Regional Government</div>
-                <div class="mon">S/ 95,000</div>
-              </div>
-              <div class="filter-row">
-                <div><span class="obj">Bien</span></div>
-                <div class="ent" data-lang="es">Materiales de ferretería · Hospital público</div>
-                <div class="ent" data-lang="en">Hardware supplies · Public Hospital</div>
-                <div class="mon">S/ 25,000</div>
-              </div>
-            </div>
-            <div class="filter-count" data-lang="es">Mostrando 3 de 24 convocatorias activas</div>
-            <div class="filter-count" data-lang="en">Showing 3 of 24 active tenders</div>
-          </div>
-        </section>
-
-        <section id="feed">
-          <div class="section-head">
-            <h2><span data-lang="es">Ejemplo de señales</span><span data-lang="en">Sample signal feed</span></h2>
-            <p data-lang="es">Esto es lo que recibe un proveedor cuando Licit encuentra algo nuevo y relevante.</p>
-            <p data-lang="en">This is what a supplier receives when Licit finds something new and relevant.</p>
-          </div>
-          <div class="report-shell">
-            <div class="report-card">
+    <section id="feed">
+      <div class="wrap">
+        <div class="sec-header">
+          <h2><span data-lang="es">Señales recientes</span><span data-lang="en">Recent signals</span></h2>
+          <p data-lang="es">Esto es lo que recibe un proveedor cuando Licit encuentra algo nuevo.</p>
+          <p data-lang="en">This is what a supplier receives when Licit finds something new.</p>
+        </div>
+        <div class="changelog">
+          <div class="cl-item">
+            <div class="cl-date">Hoy</div>
+            <div class="cl-content">
               <h3 data-lang="es">Licitación Pública · Equipos de cómputo</h3>
               <h3 data-lang="en">Public Tender · Computer equipment</h3>
-              <p data-lang="es">Municipalidad provincial abre proceso para adquisición de equipos de cómputo y servidores. Presupuesto: S/ 280,000. Plazo: 20 días.</p>
-              <p data-lang="en">Provincial municipality opens procurement for computers and servers. Budget: S/ 280,000. Deadline: 20 days.</p>
-              <div class="report-meta">
-                <span data-lang="es">Fuente: SEACE V3</span><span data-lang="en">Source: SEACE V3</span>
-                <span>Municipalidad Provincial</span>
-                <span data-lang="es">Bienes / tecnología</span><span data-lang="en">Goods / technology</span>
-              </div>
+              <p data-lang="es">Municipalidad provincial abre proceso por S/280,000. Plazo: 20 días.</p>
+              <p data-lang="en">Provincial municipality opens procurement for S/280,000. Deadline: 20 days.</p>
+              <div class="cl-tags"><span>SEACE V3</span><span data-lang="es">Bienes</span><span data-lang="en">Goods</span><span>Municipalidad</span></div>
             </div>
-            <div class="report-card">
+          </div>
+          <div class="cl-item">
+            <div class="cl-date">Ayer</div>
+            <div class="cl-content">
               <h3 data-lang="es">Adjudicación Simplificada · Consultoría ambiental</h3>
               <h3 data-lang="en">Simplified Award · Environmental consulting</h3>
-              <p data-lang="es">Gobierno Regional de Cusco publica servicio de consultoría en gestión ambiental. Monto: S/ 95,000. Plazo: 12 días.</p>
-              <p data-lang="en">Regional Government of Cusco publishes environmental consulting services. Amount: S/ 95,000. Deadline: 12 days.</p>
-              <div class="report-meta">
-                <span data-lang="es">Fuente: SEACE V3</span><span data-lang="en">Source: SEACE V3</span>
-                <span>GR Cusco</span>
-                <span data-lang="es">Servicios</span><span data-lang="en">Services</span>
-              </div>
+              <p data-lang="es">Gobierno Regional de Cusco. Monto: S/95,000. Plazo: 12 días.</p>
+              <p data-lang="en">Regional Government of Cusco. Amount: S/95,000. Deadline: 12 days.</p>
+              <div class="cl-tags"><span>SEACE V3</span><span data-lang="es">Servicios</span><span data-lang="en">Services</span><span>GR Cusco</span></div>
             </div>
-            <div class="report-card">
+          </div>
+          <div class="cl-item">
+            <div class="cl-date">Hace 2d</div>
+            <div class="cl-content">
               <h3 data-lang="es">Contrato Menor · Suministro de materiales</h3>
               <h3 data-lang="en">Minor Contract · Material supplies</h3>
-              <p data-lang="es">Hospital público requiere materiales de ferretería y mantenimiento. Monto: S/ 25,000. Proceso ágil para MYPES.</p>
-              <p data-lang="en">Public hospital needs hardware and maintenance supplies. Amount: S/ 25,000. Fast process for SMEs.</p>
-              <div class="report-meta">
-                <span data-lang="es">Fuente: Contratos Menores</span><span data-lang="en">Source: Minor Contracts</span>
-                <span data-lang="es">Hospital público</span><span data-lang="en">Public hospital</span>
-                <span data-lang="es">Bienes</span><span data-lang="en">Goods</span>
-              </div>
+              <p data-lang="es">Hospital público. Monto: S/25,000. Proceso ágil para MYPES.</p>
+              <p data-lang="en">Public hospital. Amount: S/25,000. Fast process for SMEs.</p>
+              <div class="cl-tags"><span data-lang="es">Contratos Menores</span><span data-lang="en">Minor Contracts</span><span data-lang="es">Bienes</span><span data-lang="en">Goods</span></div>
             </div>
           </div>
-        </section>
-
-        <section id="pricing">
-          <div class="pricing-header">
-            <div>
-              <h2 style="margin:0;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:-0.04em"><span data-lang="es">Planes</span><span data-lang="en">Pricing</span></h2>
-              <p style="margin:6px 0 0;color:var(--text-2);font-size:0.92rem" data-lang="es">Precios en soles peruanos. Sin contratos largos.</p>
-              <p style="margin:6px 0 0;color:var(--text-2);font-size:0.92rem" data-lang="en">Prices in Peruvian soles. No long contracts.</p>
-            </div>
-            <div class="toggle-wrap">
-              <span data-lang="es">Mensual</span><span data-lang="en">Monthly</span>
-              <div class="toggle-track" id="pricingToggle"></div>
-              <span data-lang="es">Anual</span><span data-lang="en">Yearly</span>
-              <span class="toggle-save" data-lang="es">Ahorra ~18%</span>
-              <span class="toggle-save" data-lang="en">Save ~18%</span>
-            </div>
-          </div>
-          <div class="pricing" id="pricingGrid">
-            <div class="card price-card">
-              <span class="pill" data-lang="es">Básico</span><span class="pill" data-lang="en">Starter</span>
-              <h3 data-lang="es">Una categoría</h3><h3 data-lang="en">Single category</h3>
-              <div>
-                <div class="price-amount price-monthly">S/ 49 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
-                <div class="price-amount price-yearly">S/ 40 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
-                <div class="price-yearly" data-lang="es">Facturado anualmente (S/ 480)</div>
-                <div class="price-yearly" data-lang="en">Billed annually (S/ 480)</div>
-              </div>
-              <ul class="clean">
-                <li data-lang="es"><span data-lang="es">Un rubro</span><span data-lang="en">One category</span></li>
-                <li><span data-lang="es">Alertas diarias por email o WhatsApp</span><span data-lang="en">Daily alerts via email or WhatsApp</span></li>
-                <li><span data-lang="es">Cobertura de licitaciones y contratos menores</span><span data-lang="en">Tender and minor contract coverage</span></li>
-                <li><span data-lang="es">Exportación mensual</span><span data-lang="en">Monthly export</span></li>
-              </ul>
-              <a class="button button-secondary" href="#" data-lang="es">Empezar</a><a class="button button-secondary" href="#" data-lang="en">Start</a>
-            </div>
-            <div class="card price-card highlight">
-              <span class="pill pill-live" data-lang="es">Más popular</span><span class="pill pill-live" data-lang="en">Most popular</span>
-              <h3 data-lang="es">Pro</h3><h3 data-lang="en">Pro</h3>
-              <div>
-                <div class="price-amount price-monthly">S/ 149 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
-                <div class="price-amount price-yearly">S/ 125 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
-                <div class="price-yearly" data-lang="es">Facturado anualmente (S/ 1,500)</div>
-                <div class="price-yearly" data-lang="en">Billed annually (S/ 1,500)</div>
-              </div>
-              <ul class="clean">
-                <li><span data-lang="es">Múltiples categorías y palabras clave</span><span data-lang="en">Multiple categories and keywords</span></li>
-                <li><span data-lang="es">Alertas en tiempo real por WhatsApp</span><span data-lang="en">Real-time WhatsApp alerts</span></li>
-                <li><span data-lang="es">Seguimiento de entidades específicas</span><span data-lang="en">Track specific buyers</span></li>
-                <li><span data-lang="es">Resumen semanal con análisis</span><span data-lang="en">Weekly summary with analysis</span></li>
-              </ul>
-              <a class="button button-primary" href="#" data-lang="es">Probar gratis</a><a class="button button-primary" href="#" data-lang="en">Free trial</a>
-            </div>
-            <div class="card price-card">
-              <span class="pill" data-lang="es">Portfolio</span><span class="pill" data-lang="en">Portfolio</span>
-              <h3 data-lang="es">Multi-RUC</h3><h3 data-lang="en">Multi-RUC</h3>
-              <div>
-                <div class="price-amount price-monthly">S/ 399 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
-                <div class="price-amount price-yearly">S/ 349 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
-                <div class="price-yearly" data-lang="es">Facturado anualmente (S/ 4,188)</div>
-                <div class="price-yearly" data-lang="en">Billed annually (S/ 4,188)</div>
-              </div>
-              <ul class="clean">
-                <li><span data-lang="es">Múltiples RUCs o líneas de negocio</span><span data-lang="en">Multiple RUCs or business lines</span></li>
-                <li><span data-lang="es">Entidades y regiones nominales</span><span data-lang="en">Named buyers and regions</span></li>
-                <li><span data-lang="es">Webhook o API para integración</span><span data-lang="en">Webhook or API export</span></li>
-                <li><span data-lang="es">Reglas de priorización personalizadas</span><span data-lang="en">Custom prioritization rules</span></li>
-              </ul>
-              <a class="button button-secondary" href="#" data-lang="es">Contactar</a><a class="button button-secondary" href="#" data-lang="en">Contact</a>
-            </div>
-          </div>
-        </section>
-
-        <section id="faq">
-          <div class="section-head">
-            <h2><span data-lang="es">Preguntas frecuentes</span><span data-lang="en">Frequently asked questions</span></h2>
-          </div>
-          <div class="faq-zigzag">
-            <div class="card faq-item">
-              <h3 data-lang="es">¿Para quién es Licit?</h3>
-              <h3 data-lang="en">Who is Licit for?</h3>
-              <p data-lang="es">Para proveedores de bienes, servicios, consultoría y obras que quieren venderle al Estado y necesitan enterarse rápido de las convocatorias.</p>
-              <p data-lang="en">For suppliers of goods, services, consulting and works who want to sell to the State and need to learn about tenders quickly.</p>
-            </div>
-            <div class="card faq-item offset">
-              <h3 data-lang="es">¿Licit reemplaza a mi equipo de licitaciones?</h3>
-              <h3 data-lang="en">Does Licit replace my bid team?</h3>
-              <p data-lang="es">No. Licit encuentra oportunidades más rápido. La decisión de participar y preparar la propuesta sigue siendo de tu equipo.</p>
-              <p data-lang="en">No. Licit finds opportunities faster. The decision to bid and prepare the proposal is still your team's job.</p>
-            </div>
-            <div class="card faq-item">
-              <h3 data-lang="es">¿Necesito RNP para usar Licit?</h3>
-              <h3 data-lang="en">Do I need RNP to use Licit?</h3>
-              <p data-lang="es">Sí, necesitas inscripción vigente en el Registro Nacional de Proveedores. Licit te ayuda a encontrar oportunidades, pero el RNP es requisito obligatorio.</p>
-              <p data-lang="en">Yes, you need a valid RNP registration. Licit helps you find opportunities, but RNP is a mandatory requirement.</p>
-            </div>
-            <div class="card faq-item offset">
-              <h3 data-lang="es">¿Qué tan rápido llegan las alertas?</h3>
-              <h3 data-lang="en">How fast do alerts arrive?</h3>
-              <p data-lang="es">Licit revisa el SEACE múltiples veces al día. La mayoría llegan en cuestión de horas desde que se publica la convocatoria.</p>
-              <p data-lang="en">Licit checks SEACE multiple times a day. Most alerts arrive within hours of the tender being published.</p>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div class="cta-card">
-            <div>
-              <h2 data-lang="es">Empieza con Licit</h2>
-              <h2 data-lang="en">Start with Licit</h2>
-              <div class="tiny" data-lang="es">Revisa las señales, compara planes y decide si Licit encaja con tu equipo comercial.</div>
-              <div class="tiny" data-lang="en">Review the signals, compare plans and decide if Licit fits your commercial team.</div>
-            </div>
-            <div class="hero-actions">
-              <a class="button button-primary" href="#feed"><span data-lang="es">Ver señales</span><span data-lang="en">View signals</span></a>
-              <a class="button button-secondary" href="#pricing"><span data-lang="es">Comparar planes</span><span data-lang="en">Compare plans</span></a>
-            </div>
-          </div>
-        </section>
+        </div>
       </div>
+    </section>
 
-      <aside class="sidebar">
-        <div class="card sidebar-card">
-          <h3 data-lang="es">¿Para quién es?</h3>
-          <h3 data-lang="en">Who it's for</h3>
-          <p data-lang="es">Para proveedores que necesitan visibilidad temprana de las contrataciones del Estado sin depender de la revisión manual del SEACE.</p>
-          <p data-lang="en">For suppliers who need early visibility into State procurement without manual SEACE checking.</p>
-          <ul>
-            <li data-lang="es">Proveedores de bienes</li><li data-lang="en">Goods suppliers</li>
-            <li data-lang="es">Empresas de servicios y consultoría</li><li data-lang="en">Services and consulting firms</li>
-            <li data-lang="es">Contratistas de obras</li><li data-lang="en">Works contractors</li>
-          </ul>
+    <section id="pricing">
+      <div class="wrap">
+        <div class="sec-header">
+          <h2><span data-lang="es">Planes</span><span data-lang="en">Pricing</span></h2>
+          <p data-lang="es">Precios en soles. Sin contratos largos. Cancela cuando quieras.</p>
+          <p data-lang="en">Prices in soles. No long contracts. Cancel anytime.</p>
         </div>
-        <div class="card sidebar-card">
-          <h3 data-lang="es">Cobertura</h3>
-          <h3 data-lang="en">Coverage</h3>
-          <p data-lang="es">Datos estructurados vía la API oficial de Contrataciones Abiertas del OECE.</p>
-          <p data-lang="en">Structured data via the official OECE Open Contracting API.</p>
-          <ul>
-            <li>SEACE V3</li>
-            <li data-lang="es">Contratos Menores</li><li data-lang="en">Minor Contracts</li>
-            <li data-lang="es">Perú Compras</li><li data-lang="en">Peru Procurement</li>
-          </ul>
+        <div class="pricing-toggle-wrap">
+          <span data-lang="es">Mensual</span><span data-lang="en">Monthly</span>
+          <div class="toggle-track" id="pricingToggle"></div>
+          <span data-lang="es">Anual</span><span data-lang="en">Yearly</span>
+          <span class="toggle-save" data-lang="es">Ahorra ~18%</span>
+          <span class="toggle-save" data-lang="en">Save ~18%</span>
         </div>
-        <div class="card sidebar-card">
-          <h3 data-lang="es">Canales</h3><h3 data-lang="en">Channels</h3>
-          <ul>
-            <li>WhatsApp</li>
-            <li>Telegram</li>
-            <li data-lang="es">Email</li><li data-lang="en">Email</li>
-          </ul>
+        <div class="pricing-grid" id="pricingGrid">
+          <div class="pc">
+            <div class="pname"><span data-lang="es">Básico</span><span data-lang="en">Starter</span></div>
+            <h3 data-lang="es">Una categoría</h3><h3 data-lang="en">Single category</h3>
+            <div class="price pm">S/ 49 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+            <div class="price py">S/ 40 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+            <div class="py" data-lang="es">Facturado anualmente (S/ 480)</div>
+            <div class="py" data-lang="en">Billed annually (S/ 480)</div>
+            <ul>
+              <li><span data-lang="es">Un rubro</span><span data-lang="en">One category</span></li>
+              <li><span data-lang="es">Alertas diarias</span><span data-lang="en">Daily alerts</span></li>
+              <li><span data-lang="es">Cobertura SEACE + Contratos Menores</span><span data-lang="en">SEACE + Minor Contracts</span></li>
+              <li><span data-lang="es">Exportación mensual</span><span data-lang="en">Monthly export</span></li>
+            </ul>
+            <a class="btn btn-secondary" href="#" data-lang="es">Empezar</a><a class="btn btn-secondary" href="#" data-lang="en">Start</a>
+          </div>
+          <div class="pc highlight">
+            <div class="pname" style="color:var(--accent)"><span data-lang="es">Más popular</span><span data-lang="en">Most popular</span></div>
+            <h3 data-lang="es">Pro</h3><h3 data-lang="en">Pro</h3>
+            <div class="price pm">S/ 149 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+            <div class="price py">S/ 125 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+            <div class="py" data-lang="es">Facturado anualmente (S/ 1,500)</div>
+            <div class="py" data-lang="en">Billed annually (S/ 1,500)</div>
+            <ul>
+              <li><span data-lang="es">Multi-categoría + keywords</span><span data-lang="en">Multi-category + keywords</span></li>
+              <li><span data-lang="es">Alertas WhatsApp en tiempo real</span><span data-lang="en">Real-time WhatsApp alerts</span></li>
+              <li><span data-lang="es">Seguimiento de entidades</span><span data-lang="en">Track specific buyers</span></li>
+              <li><span data-lang="es">Resumen semanal</span><span data-lang="en">Weekly summary</span></li>
+            </ul>
+            <a class="btn btn-primary" href="#" data-lang="es">Probar gratis</a><a class="btn btn-primary" href="#" data-lang="en">Free trial</a>
+          </div>
+          <div class="pc">
+            <div class="pname"><span data-lang="es">Portfolio</span><span data-lang="en">Portfolio</span></div>
+            <h3 data-lang="es">Multi-RUC</h3><h3 data-lang="en">Multi-RUC</h3>
+            <div class="price pm">S/ 399 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+            <div class="price py">S/ 349 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+            <div class="py" data-lang="es">Facturado anualmente (S/ 4,188)</div>
+            <div class="py" data-lang="en">Billed annually (S/ 4,188)</div>
+            <ul>
+              <li><span data-lang="es">Múltiples RUCs</span><span data-lang="en">Multiple RUCs</span></li>
+              <li><span data-lang="es">Entidades y regiones nominales</span><span data-lang="en">Named buyers & regions</span></li>
+              <li><span data-lang="es">Webhook / API</span><span data-lang="en">Webhook / API</span></li>
+              <li><span data-lang="es">Reglas personalizadas</span><span data-lang="en">Custom rules</span></li>
+            </ul>
+            <a class="btn btn-secondary" href="#" data-lang="es">Contactar</a><a class="btn btn-secondary" href="#" data-lang="en">Contact</a>
+          </div>
         </div>
-      </aside>
-    </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="sec-header">
+          <h2><span data-lang="es">FAQ</span><span data-lang="en">FAQ</span></h2>
+        </div>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3 data-lang="es">¿Para quién es Licit?</h3><h3 data-lang="en">Who is Licit for?</h3>
+            <p data-lang="es">Para proveedores de bienes, servicios, consultoría y obras que quieren venderle al Estado.</p>
+            <p data-lang="en">For suppliers of goods, services, consulting and works who want to sell to the State.</p>
+          </div>
+          <div class="faq-item">
+            <h3 data-lang="es">¿Necesito RNP?</h3><h3 data-lang="en">Do I need RNP?</h3>
+            <p data-lang="es">Sí, necesitas inscripción vigente en el Registro Nacional de Proveedores para contratar con el Estado.</p>
+            <p data-lang="en">Yes, you need a valid RNP registration to contract with the State.</p>
+          </div>
+          <div class="faq-item">
+            <h3 data-lang="es">¿Licit reemplaza a mi equipo?</h3><h3 data-lang="en">Does Licit replace my team?</h3>
+            <p data-lang="es">No. Licit encuentra oportunidades más rápido. La decisión y la propuesta siguen siendo de tu equipo.</p>
+            <p data-lang="en">No. Licit finds opportunities faster. The decision and proposal are still your team's job.</p>
+          </div>
+          <div class="faq-item">
+            <h3 data-lang="es">¿Qué tan rápido llegan?</h3><h3 data-lang="en">How fast do alerts arrive?</h3>
+            <p data-lang="es">Revisamos el SEACE múltiples veces al día. Las alertas llegan en cuestión de minutos u horas.</p>
+            <p data-lang="en">We check SEACE multiple times a day. Alerts arrive within minutes or hours.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-block">
+      <div class="wrap">
+        <h2><span data-lang="es">Empieza con Licit</span><span data-lang="en">Start with Licit</span></h2>
+        <div class="tiny" data-lang="es">Revisa las señales, compara planes y decide si Licit encaja con tu equipo.</div>
+        <div class="tiny" data-lang="en">Review the signals, compare plans and decide if Licit fits your team.</div>
+        <div class="hero-actions" style="margin-top:20px">
+          <a class="btn btn-primary" href="#feed" data-lang="es">Ver señales</a><a class="btn btn-primary" href="#feed" data-lang="en">View signals</a>
+          <a class="btn btn-secondary" href="#pricing" data-lang="es">Comparar planes</a><a class="btn btn-secondary" href="#pricing" data-lang="en">Compare plans</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="wrap">
-    <span data-lang="es">Licit es un producto de Alvento para proveedores que necesitan visibilidad temprana de las contrataciones del Estado peruano.</span>
-    <span data-lang="en">Licit is an Alvento product for suppliers who need early visibility into Peruvian State procurement.</span>
-  </footer>
+  <footer class="wrap" data-lang="es">Licit es un producto de Alvento para proveedores que necesitan visibilidad temprana de las contrataciones del Estado peruano.</footer>
+  <footer class="wrap" data-lang="en">Licit is an Alvento product for suppliers who need early visibility into Peruvian State procurement.</footer>
 
   <script>
-    (function() {
-      // Language toggle
+    (function(){
       var lang = 'es';
       var toggle = document.getElementById('langToggle');
       if (toggle) {
-        toggle.addEventListener('click', function() {
+        toggle.addEventListener('click', function(){
           lang = lang === 'es' ? 'en' : 'es';
           document.documentElement.className = 'lang-' + lang;
           var spans = toggle.querySelectorAll('span');
-          spans.forEach(function(s) { s.classList.toggle('active'); });
+          spans.forEach(function(s){ s.classList.toggle('active'); });
         });
       }
-
-      // Pricing toggle
-      var pricingToggle = document.getElementById('pricingToggle');
-      if (pricingToggle) {
-        pricingToggle.addEventListener('click', function() {
+      var pt = document.getElementById('pricingToggle');
+      if (pt) {
+        pt.addEventListener('click', function(){
           this.classList.toggle('active');
           document.getElementById('pricingGrid').classList.toggle('show-yearly');
         });
-      }
-
-      // Filter mockup
-      var selects = document.querySelectorAll('#filterMock select');
-      var results = document.getElementById('filterResults');
-      var allRows = results ? results.querySelectorAll('.filter-row') : [];
-      var countEl = document.querySelector('.filter-count');
-
-      function updateFilters() {
-        var obj = document.getElementById('filterObj').value;
-        var dept = document.getElementById('filterDept').value;
-        var min = parseInt(document.getElementById('filterMin').value) || 0;
-        var visible = 0;
-        allRows.forEach(function(row) {
-          var show = true;
-          var amountStr = row.querySelector('.mon') ? row.querySelector('.mon').textContent : '';
-          var amount = parseInt(amountStr.replace(/[^0-9]/g, '')) || 0;
-          if (min && amount < min) show = false;
-          if (dept !== 'all' && !row.textContent.toLowerCase().includes(dept === 'lima' ? 'hospital' : dept === 'arequipa' ? 'gobierno' : dept === 'cusco' ? 'gobierno' : '')) {
-            // keep visible for demo simplicity
-          }
-          row.style.display = show ? '' : 'none';
-          if (show) visible++;
-        });
-        if (countEl) {
-          var countText = countEl.getAttribute('data-lang-' + (lang === 'en' ? 'en' : 'es'));
-          if (!countText) countText = countEl.textContent;
-          countEl.textContent = lang === 'en' ? 'Showing ' + visible + ' of 24 active tenders' : 'Mostrando ' + visible + ' de 24 convocatorias activas';
-        }
-      }
-
-      if (selects.length) {
-        selects.forEach(function(s) { s.addEventListener('change', updateFilters); });
       }
     })();
   </script>

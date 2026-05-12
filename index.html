@@ -2,7 +2,7 @@
 <html lang="es-PE">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A2FFF'/><path d='M10 22 L10 12 M16 22 L16 8 M22 22 L22 16' stroke='white' stroke-width='2.5' stroke-linecap='round' fill='none'/></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A2FFF'/><path d='M14 22 L14 14 M17 22 L17 8 M20 22 L20 2' stroke='white' stroke-width='2.5' stroke-linecap='round' fill='none'/></svg>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Licit — Alertas de Licitaciones SEACE para Proveedores del Estado</title>
   <link rel="preconnect" href="https://api.fontshare.com/v2/"/>
@@ -34,10 +34,7 @@
       margin: 0;
       font-family: "Satoshi", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at top right, rgba(10, 47, 255, 0.08), transparent 28%),
-        radial-gradient(circle at top left, rgba(15, 159, 110, 0.05), transparent 20%),
-        var(--bg);
+      background: var(--bg);
       line-height: 1.6;
     }
     a { color: inherit; text-decoration: none; }
@@ -57,16 +54,7 @@
       justify-content: space-between;
       gap: 20px;
     }
-    .brand-mark {
-      font-size: 1.6rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .brand-mark span { color: var(--text); font-weight: 400; }
+
     .nav-links {
       display: flex;
       align-items: center;
@@ -94,9 +82,8 @@
     .button-primary {
       background: var(--accent);
       color: white;
-      box-shadow: 0 12px 28px rgba(0, 94, 184, 0.2);
     }
-    .button-primary:hover { background: #0A2FFF; }
+    .button-primary:hover { opacity: 0.85; }
     .button:active { transform: translate-y(1px) scale(0.98); }
     .button-secondary {
       background: var(--surface);
@@ -179,7 +166,7 @@
       border-radius: 999px;
       margin-right: 8px;
       background: var(--success);
-      box-shadow: 0 0 0 4px rgba(15, 159, 110, 0.12);
+
     }
 
     .card {
@@ -190,7 +177,7 @@
     }
     .hero-panel {
       position: sticky;
-      top: 96px;
+      top: 100px;
       padding: 22px;
       display: grid;
       gap: 16px;
@@ -350,13 +337,13 @@
       gap: 14px;
     }
     .report-card {
-      background: linear-gradient(180deg, #ffffff, #fbfbfe);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
     }
     .price-card.highlight {
       border-color: rgba(10, 47, 255, 0.24);
-      box-shadow: 0 18px 42px rgba(0, 94, 184, 0.1);
+      box-shadow: var(--shadow-md);
     }
     .price {
       margin: 8px 0 2px;
@@ -371,7 +358,7 @@
       align-items: center;
       gap: 16px;
       flex-wrap: wrap;
-      background: linear-gradient(180deg, #ffffff, #f7f8fd);
+      background: var(--surface);
       box-shadow: var(--shadow-md);
     }
     footer {
@@ -436,8 +423,13 @@
 <body>
   <nav class="nav">
     <div class="wrap nav-inner">
-      <div class="brand-mark">
-        licit<span>.pe</span>
+      <div class="logo-horizontal" style="display:flex;align-items:center;gap:10px">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="10" width="4" height="12" rx="1.5" fill="#0A2FFF"/>
+          <rect x="8" y="6" width="4" height="16" rx="1.5" fill="#0A2FFF"/>
+          <rect x="14" y="2" width="4" height="20" rx="1.5" fill="#0A2FFF"/>
+        </svg>
+        <span style="font-size:1.3rem;font-weight:900;letter-spacing:-0.04em">licit</span>
       </div>
       <div class="nav-links">
         <a href="#product">Producto</a>
@@ -455,7 +447,7 @@
         <span class="eyebrow">Licit · inteligencia de compras públicas</span>
         <h1>Entérate de las licitaciones del Estado antes que los demás</h1>
         <p class="lead">
-          Licit monitorea el SEACE y te envía alertas con las convocatorias que matchean con tu negocio. Deja de revisar el portal a mano y empieza a ganar.
+          Licit monitorea el SEACE y te envía alertas con las convocatorias que coinciden con tu negocio. Deja de revisar el portal a mano y empieza a ganar.
         </p>
         <div class="hero-actions">
           <a class="button button-primary" href="#feed">Ver señales de ejemplo</a>

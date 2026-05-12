@@ -28,8 +28,8 @@
       --radius-md: 14px;
       --radius-lg: 18px;
       --max: 1180px;
+      --nav-h: 72px;
     }
-
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #0A0A0A;
@@ -45,71 +45,90 @@
         --shadow-md: 0 24px 56px rgba(0, 0, 0, 0.4);
       }
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Satoshi", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Satoshi", ui-sans-serif, system-ui, sans-serif;
       color: var(--text);
       background: var(--bg);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
     .wrap { width: min(var(--max), calc(100vw - 32px)); margin: 0 auto; }
+
     .nav {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: rgba(250, 250, 250, 0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(231, 233, 240, 0.9);
+      z-index: 50;
+      height: var(--nav-h);
+      background: rgba(250, 250, 250, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(231, 233, 240, 0.8);
     }
     @media (prefers-color-scheme: dark) {
       .nav {
-        background: rgba(10, 10, 10, 0.9);
-        border-bottom-color: rgba(34, 34, 34, 0.9);
+        background: rgba(10, 10, 10, 0.85);
+        border-bottom-color: rgba(34, 34, 34, 0.8);
       }
     }
     .nav-inner {
-      min-height: 76px;
+      height: var(--nav-h);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
     }
+    .nav-start { display: flex; align-items: center; gap: 32px; }
+    .nav-links { display: flex; align-items: center; gap: 20px; color: var(--text-2); font-size: 0.9rem; font-weight: 600; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-end { display: flex; align-items: center; gap: 12px; }
 
-    .nav-links {
+    .lang-toggle {
       display: flex;
       align-items: center;
-      gap: 18px;
-      color: var(--text-2);
-      font-size: 0.95rem;
-      font-weight: 600;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 8px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
     }
-    .nav-links a:hover { color: var(--text); }
+    .lang-toggle span {
+      padding: 4px 8px;
+      border-radius: 6px;
+      color: var(--text-3);
+      transition: 0.15s;
+    }
+    .lang-toggle span.active {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    [data-lang="en"] { display: none; }
+    .lang-en [data-lang="en"] { display: inherit; }
+    .lang-en [data-lang="es"] { display: none; }
 
     .button {
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 46px;
-      padding: 0 16px;
+      align-items: center; justify-content: center; gap: 8px;
+      min-height: 44px; padding: 0 18px;
       border-radius: var(--radius-sm);
       border: 1px solid transparent;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.2s ease;
+      font-size: 0.92rem; font-weight: 700;
+      cursor: pointer; transition: 0.15s;
+      text-align: center;
     }
     .button-primary {
-      background: var(--accent);
-      color: white;
+      background: var(--accent); color: white;
     }
     .button-primary:hover { opacity: 0.85; }
-    .button:active { transform: translate-y(1px) scale(0.98); }
     .button-secondary {
       background: var(--surface);
       border-color: var(--border);
@@ -118,80 +137,94 @@
     .button-secondary:hover { background: var(--surface-alt); }
 
     main { padding-bottom: 60px; }
-    section { padding: 32px 0; }
+    section { padding: 40px 0; }
+
     .hero {
-      padding: 48px 0 26px;
+      padding: 60px 0 40px;
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
       gap: 28px;
       align-items: start;
+      position: relative;
+      overflow: hidden;
     }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-bg .dot-grid {
+      position: absolute;
+      width: 100%; height: 100%;
+      background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.4;
+    }
+    .hero-bg .radar-ring {
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      opacity: 0.3;
+    }
+    .hero-bg .radar-ring:nth-child(2) { width: 350px; height: 350px; top: -60px; right: -40px; opacity: 0.2; }
+    .hero-bg .radar-ring:nth-child(3) { width: 200px; height: 200px; top: 0; right: 0; opacity: 0.15; }
+
+    @keyframes signal-pulse {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.7); }
+    }
+    @keyframes signal-pulse-delayed {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.6); }
+    }
+    .hero-signal {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 32px;
+      margin-bottom: 16px;
+    }
+    .hero-signal .bar {
+      width: 5px;
+      background: var(--accent);
+      border-radius: 3px;
+      transform-origin: bottom;
+    }
+    .hero-signal .bar:nth-child(1) { height: 12px; animation: signal-pulse 2s ease-in-out infinite; }
+    .hero-signal .bar:nth-child(2) { height: 20px; animation: signal-pulse-delayed 2.2s ease-in-out infinite; }
+    .hero-signal .bar:nth-child(3) { height: 28px; animation: signal-pulse 1.8s ease-in-out infinite; }
+
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      border: 1px solid rgba(10, 47, 255, 0.14);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-size: 11px;
-      font-weight: 800;
+      display: inline-flex; align-items: center;
+      padding: 6px 12px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+      border: 1px solid rgba(10,47,255,0.14);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      font-size: 11px; font-weight: 800;
     }
     h1 {
       margin: 14px 0 16px;
-      font-size: clamp(2.8rem, 5vw, 4.7rem);
+      font-size: clamp(2.6rem, 4.5vw, 4.2rem);
       line-height: 1.01;
       letter-spacing: -0.055em;
-      max-width: 760px;
+      max-width: 720px;
     }
     .lead {
-      margin: 0;
-      max-width: 720px;
-      color: var(--text-2);
-      font-size: 1.14rem;
+      margin: 0; max-width: 680px;
+      color: var(--text-2); font-size: 1.08rem;
+      line-height: 1.55;
     }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-    .hero-meta,
-    .report-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
-    }
-    .chip,
-    .report-meta span,
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-meta, .report-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .chip {
+      display: inline-flex; align-items: center;
+      min-height: 32px; padding: 6px 11px;
+      border-radius: 999px; border: 1px solid var(--border);
       background: var(--surface);
-      color: var(--text-2);
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    .pill-live {
-      color: var(--success);
-      border-color: rgba(15, 159, 110, 0.18);
-      background: rgba(15, 159, 110, 0.07);
-    }
-    .pill-live::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      margin-right: 8px;
-      background: var(--success);
-
+      color: var(--text-2); font-size: 0.85rem; font-weight: 600;
     }
 
     .card {
@@ -200,211 +233,231 @@
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
     }
+
     .hero-panel {
-      position: sticky;
-      top: 100px;
-      padding: 22px;
-      display: grid;
-      gap: 16px;
+      position: sticky; top: calc(var(--nav-h) + 24px);
+      padding: 20px; display: grid; gap: 14px;
+      overflow: hidden;
     }
-    .panel-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+    .panel-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center;
+      min-height: 30px; padding: 6px 11px;
+      border-radius: 999px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text-2);
+      font-size: 0.85rem; font-weight: 600;
     }
-    .snapshot,
-    .metric,
-    .feature,
-    .step,
-    .price-card,
-    .faq-item,
-    .sidebar-card,
-    .report-card,
-    .cta {
-      padding: 20px;
+    .pill-live {
+      color: var(--success);
+      border-color: rgba(15,159,110,0.18);
+      background: rgba(15,159,110,0.07);
+    }
+    .pill-live::before {
+      content: "";
+      width: 7px; height: 7px; border-radius: 999px;
+      margin-right: 7px;
+      background: var(--success);
     }
     .snapshot {
+      padding: 16px;
       background: var(--surface-alt);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
     }
-    .tiny { color: var(--text-3); font-size: 0.92rem; }
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .metric {
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-    .metric .label { color: var(--text-3); font-size: 0.85rem; font-weight: 600; }
-    .metric .value { margin-top: 6px; font-size: 1.45rem; font-weight: 800; letter-spacing: -0.04em; }
+    .snapshot h3 { margin: 0 0 6px; font-size: 0.95rem; }
+    .snapshot p { margin: 0; font-size: 0.85rem; color: var(--text-2); }
+    .tiny { color: var(--text-3); font-size: 0.85rem; }
+    .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .metric { padding: 14px; background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-md); }
+    .metric .label { color: var(--text-3); font-size: 0.78rem; font-weight: 600; }
+    .metric .value { margin-top: 4px; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.04em; }
 
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 320px;
-      gap: 24px;
-      align-items: start;
+    /* whatsapp notification */
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .sidebar {
-      display: grid;
-      gap: 16px;
-      position: sticky;
-      top: 96px;
+    .wa-notif {
+      display: flex; gap: 12px; padding: 14px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      animation: slide-in 0.4s ease-out;
     }
-    .sidebar-card ul,
-    .clean {
-      list-style: none;
-      padding: 0;
-      margin: 14px 0 0;
-      display: grid;
-      gap: 10px;
-    }
-    .sidebar-card li,
-    .clean li {
-      position: relative;
-      padding-left: 18px;
-      color: var(--text-2);
-    }
-    .sidebar-card li::before,
-    .clean li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
+    .wa-avatar {
+      width: 40px; height: 40px; border-radius: 10px;
       background: var(--accent);
+      display: grid; place-items: center;
+      flex-shrink: 0;
     }
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 18px;
-      margin-bottom: 18px;
+    .wa-avatar svg { width: 20px; height: 20px; }
+    .wa-content { flex: 1; min-width: 0; }
+    .wa-head { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+    .wa-sender { font-weight: 700; }
+    .wa-time { color: var(--text-3); font-size: 0.75rem; }
+    .wa-msg { margin-top: 3px; font-size: 0.85rem; color: var(--text-2); line-height: 1.4; }
+    .wa-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 8px; padding: 3px 8px;
+      border-radius: 6px; font-size: 0.72rem; font-weight: 700;
+      background: rgba(15,159,110,0.1); color: var(--success);
     }
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(1.75rem, 3vw, 2.45rem);
-      letter-spacing: -0.04em;
-    }
-    .section-head p {
-      margin: 8px 0 0;
-      color: var(--text-2);
-      max-width: 760px;
-    }
-    .grid-3,
-    .workflow,
-    .pricing {
-      display: grid;
-      gap: 16px;
-    }
-    .features-asymmetric {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 16px;
-    }
-    .features-asymmetric .span-2 { grid-column: span 2; }
-    .workflow-asymmetric {
-      display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
-      gap: 16px;
-    }
-    .workflow-asymmetric .span-2 { grid-column: span 2; }
-    .faq-zigzag {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .faq-zigzag .offset { margin-top: 48px; }
-    .pricing { grid-template-columns: repeat(3, 1fr); }
-    .icon,
-    .num {
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      margin-bottom: 14px;
-      background: var(--surface-accent);
-      color: var(--accent);
-      border: 1px solid rgba(10, 47, 255, 0.12);
-      font-weight: 800;
-    }
-    .feature h3,
-    .step h3,
-    .price-card h3,
-    .faq-item h3,
-    .sidebar-card h3,
-    .report-card h3,
-    .snapshot h3 {
-      margin: 0 0 8px;
-      letter-spacing: -0.03em;
-    }
-    .feature p,
-    .step p,
-    .price-card p,
-    .faq-item p,
-    .sidebar-card p,
-    .report-card p,
-    .snapshot p {
-      margin: 0;
-      color: var(--text-2);
-    }
+    .wa-badge::before { content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--success); }
 
-    .report-shell {
-      display: grid;
-      gap: 14px;
-    }
-    .report-card {
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
+    .sidebar { display: grid; gap: 14px; position: sticky; top: calc(var(--nav-h) + 24px); }
+    .sidebar-card { padding: 18px; }
+    .sidebar-card h3 { margin: 0 0 8px; font-size: 0.95rem; }
+    .sidebar-card p { margin: 0; font-size: 0.85rem; color: var(--text-2); }
+    .sidebar-card ul { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; }
+    .sidebar-card li { position: relative; padding-left: 16px; color: var(--text-2); font-size: 0.85rem; }
+    .sidebar-card li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 999px; background: var(--accent); }
+
+    .section-head { margin-bottom: 20px; }
+    .section-head h2 { margin: 0; font-size: clamp(1.6rem, 2.8vw, 2.2rem); letter-spacing: -0.04em; }
+    .section-head p { margin: 8px 0 0; color: var(--text-2); max-width: 680px; font-size: 0.95rem; }
+
+    .features-asymmetric { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; }
+    .features-asymmetric .span-2 { grid-column: span 2; }
+    .feature { padding: 20px; }
+    .feature h3 { margin: 0 0 6px; font-size: 1rem; }
+    .feature p { margin: 0; font-size: 0.88rem; color: var(--text-2); }
+    .icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; margin-bottom: 12px; background: var(--surface-accent); color: var(--accent); border: 1px solid rgba(10,47,255,0.12); font-weight: 800; font-size: 0.85rem; }
+
+    .workflow-asymmetric { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 14px; }
+    .workflow-asymmetric .span-2 { grid-column: span 2; }
+    .step { padding: 20px; }
+    .step h3 { margin: 0 0 6px; font-size: 1rem; }
+    .step p { margin: 0; font-size: 0.88rem; color: var(--text-2); }
+    .num { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; margin-bottom: 12px; background: var(--surface-accent); color: var(--accent); border: 1px solid rgba(10,47,255,0.12); font-weight: 800; }
+
+    .report-shell { display: grid; gap: 12px; }
+    .report-card { padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+    .report-card h3 { margin: 0 0 6px; font-size: 0.95rem; }
+    .report-card p { margin: 0; font-size: 0.85rem; color: var(--text-2); }
+    .report-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; font-size: 0.75rem; color: var(--text-3); }
+    .report-meta span { padding: 2px 8px; border-radius: 4px; background: var(--bg); }
+
+    /* filter mockup */
+    .filter-mock {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
+      overflow: hidden;
     }
-    .price-card.highlight {
-      border-color: rgba(10, 47, 255, 0.24);
-      box-shadow: var(--shadow-md);
-    }
-    .price {
-      margin: 8px 0 2px;
-      font-size: 2.05rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-    }
-    .price small { font-size: 1rem; color: var(--text-3); font-weight: 700; }
-    .cta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
+    .filter-toolbar {
+      display: flex; gap: 10px; padding: 16px;
+      border-bottom: 1px solid var(--border);
       flex-wrap: wrap;
+    }
+    .filter-select {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      min-width: 130px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238A90A0' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+    }
+    .filter-results { padding: 12px 16px; display: grid; gap: 8px; min-height: 120px; }
+    .filter-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem;
+    }
+    .filter-row:last-child { border-bottom: none; }
+    .filter-row .ent { color: var(--text-2); }
+    .filter-row .mon { font-weight: 700; font-variant-numeric: tabular-nums; }
+    .filter-row .obj {
+      padding: 2px 7px; border-radius: 4px;
+      font-size: 0.7rem; font-weight: 700;
+      background: var(--surface-accent); color: var(--accent);
+    }
+    .filter-count {
+      padding: 8px 16px 12px;
+      font-size: 0.78rem; color: var(--text-3);
+    }
+
+    .pricing-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; flex-wrap: wrap; gap: 16px;
+    }
+    .toggle-wrap {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.88rem; font-weight: 600; color: var(--text-2);
+    }
+    .toggle-track {
+      width: 44px; height: 24px; border-radius: 999px;
+      background: var(--border);
+      cursor: pointer; position: relative; transition: 0.2s; flex-shrink: 0;
+    }
+    .toggle-track.active { background: var(--accent); }
+    .toggle-track::after {
+      content: ""; position: absolute;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px; border-radius: 999px;
+      background: white; transition: 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .toggle-track.active::after { left: 23px; }
+    .toggle-save {
+      padding: 2px 8px; border-radius: 6px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 0.75rem; font-weight: 700;
+    }
+    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .price-card { padding: 24px; display: grid; gap: 16px; }
+    .price-card .pill { align-self: start; }
+    .price-card h3 { margin: 0; font-size: 1rem; }
+    .price-card .price-desc { margin: 0; font-size: 0.85rem; color: var(--text-2); }
+    .price-card.highlight { border-color: rgba(10,47,255,0.2); box-shadow: var(--shadow-md); }
+    .price-amount {
+      font-size: 2rem; font-weight: 900; letter-spacing: -0.04em;
+    }
+    .price-amount small { font-size: 0.85rem; color: var(--text-3); font-weight: 700; }
+    .price-yearly { display: none; font-size: 0.82rem; color: var(--text-3); }
+    .show-yearly .price-yearly { display: block; }
+    .show-yearly .price-monthly { display: none; }
+    .clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    .clean li { position: relative; padding-left: 18px; color: var(--text-2); font-size: 0.85rem; }
+    .clean li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 999px; background: var(--accent); }
+    .price-card .button { margin-top: 8px; }
+
+    .faq-zigzag { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .faq-zigzag .offset { margin-top: 40px; }
+    .faq-item { padding: 20px; }
+    .faq-item h3 { margin: 0 0 8px; font-size: 0.95rem; }
+    .faq-item p { margin: 0; font-size: 0.85rem; color: var(--text-2); }
+
+    .cta-card {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; flex-wrap: wrap;
+      padding: 28px;
       background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-md);
     }
-    footer {
-      padding: 12px 0 42px;
-      color: var(--text-3);
-      font-size: 0.92rem;
-    }
+    .cta-card h2 { margin: 0 0 6px; letter-spacing: -0.04em; }
+    .cta-card .tiny { color: var(--text-3); font-size: 0.9rem; }
+    .cta-card .hero-actions { margin-top: 0; }
+
+    footer { padding: 12px 0 40px; color: var(--text-3); font-size: 0.85rem; }
 
     @media (max-width: 1080px) {
-      .hero,
-      .layout,
-      .pricing,
-      .metric-grid { grid-template-columns: 1fr; }
-      .features-asymmetric,
-      .workflow-asymmetric,
-      .faq-zigzag { grid-template-columns: 1fr; }
-      .features-asymmetric .span-2,
-      .workflow-asymmetric .span-2,
-      .faq-zigzag .offset { grid-column: auto; margin-top: 0; }
-      .hero-panel,
-      .sidebar { position: static; }
+      .hero, .layout, .pricing, .metric-grid { grid-template-columns: 1fr; }
+      .features-asymmetric, .workflow-asymmetric, .faq-zigzag { grid-template-columns: 1fr; }
+      .features-asymmetric .span-2, .workflow-asymmetric .span-2, .faq-zigzag .offset { grid-column: auto; margin-top: 0; }
+      .hero-panel, .sidebar { position: static; }
     }
     @media (max-width: 720px) {
       .wrap { width: min(var(--max), calc(100vw - 20px)); }
@@ -413,100 +466,109 @@
       .hero-actions { flex-direction: column; }
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      { "@type": "Question", "name": "¿Para quién es Licit?", "acceptedAnswer": { "@type": "Answer", "text": "Para proveedores de bienes, servicios, consultoría y obras que quieren venderle al Estado peruano y necesitan enterarse de las convocatorias antes que los demás." } },
-      { "@type": "Question", "name": "¿Qué fuentes monitorea Licit?", "acceptedAnswer": { "@type": "Answer", "text": "Licit monitorea el SEACE V3 a través de la API oficial de Contrataciones Abiertas del OECE, más descargas del buscador público y contratos menores." } },
-      { "@type": "Question", "name": "¿Licit reemplaza a un equipo de licitaciones?", "acceptedAnswer": { "@type": "Answer", "text": "No. Licit encuentra y resume oportunidades más rápido. La decisión comercial y la preparación de la propuesta siguen siendo trabajo de tu equipo." } },
-      { "@type": "Question", "name": "¿Qué tan rápido llegan las alertas?", "acceptedAnswer": { "@type": "Answer", "text": "Licit revisa el SEACE múltiples veces al día. La mayoría de las alertas llegan en cuestión de horas desde que se publica la convocatoria." } },
-      { "@type": "Question", "name": "¿Puedo filtrar por rubro o categoría?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Puedes filtrar por objeto (bien, servicio, obra, consultoría), departamento, entidad y monto estimado." } },
-      { "@type": "Question", "name": "¿Hay periodo de prueba?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Licit ofrece acceso gratuito limitado para que veas el tipo de señales antes de suscribirte." } }
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Licit",
-    "description": "Alertas de licitaciones SEACE e inteligencia de compras públicas para proveedores del Estado peruano.",
-    "brand": { "@type": "Brand", "name": "Alvento" },
-    "url": "https://licit.alvento.ltd",
-    "offers": [
-      { "@type": "Offer", "name": "Básico", "price": "49", "priceCurrency": "PEN", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "49", "priceCurrency": "PEN", "unitText": "MONTH" } },
-      { "@type": "Offer", "name": "Pro", "price": "149", "priceCurrency": "PEN", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "149", "priceCurrency": "PEN", "unitText": "MONTH" } },
-      { "@type": "Offer", "name": "Portfolio", "price": "399", "priceCurrency": "PEN", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "399", "priceCurrency": "PEN", "unitText": "MONTH" } }
-    ]
-  }
-  </script>
 </head>
 <body>
   <nav class="nav">
     <div class="wrap nav-inner">
-      <div class="logo-horizontal" style="display:flex;align-items:center;gap:10px">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="10" width="4" height="12" rx="1.5" fill="#0A2FFF"/>
-          <rect x="8" y="6" width="4" height="16" rx="1.5" fill="#0A2FFF"/>
-          <rect x="14" y="2" width="4" height="20" rx="1.5" fill="#0A2FFF"/>
-        </svg>
-        <span style="font-size:1.3rem;font-weight:900;letter-spacing:-0.04em">licit</span>
+      <div class="nav-start">
+        <a href="#" style="display:flex;align-items:center;gap:10px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="10" width="4" height="12" rx="1.5" fill="#0A2FFF"/>
+            <rect x="8" y="6" width="4" height="16" rx="1.5" fill="#0A2FFF"/>
+            <rect x="14" y="2" width="4" height="20" rx="1.5" fill="#0A2FFF"/>
+          </svg>
+          <span style="font-size:1.2rem;font-weight:900;letter-spacing:-0.04em">licit</span>
+        </a>
+        <div class="nav-links">
+          <a href="#features"><span data-lang="es">Producto</span><span data-lang="en">Product</span></a>
+          <a href="#feed"><span data-lang="es">Señales</span><span data-lang="en">Signals</span></a>
+          <a href="#pricing"><span data-lang="es">Planes</span><span data-lang="en">Pricing</span></a>
+          <a href="#faq"><span data-lang="es">FAQ</span><span data-lang="en">FAQ</span></a>
+        </div>
       </div>
-      <div class="nav-links">
-        <a href="#product">Producto</a>
-        <a href="#feed">Señales</a>
-        <a href="#pricing">Planes</a>
-        <a href="#faq">FAQ</a>
-        <a class="button button-secondary" href="#pricing">Ver planes</a>
+      <div class="nav-end">
+        <div class="lang-toggle" id="langToggle">
+          <span class="active">ES</span>
+          <span>EN</span>
+        </div>
+        <a class="button button-primary" href="#pricing" style="min-height:36px;font-size:0.85rem;padding:0 14px">
+          <span data-lang="es">Probar gratis</span><span data-lang="en">Free trial</span>
+        </a>
       </div>
     </div>
   </nav>
 
   <main class="wrap">
     <section class="hero">
+      <div class="hero-bg">
+        <div class="dot-grid"></div>
+        <div class="radar-ring"></div>
+        <div class="radar-ring"></div>
+        <div class="radar-ring"></div>
+      </div>
       <div>
-        <span class="eyebrow">Licit · inteligencia de compras públicas</span>
-        <h1>Entérate de las licitaciones del Estado antes que los demás</h1>
+        <div class="hero-signal">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <span class="eyebrow"><span data-lang="es">Licit · inteligencia de compras públicas</span><span data-lang="en">Licit · public procurement intelligence</span></span>
+        <h1><span data-lang="es">Entérate de las licitaciones del Estado antes que los demás</span><span data-lang="en">Get state tender alerts before your competitors</span></h1>
         <p class="lead">
-          Licit monitorea el SEACE y te envía alertas con las convocatorias que coinciden con tu negocio. Deja de revisar el portal a mano y empieza a ganar.
+          <span data-lang="es">Licit monitorea el SEACE y te envía alertas con las convocatorias que coinciden con tu negocio. Deja de revisar el portal a mano y empieza a ganar.</span>
+          <span data-lang="en">Licit monitors SEACE and sends you alerts for tenders that match your business. Stop checking the portal manually and start winning.</span>
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#feed">Ver señales de ejemplo</a>
-          <a class="button button-secondary" href="#pricing">Ver planes</a>
+          <a class="button button-primary" href="#feed"><span data-lang="es">Ver señales de ejemplo</span><span data-lang="en">See sample signals</span></a>
+          <a class="button button-secondary" href="#pricing"><span data-lang="es">Ver planes</span><span data-lang="en">View plans</span></a>
         </div>
         <div class="hero-meta">
-          <span class="chip">Para proveedores de bienes, servicios, consultoría y obras</span>
-          <span class="chip">Alertas por WhatsApp, Telegram o email</span>
-          <span class="chip">Cobertura: SEACE V3 + Contratos Menores + Perú Compras</span>
+          <span class="chip" data-lang="es">Para proveedores de bienes, servicios, consultoría y obras</span>
+          <span class="chip" data-lang="en">For goods, services, consulting and works suppliers</span>
+          <span class="chip" data-lang="es">Alertas por WhatsApp, Telegram o email</span>
+          <span class="chip" data-lang="en">Alerts via WhatsApp, Telegram or email</span>
         </div>
       </div>
 
       <aside class="card hero-panel">
         <div class="panel-top">
-          <div class="pill pill-live">Producto piloto</div>
-          <div class="pill">Alertas tempranas</div>
+          <span class="pill pill-live"><span data-lang="es">Producto piloto</span><span data-lang="en">Pilot product</span></span>
+          <span class="pill"><span data-lang="es">Alertas tempranas</span><span data-lang="en">Early alerts</span></span>
+        </div>
+        <div class="wa-notif">
+          <div class="wa-avatar">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="10" width="4" height="12" rx="1.5" fill="white"/><rect x="8" y="6" width="4" height="16" rx="1.5" fill="white"/><rect x="14" y="2" width="4" height="20" rx="1.5" fill="white"/></svg>
+          </div>
+          <div class="wa-content">
+            <div class="wa-head">
+              <span class="wa-sender">Licit</span>
+              <span class="wa-time">11:24</span>
+            </div>
+            <div class="wa-msg" data-lang="es">Nueva licitación por S/420,000. Equipos biomédicos. Plazo: 15 días.</div>
+            <div class="wa-msg" data-lang="en">New tender for S/420,000. Biomedical equipment. Deadline: 15 days.</div>
+            <div class="wa-badge"><span data-lang="es">Alta prioridad</span><span data-lang="en">High priority</span></div>
+          </div>
         </div>
         <div class="snapshot">
-          <div class="tiny">Señal de alta prioridad</div>
-          <h3>Licitación Pública · Equipos médicos</h3>
-          <p>Hospital Regional de Lambayeque abre proceso para adquisición de equipos biomédicos con un presupuesto de S/ 420,000. Plazo de presentación: 15 días.</p>
+          <div class="tiny" data-lang="es">Señal en vivo</div>
+          <div class="tiny" data-lang="en">Live signal</div>
+          <h3 data-lang="es">Licitación Pública · Equipos médicos</h3>
+          <h3 data-lang="en">Public Tender · Medical equipment</h3>
+          <p data-lang="es">Hospital Regional de Lambayeque abre proceso para adquisición de equipos biomédicos. Presupuesto: S/ 420,000.</p>
+          <p data-lang="en">Regional Hospital of Lambayeque opens procurement for biomedical equipment. Budget: S/ 420,000.</p>
         </div>
         <div class="metric-grid">
           <div class="metric">
-            <div class="label">Fuentes activas</div>
+            <div class="label" data-lang="es">Fuentes</div><div class="label" data-lang="en">Sources</div>
             <div class="value">3</div>
           </div>
           <div class="metric">
-            <div class="label">Tipos de señal</div>
+            <div class="label" data-lang="es">Señales</div><div class="label" data-lang="en">Signals</div>
             <div class="value">3</div>
           </div>
           <div class="metric">
-            <div class="label">Entrega</div>
-            <div class="value" style="font-size:1.05rem">Tiempo real</div>
+            <div class="label" data-lang="es">Entrega</div><div class="label" data-lang="en">Delivery</div>
+            <div class="value" style="font-size:0.95rem"><span data-lang="es">Tiempo real</span><span data-lang="en">Real-time</span></div>
           </div>
         </div>
       </aside>
@@ -514,179 +576,288 @@
 
     <div class="layout">
       <div>
-        <section id="product">
+        <section id="features">
           <div class="section-head">
-            <div>
-              <h2>Lo que hace Licit</h2>
-              <p>Monitorea el SEACE por ti y te avisa solo cuando aparece algo relevante para tu negocio. Sin ruido, sin revisar manualmente.</p>
-            </div>
+            <h2><span data-lang="es">Lo que hace Licit</span><span data-lang="en">What Licit does</span></h2>
+            <p data-lang="es">Monitorea el SEACE por ti y te avisa solo cuando aparece algo relevante para tu negocio. Sin ruido, sin revisar manualmente.</p>
+            <p data-lang="en">Monitors SEACE for you and alerts you only when something relevant appears. No noise, no manual checking.</p>
           </div>
           <div class="features-asymmetric">
             <div class="card feature span-2">
               <div class="icon">01</div>
-              <h3>Alertas tempranas</h3>
-              <p>Entérate de las convocatorias nuevas antes que se llenen de competidores. Recibe la alerta con el enlace directo a la convocatoria en el SEACE para que puedas actuar de inmediato.</p>
+              <h3 data-lang="es">Alertas tempranas</h3>
+              <h3 data-lang="en">Early alerts</h3>
+              <p data-lang="es">Entérate de las convocatorias nuevas antes que se llenen de competidores. Recibe la alerta con el enlace directo a la convocatoria en el SEACE.</p>
+              <p data-lang="en">Get notified of new tenders before they fill with competitors. Receive the alert with a direct link to the SEACE notice.</p>
             </div>
             <div class="card feature">
               <div class="icon">02</div>
-              <h3>Con fuente directa</h3>
-              <p>Cada alerta incluye el enlace a la convocatoria en el SEACE, la entidad convocante y el objeto de contratación. Nada de links rotos.</p>
+              <h3 data-lang="es">Con fuente directa</h3>
+              <h3 data-lang="en">Source-linked</h3>
+              <p data-lang="es">Cada alerta incluye el enlace a la convocatoria, la entidad y el objeto. Nada de links rotos.</p>
+              <p data-lang="en">Every alert includes the link, buyer and category. No broken links.</p>
             </div>
             <div class="card feature">
               <div class="icon">03</div>
-              <h3>Filtros por rubro</h3>
-              <p>Filtra por objeto (bien, servicio, obra, consultoría), departamento, entidad o monto. Solo ves lo que te sirve.</p>
+              <h3 data-lang="es">Filtros por rubro</h3>
+              <h3 data-lang="en">Filter by segment</h3>
+              <p data-lang="es">Filtra por objeto, departamento, entidad o monto. Solo ves lo que te sirve.</p>
+              <p data-lang="en">Filter by category, department, buyer or amount. See only what matters.</p>
             </div>
           </div>
         </section>
 
         <section>
           <div class="section-head">
-            <div>
-              <h2>Cómo funciona</h2>
-              <p>Licit revisa el SEACE varias veces al día, compara con lo último que viste, extrae los datos comerciales y te manda un resumen claro por tu canal favorito.</p>
-            </div>
+            <h2><span data-lang="es">Cómo funciona</span><span data-lang="en">How it works</span></h2>
+            <p data-lang="es">Licit revisa el SEACE varias veces al día, compara con lo último que viste, extrae los datos y te manda un resumen claro por tu canal favorito.</p>
+            <p data-lang="en">Licit checks SEACE multiple times a day, compares with what you last saw, extracts the data and sends a clear summary to your preferred channel.</p>
           </div>
           <div class="workflow-asymmetric">
             <div class="card step">
               <div class="num">1</div>
-              <h3>Monitorear</h3>
-              <p>Revisamos el SEACE V3 vía la API de Contrataciones Abiertas del OECE y los buscadores públicos de contratos menores y Perú Compras.</p>
+              <h3 data-lang="es">Monitorear</h3>
+              <h3 data-lang="en">Monitor</h3>
+              <p data-lang="es">Revisamos el SEACE V3 vía la API de Contrataciones Abiertas del OECE y los buscadores públicos.</p>
+              <p data-lang="en">We check SEACE V3 via the OECE Open Contracting API and public search tools.</p>
             </div>
             <div class="card step span-2">
               <div class="num">2</div>
-              <h3>Filtrar y priorizar</h3>
-              <p>Quitamos duplicados y convocatorias de bajo ajuste. Priorizamos las señales por objeto, entidad, departamento y monto para que veas primero lo más relevante.</p>
+              <h3 data-lang="es">Filtrar y priorizar</h3>
+              <h3 data-lang="en">Filter & rank</h3>
+              <p data-lang="es">Quitamos duplicados y priorizamos por objeto, entidad, departamento y monto. Ves primero lo más relevante.</p>
+              <p data-lang="en">We remove duplicates and rank by category, buyer, region and amount. The most relevant signals appear first.</p>
             </div>
             <div class="card step">
               <div class="num">3</div>
-              <h3>Alertar</h3>
-              <p>Te enviamos la oportunidad por WhatsApp, Telegram o email con un resumen en lenguaje claro y el enlace directo al SEACE.</p>
+              <h3 data-lang="es">Alertar</h3>
+              <h3 data-lang="en">Alert</h3>
+              <p data-lang="es">Te enviamos la oportunidad por WhatsApp, Telegram o email con resumen y enlace directo al SEACE.</p>
+              <p data-lang="en">We send the opportunity via WhatsApp, Telegram or email with a summary and direct SEACE link.</p>
             </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-head">
+            <h2><span data-lang="es">Filtros inteligentes</span><span data-lang="en">Smart filters</span></h2>
+            <p data-lang="es">Configura qué convocatorias quieres recibir. Así de simple.</p>
+            <p data-lang="en">Set which tenders you want to receive. That simple.</p>
+          </div>
+          <div class="filter-mock" id="filterMock">
+            <div class="filter-toolbar">
+              <select class="filter-select" id="filterObj">
+                <option value="all" data-lang="es" selected>Todos los objetos</option>
+                <option value="all" data-lang="en" selected>All categories</option>
+                <option value="bien" data-lang="es">Bienes</option>
+                <option value="bien" data-lang="en">Goods</option>
+                <option value="servicio" data-lang="es">Servicios</option>
+                <option value="servicio" data-lang="en">Services</option>
+                <option value="obra" data-lang="es">Obras</option>
+                <option value="obra" data-lang="en">Works</option>
+                <option value="consultoria" data-lang="es">Consultoría</option>
+                <option value="consultoria" data-lang="en">Consulting</option>
+              </select>
+              <select class="filter-select" id="filterDept">
+                <option value="all" data-lang="es" selected>Todos los departamentos</option>
+                <option value="all" data-lang="en" selected>All regions</option>
+                <option value="lima" data-lang="es">Lima</option>
+                <option value="lima" data-lang="en">Lima</option>
+                <option value="arequipa">Arequipa</option>
+                <option value="cusco">Cusco</option>
+                <option value="lambayeque">Lambayeque</option>
+                <option value="la_libertad">La Libertad</option>
+              </select>
+              <select class="filter-select" id="filterMin">
+                <option value="0" data-lang="es" selected>Cualquier monto</option>
+                <option value="0" data-lang="en" selected>Any amount</option>
+                <option value="50000" data-lang="es">Desde S/50,000</option>
+                <option value="50000" data-lang="en">From S/50,000</option>
+                <option value="200000" data-lang="es">Desde S/200,000</option>
+                <option value="200000" data-lang="en">From S/200,000</option>
+              </select>
+            </div>
+            <div class="filter-results" id="filterResults">
+              <div class="filter-row">
+                <div><span class="obj">Bien</span></div>
+                <div class="ent" data-lang="es">Equipos médicos · Hospital Regional</div>
+                <div class="ent" data-lang="en">Medical equip. · Regional Hospital</div>
+                <div class="mon">S/ 420,000</div>
+              </div>
+              <div class="filter-row">
+                <div><span class="obj" style="background:rgba(15,159,110,0.1);color:var(--success)">Servicio</span></div>
+                <div class="ent" data-lang="es">Consultoría ambiental · Gobierno Regional</div>
+                <div class="ent" data-lang="en">Env. consulting · Regional Government</div>
+                <div class="mon">S/ 95,000</div>
+              </div>
+              <div class="filter-row">
+                <div><span class="obj">Bien</span></div>
+                <div class="ent" data-lang="es">Materiales de ferretería · Hospital público</div>
+                <div class="ent" data-lang="en">Hardware supplies · Public Hospital</div>
+                <div class="mon">S/ 25,000</div>
+              </div>
+            </div>
+            <div class="filter-count" data-lang="es">Mostrando 3 de 24 convocatorias activas</div>
+            <div class="filter-count" data-lang="en">Showing 3 of 24 active tenders</div>
           </div>
         </section>
 
         <section id="feed">
           <div class="section-head">
-            <div>
-              <h2>Ejemplo de señales</h2>
-              <p>Esto es lo que recibe un proveedor cuando Licit encuentra algo nuevo y relevante.</p>
-            </div>
+            <h2><span data-lang="es">Ejemplo de señales</span><span data-lang="en">Sample signal feed</span></h2>
+            <p data-lang="es">Esto es lo que recibe un proveedor cuando Licit encuentra algo nuevo y relevante.</p>
+            <p data-lang="en">This is what a supplier receives when Licit finds something new and relevant.</p>
           </div>
           <div class="report-shell">
             <div class="report-card">
-              <h3>Licitación Pública · Equipos de cómputo</h3>
-              <p>Una municipalidad provincial abre un proceso para la adquisición de equipos de cómputo y servidores, con un presupuesto de S/ 280,000 y plazo de entrega de 20 días. Alta probabilidad de ajuste para proveedores de tecnología.</p>
+              <h3 data-lang="es">Licitación Pública · Equipos de cómputo</h3>
+              <h3 data-lang="en">Public Tender · Computer equipment</h3>
+              <p data-lang="es">Municipalidad provincial abre proceso para adquisición de equipos de cómputo y servidores. Presupuesto: S/ 280,000. Plazo: 20 días.</p>
+              <p data-lang="en">Provincial municipality opens procurement for computers and servers. Budget: S/ 280,000. Deadline: 20 days.</p>
               <div class="report-meta">
-                <span>Fuente: SEACE V3</span>
-                <span>Entidad: Municipalidad Provincial</span>
-                <span>Categoría: bienes / tecnología</span>
-                <span>Prioridad: alta</span>
+                <span data-lang="es">Fuente: SEACE V3</span><span data-lang="en">Source: SEACE V3</span>
+                <span>Municipalidad Provincial</span>
+                <span data-lang="es">Bienes / tecnología</span><span data-lang="en">Goods / technology</span>
               </div>
             </div>
             <div class="report-card">
-              <h3>Adjudicación Simplificada · Consultoría ambiental</h3>
-              <p>Un gobierno regional publica una adjudicación simplificada para servicios de consultoría en gestión ambiental. Monto estimado: S/ 95,000. Plazo: 12 días.</p>
+              <h3 data-lang="es">Adjudicación Simplificada · Consultoría ambiental</h3>
+              <h3 data-lang="en">Simplified Award · Environmental consulting</h3>
+              <p data-lang="es">Gobierno Regional de Cusco publica servicio de consultoría en gestión ambiental. Monto: S/ 95,000. Plazo: 12 días.</p>
+              <p data-lang="en">Regional Government of Cusco publishes environmental consulting services. Amount: S/ 95,000. Deadline: 12 days.</p>
               <div class="report-meta">
-                <span>Fuente: SEACE V3</span>
-                <span>Entidad: Gobierno Regional</span>
-                <span>Categoría: servicios / consultoría</span>
-                <span>Prioridad: media</span>
+                <span data-lang="es">Fuente: SEACE V3</span><span data-lang="en">Source: SEACE V3</span>
+                <span>GR Cusco</span>
+                <span data-lang="es">Servicios</span><span data-lang="en">Services</span>
               </div>
             </div>
             <div class="report-card">
-              <h3>Contrato Menor · Suministro de materiales</h3>
-              <p>Un hospital público requiere materiales de ferretería y mantenimiento por un monto estimado de S/ 25,000. Proceso ágil, ideal para MYPES.</p>
+              <h3 data-lang="es">Contrato Menor · Suministro de materiales</h3>
+              <h3 data-lang="en">Minor Contract · Material supplies</h3>
+              <p data-lang="es">Hospital público requiere materiales de ferretería y mantenimiento. Monto: S/ 25,000. Proceso ágil para MYPES.</p>
+              <p data-lang="en">Public hospital needs hardware and maintenance supplies. Amount: S/ 25,000. Fast process for SMEs.</p>
               <div class="report-meta">
-                <span>Fuente: Contratos Menores</span>
-                <span>Entidad: Hospital público</span>
-                <span>Categoría: bienes / materiales</span>
-                <span>Prioridad: media</span>
+                <span data-lang="es">Fuente: Contratos Menores</span><span data-lang="en">Source: Minor Contracts</span>
+                <span data-lang="es">Hospital público</span><span data-lang="en">Public hospital</span>
+                <span data-lang="es">Bienes</span><span data-lang="en">Goods</span>
               </div>
             </div>
           </div>
         </section>
 
         <section id="pricing">
-          <div class="section-head">
+          <div class="pricing-header">
             <div>
-              <h2>Planes</h2>
-              <p>Precios en soles peruanos. Sin contratos largos. Cancela cuando quieras.</p>
+              <h2 style="margin:0;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:-0.04em"><span data-lang="es">Planes</span><span data-lang="en">Pricing</span></h2>
+              <p style="margin:6px 0 0;color:var(--text-2);font-size:0.92rem" data-lang="es">Precios en soles peruanos. Sin contratos largos.</p>
+              <p style="margin:6px 0 0;color:var(--text-2);font-size:0.92rem" data-lang="en">Prices in Peruvian soles. No long contracts.</p>
+            </div>
+            <div class="toggle-wrap">
+              <span data-lang="es">Mensual</span><span data-lang="en">Monthly</span>
+              <div class="toggle-track" id="pricingToggle"></div>
+              <span data-lang="es">Anual</span><span data-lang="en">Yearly</span>
+              <span class="toggle-save" data-lang="es">Ahorra ~18%</span>
+              <span class="toggle-save" data-lang="en">Save ~18%</span>
             </div>
           </div>
-          <div class="pricing">
+          <div class="pricing" id="pricingGrid">
             <div class="card price-card">
-              <div class="pill">Básico</div>
-              <h3>Una categoría</h3>
-              <div class="price">S/ 49 <small>/mes</small></div>
+              <span class="pill" data-lang="es">Básico</span><span class="pill" data-lang="en">Starter</span>
+              <h3 data-lang="es">Una categoría</h3><h3 data-lang="en">Single category</h3>
+              <div>
+                <div class="price-amount price-monthly">S/ 49 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+                <div class="price-amount price-yearly">S/ 40 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+                <div class="price-yearly" data-lang="es">Facturado anualmente (S/ 480)</div>
+                <div class="price-yearly" data-lang="en">Billed annually (S/ 480)</div>
+              </div>
               <ul class="clean">
-                <li>Un rubro (bienes, servicios u obras)</li>
-                <li>Alertas diarias por email o WhatsApp</li>
-                <li>Cobertura de licitaciones y contratos menores</li>
-                <li>Exportación mensual</li>
+                <li data-lang="es"><span data-lang="es">Un rubro</span><span data-lang="en">One category</span></li>
+                <li><span data-lang="es">Alertas diarias por email o WhatsApp</span><span data-lang="en">Daily alerts via email or WhatsApp</span></li>
+                <li><span data-lang="es">Cobertura de licitaciones y contratos menores</span><span data-lang="en">Tender and minor contract coverage</span></li>
+                <li><span data-lang="es">Exportación mensual</span><span data-lang="en">Monthly export</span></li>
               </ul>
+              <a class="button button-secondary" href="#" data-lang="es">Empezar</a><a class="button button-secondary" href="#" data-lang="en">Start</a>
             </div>
             <div class="card price-card highlight">
-              <div class="pill">Más popular</div>
-              <h3>Pro</h3>
-              <div class="price">S/ 149 <small>/mes</small></div>
+              <span class="pill pill-live" data-lang="es">Más popular</span><span class="pill pill-live" data-lang="en">Most popular</span>
+              <h3 data-lang="es">Pro</h3><h3 data-lang="en">Pro</h3>
+              <div>
+                <div class="price-amount price-monthly">S/ 149 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+                <div class="price-amount price-yearly">S/ 125 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+                <div class="price-yearly" data-lang="es">Facturado anualmente (S/ 1,500)</div>
+                <div class="price-yearly" data-lang="en">Billed annually (S/ 1,500)</div>
+              </div>
               <ul class="clean">
-                <li>Múltiples categorías y palabras clave</li>
-                <li>Alertas en tiempo real por WhatsApp</li>
-                <li>Seguimiento de entidades específicas</li>
-                <li>Resumen semanal con análisis</li>
+                <li><span data-lang="es">Múltiples categorías y palabras clave</span><span data-lang="en">Multiple categories and keywords</span></li>
+                <li><span data-lang="es">Alertas en tiempo real por WhatsApp</span><span data-lang="en">Real-time WhatsApp alerts</span></li>
+                <li><span data-lang="es">Seguimiento de entidades específicas</span><span data-lang="en">Track specific buyers</span></li>
+                <li><span data-lang="es">Resumen semanal con análisis</span><span data-lang="en">Weekly summary with analysis</span></li>
               </ul>
+              <a class="button button-primary" href="#" data-lang="es">Probar gratis</a><a class="button button-primary" href="#" data-lang="en">Free trial</a>
             </div>
             <div class="card price-card">
-              <div class="pill">Portfolio</div>
-              <h3>Multi-RUC</h3>
-              <div class="price">S/ 399 <small>/mes</small></div>
+              <span class="pill" data-lang="es">Portfolio</span><span class="pill" data-lang="en">Portfolio</span>
+              <h3 data-lang="es">Multi-RUC</h3><h3 data-lang="en">Multi-RUC</h3>
+              <div>
+                <div class="price-amount price-monthly">S/ 399 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+                <div class="price-amount price-yearly">S/ 349 <small data-lang="es">/mes</small><small data-lang="en">/mo</small></div>
+                <div class="price-yearly" data-lang="es">Facturado anualmente (S/ 4,188)</div>
+                <div class="price-yearly" data-lang="en">Billed annually (S/ 4,188)</div>
+              </div>
               <ul class="clean">
-                <li>Múltiples líneas de negocio o RUCs</li>
-                <li>Entidades y regiones nominales</li>
-                <li>Webhook o API para integración</li>
-                <li>Reglas de priorización personalizadas</li>
+                <li><span data-lang="es">Múltiples RUCs o líneas de negocio</span><span data-lang="en">Multiple RUCs or business lines</span></li>
+                <li><span data-lang="es">Entidades y regiones nominales</span><span data-lang="en">Named buyers and regions</span></li>
+                <li><span data-lang="es">Webhook o API para integración</span><span data-lang="en">Webhook or API export</span></li>
+                <li><span data-lang="es">Reglas de priorización personalizadas</span><span data-lang="en">Custom prioritization rules</span></li>
               </ul>
+              <a class="button button-secondary" href="#" data-lang="es">Contactar</a><a class="button button-secondary" href="#" data-lang="en">Contact</a>
             </div>
           </div>
         </section>
 
         <section id="faq">
           <div class="section-head">
-            <div>
-              <h2>Preguntas frecuentes</h2>
-              <p>Lo primero que preguntan los proveedores antes de probar Licit.</p>
-            </div>
+            <h2><span data-lang="es">Preguntas frecuentes</span><span data-lang="en">Frequently asked questions</span></h2>
           </div>
           <div class="faq-zigzag">
             <div class="card faq-item">
-              <h3>¿Para quién es Licit?</h3>
-              <p>Para proveedores de bienes, servicios, consultoría y obras que quieren venderle al Estado y necesitan enterarse rápido de las convocatorias sin revisar el SEACE a cada rato.</p>
+              <h3 data-lang="es">¿Para quién es Licit?</h3>
+              <h3 data-lang="en">Who is Licit for?</h3>
+              <p data-lang="es">Para proveedores de bienes, servicios, consultoría y obras que quieren venderle al Estado y necesitan enterarse rápido de las convocatorias.</p>
+              <p data-lang="en">For suppliers of goods, services, consulting and works who want to sell to the State and need to learn about tenders quickly.</p>
             </div>
             <div class="card faq-item offset">
-              <h3>¿Licit reemplaza a mi equipo de licitaciones?</h3>
-              <p>No. Licit encuentra las oportunidades más rápido. La decisión de participar y preparar la propuesta sigue siendo de tu equipo.</p>
+              <h3 data-lang="es">¿Licit reemplaza a mi equipo de licitaciones?</h3>
+              <h3 data-lang="en">Does Licit replace my bid team?</h3>
+              <p data-lang="es">No. Licit encuentra oportunidades más rápido. La decisión de participar y preparar la propuesta sigue siendo de tu equipo.</p>
+              <p data-lang="en">No. Licit finds opportunities faster. The decision to bid and prepare the proposal is still your team's job.</p>
             </div>
             <div class="card faq-item">
-              <h3>¿Necesito RNP para usar Licit?</h3>
-              <p>Sí, para contratar con el Estado necesitas inscripción vigente en el Registro Nacional de Proveedores (RNP). Licit te ayuda a encontrar oportunidades, pero el RNP es requisito obligatorio.</p>
+              <h3 data-lang="es">¿Necesito RNP para usar Licit?</h3>
+              <h3 data-lang="en">Do I need RNP to use Licit?</h3>
+              <p data-lang="es">Sí, necesitas inscripción vigente en el Registro Nacional de Proveedores. Licit te ayuda a encontrar oportunidades, pero el RNP es requisito obligatorio.</p>
+              <p data-lang="en">Yes, you need a valid RNP registration. Licit helps you find opportunities, but RNP is a mandatory requirement.</p>
             </div>
             <div class="card faq-item offset">
-              <h3>¿Qué tan rápido llegan las alertas?</h3>
-              <p>Licit revisa el SEACE múltiples veces al día. La mayoría de las alertas llegan en cuestión de horas desde que se publica la convocatoria.</p>
+              <h3 data-lang="es">¿Qué tan rápido llegan las alertas?</h3>
+              <h3 data-lang="en">How fast do alerts arrive?</h3>
+              <p data-lang="es">Licit revisa el SEACE múltiples veces al día. La mayoría llegan en cuestión de horas desde que se publica la convocatoria.</p>
+              <p data-lang="en">Licit checks SEACE multiple times a day. Most alerts arrive within hours of the tender being published.</p>
             </div>
           </div>
         </section>
 
         <section>
-          <div class="card cta">
+          <div class="cta-card">
             <div>
-              <h2 style="margin:0 0 6px; letter-spacing:-0.04em;">Empieza con Licit</h2>
-              <div class="tiny">Revisa las señales de ejemplo, compara los planes y decide si Licit encaja con tu equipo comercial.</div>
+              <h2 data-lang="es">Empieza con Licit</h2>
+              <h2 data-lang="en">Start with Licit</h2>
+              <div class="tiny" data-lang="es">Revisa las señales, compara planes y decide si Licit encaja con tu equipo comercial.</div>
+              <div class="tiny" data-lang="en">Review the signals, compare plans and decide if Licit fits your commercial team.</div>
             </div>
-            <div class="hero-actions" style="margin-top:0;">
-              <a class="button button-primary" href="#feed">Ver señales</a>
-              <a class="button button-secondary" href="#pricing">Comparar planes</a>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#feed"><span data-lang="es">Ver señales</span><span data-lang="en">View signals</span></a>
+              <a class="button button-secondary" href="#pricing"><span data-lang="es">Comparar planes</span><span data-lang="en">Compare plans</span></a>
             </div>
           </div>
         </section>
@@ -694,35 +865,100 @@
 
       <aside class="sidebar">
         <div class="card sidebar-card">
-          <h3>¿Para quién es?</h3>
-          <p>Para proveedores que necesitan visibilidad temprana de las contrataciones del Estado sin depender de la revisión manual del SEACE.</p>
+          <h3 data-lang="es">¿Para quién es?</h3>
+          <h3 data-lang="en">Who it's for</h3>
+          <p data-lang="es">Para proveedores que necesitan visibilidad temprana de las contrataciones del Estado sin depender de la revisión manual del SEACE.</p>
+          <p data-lang="en">For suppliers who need early visibility into State procurement without manual SEACE checking.</p>
           <ul>
-            <li>Proveedores de bienes</li>
-            <li>Empresas de servicios y consultoría</li>
-            <li>Contratistas de obras</li>
+            <li data-lang="es">Proveedores de bienes</li><li data-lang="en">Goods suppliers</li>
+            <li data-lang="es">Empresas de servicios y consultoría</li><li data-lang="en">Services and consulting firms</li>
+            <li data-lang="es">Contratistas de obras</li><li data-lang="en">Works contractors</li>
           </ul>
         </div>
         <div class="card sidebar-card">
-          <h3>Cobertura actual</h3>
-          <p>La primera versión cubre las fuentes oficiales del OSCE/OECE con datos estructurados vía la API de Contrataciones Abiertas.</p>
+          <h3 data-lang="es">Cobertura</h3>
+          <h3 data-lang="en">Coverage</h3>
+          <p data-lang="es">Datos estructurados vía la API oficial de Contrataciones Abiertas del OECE.</p>
+          <p data-lang="en">Structured data via the official OECE Open Contracting API.</p>
           <ul>
-            <li>SEACE V3 (Licitaciones y Adjudicaciones)</li>
-            <li>Contratos Menores (hasta 8 UIT)</li>
-            <li>Catálogos Electrónicos de Perú Compras</li>
+            <li>SEACE V3</li>
+            <li data-lang="es">Contratos Menores</li><li data-lang="en">Minor Contracts</li>
+            <li data-lang="es">Perú Compras</li><li data-lang="en">Peru Procurement</li>
           </ul>
         </div>
         <div class="card sidebar-card">
-          <h3>Canales de entrega</h3>
+          <h3 data-lang="es">Canales</h3><h3 data-lang="en">Channels</h3>
           <ul>
-            <li>WhatsApp (Mensajes directos)</li>
-            <li>Telegram (Canal privado)</li>
-            <li>Email (Resumen diario)</li>
+            <li>WhatsApp</li>
+            <li>Telegram</li>
+            <li data-lang="es">Email</li><li data-lang="en">Email</li>
           </ul>
         </div>
       </aside>
     </div>
   </main>
 
-  <footer class="wrap">Licit es un producto de Alvento para proveedores que necesitan visibilidad temprana de las contrataciones del Estado peruano.</footer>
+  <footer class="wrap">
+    <span data-lang="es">Licit es un producto de Alvento para proveedores que necesitan visibilidad temprana de las contrataciones del Estado peruano.</span>
+    <span data-lang="en">Licit is an Alvento product for suppliers who need early visibility into Peruvian State procurement.</span>
+  </footer>
+
+  <script>
+    (function() {
+      // Language toggle
+      var lang = 'es';
+      var toggle = document.getElementById('langToggle');
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          lang = lang === 'es' ? 'en' : 'es';
+          document.documentElement.className = 'lang-' + lang;
+          var spans = toggle.querySelectorAll('span');
+          spans.forEach(function(s) { s.classList.toggle('active'); });
+        });
+      }
+
+      // Pricing toggle
+      var pricingToggle = document.getElementById('pricingToggle');
+      if (pricingToggle) {
+        pricingToggle.addEventListener('click', function() {
+          this.classList.toggle('active');
+          document.getElementById('pricingGrid').classList.toggle('show-yearly');
+        });
+      }
+
+      // Filter mockup
+      var selects = document.querySelectorAll('#filterMock select');
+      var results = document.getElementById('filterResults');
+      var allRows = results ? results.querySelectorAll('.filter-row') : [];
+      var countEl = document.querySelector('.filter-count');
+
+      function updateFilters() {
+        var obj = document.getElementById('filterObj').value;
+        var dept = document.getElementById('filterDept').value;
+        var min = parseInt(document.getElementById('filterMin').value) || 0;
+        var visible = 0;
+        allRows.forEach(function(row) {
+          var show = true;
+          var amountStr = row.querySelector('.mon') ? row.querySelector('.mon').textContent : '';
+          var amount = parseInt(amountStr.replace(/[^0-9]/g, '')) || 0;
+          if (min && amount < min) show = false;
+          if (dept !== 'all' && !row.textContent.toLowerCase().includes(dept === 'lima' ? 'hospital' : dept === 'arequipa' ? 'gobierno' : dept === 'cusco' ? 'gobierno' : '')) {
+            // keep visible for demo simplicity
+          }
+          row.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        if (countEl) {
+          var countText = countEl.getAttribute('data-lang-' + (lang === 'en' ? 'en' : 'es'));
+          if (!countText) countText = countEl.textContent;
+          countEl.textContent = lang === 'en' ? 'Showing ' + visible + ' of 24 active tenders' : 'Mostrando ' + visible + ' de 24 convocatorias activas';
+        }
+      }
+
+      if (selects.length) {
+        selects.forEach(function(s) { s.addEventListener('change', updateFilters); });
+      }
+    })();
+  </script>
 </body>
 </html>

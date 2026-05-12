@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)" />
-  <title>Licit — Alertas de Licitaciones SEACE</title>
+  <title>Licit — Alertas de Licitaciones SEACE | SEACE招标通知 | State Tender Alerts</title>
   <link rel="preconnect" href="https://api.fontshare.com/v2/"/>
   <link href="https://api.fontshare.com/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
   <style>
@@ -50,6 +50,7 @@
     .wrap { width: min(var(--max), calc(100vw - 48px)); margin: 0 auto; }
 
     [data-lang="en"] { display: none; }
+    [data-lang="cn"] { display: none; }
 
     .nav {
       position: sticky; top: 0; z-index: 50;
@@ -221,6 +222,7 @@
         <div class="lang-toggle" id="langToggle">
           <span class="active">ES</span>
           <span>EN</span>
+          <span>中文</span>
         </div>
         <a class="btn btn-primary btn-sm" href="#pricing">Probar gratis</a>
       </div>
@@ -257,7 +259,7 @@
           </div>
           <div class="signal-metrics">
             <div class="signal-metric"><div class="lbl">Fuentes</div><div class="val">3</div></div>
-            <div class="signal-metric"><div class="lbl">Señales/día</div><div class="val">24</div></div>
+            <div class="signal-metric"><div class="lbl">Señales/día</div><div class="val" id="liveCount">—</div></div>
             <div class="signal-metric"><div class="lbl">Latencia</div><div class="val" style="font-size:0.9rem">Minutos</div></div>
           </div>
         </div>
@@ -384,7 +386,7 @@
           </div>
           <div class="signal-metrics">
             <div class="signal-metric"><div class="lbl">Sources</div><div class="val">3</div></div>
-            <div class="signal-metric"><div class="lbl">Signals/day</div><div class="val">24</div></div>
+            <div class="signal-metric"><div class="lbl">Signals/day</div><div class="val" id="liveCountEn">—</div></div>
             <div class="signal-metric"><div class="lbl">Latency</div><div class="val" style="font-size:0.9rem">Minutes</div></div>
           </div>
         </div>
@@ -484,22 +486,159 @@
     <section class="cta-block"><div class="wrap"><h2>Start with Licit</h2><div class="tiny">Review the signals, compare plans and decide if Licit fits your team.</div><div class="hero-actions" style="margin-top:20px"><a class="btn btn-primary" href="#feed">View signals</a><a class="btn btn-secondary" href="#pricing">Compare plans</a></div></div></section>
   </main>
 
+  <main data-lang="cn">
+    <div class="wrap hero-wrap">
+      <div class="hero-bg"><div class="dot-grid"></div></div>
+      <div class="hero-signal"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+      <h1>再也不错过国家招标</h1>
+      <p class="lead">Licit 监控SEACE系统，向您发送与您的业务匹配的招标通知。通过WhatsApp、Telegram或邮件。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#feed">查看示例信号</a>
+        <a class="btn btn-secondary" href="#pricing">查看方案</a>
+      </div>
+      <div class="hero-chips">
+        <span class="chip">商品、服务、工程和咨询</span>
+        <span class="chip">实时告警</span>
+      </div>
+      <div class="hero-panel-wrap">
+        <div class="hero-card">
+          <div class="hero-card-top"><span class="pill pill-live">实时</span><span class="pill">最新告警</span></div>
+          <div class="wa-line">
+            <div class="wa-avatar"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="10" width="4" height="12" rx="1.5" fill="white"/><rect x="8" y="6" width="4" height="16" rx="1.5" fill="white"/><rect x="14" y="2" width="4" height="20" rx="1.5" fill="white"/></svg></div>
+            <div class="wa-content">
+              <div class="wa-head"><span class="wa-sender">Licit</span><span class="wa-time">11:24</span></div>
+              <div class="wa-msg">新招标 S/420,000。医疗设备。截止：15天。</div>
+              <div class="wa-tag">高优先级</div>
+            </div>
+          </div>
+          <div class="signal-metrics">
+            <div class="signal-metric"><div class="lbl">数据源</div><div class="val">3</div></div>
+            <div class="signal-metric"><div class="lbl">信号/天</div><div class="val" id="liveCountCn">—</div></div>
+            <div class="signal-metric"><div class="lbl">延迟</div><div class="val" style="font-size:0.9rem">分钟</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="sec-header"><h2>Licit 的功能</h2><p>自动监控SEACE，仅在出现相关内容时通知您。</p></div>
+        <div class="grid-3">
+          <div class="tile"><div class="ico">01</div><h3>早期告警</h3><p>在新的招标填满竞争对手之前了解信息。收到直接链接到SEACE的通知。</p></div>
+          <div class="tile"><div class="ico">02</div><h3>来源可追溯</h3><p>每条告警都包含采购方、品类、金额和链接。无失效链接。</p></div>
+          <div class="tile"><div class="ico">03</div><h3>按类别筛选</h3><p>按品类、地区、采购方或金额筛选。只看到对您有用的信息。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="alt-section">
+      <div class="wrap alt-inner">
+        <div>
+          <div class="alt-label">智能监控</div>
+          <h2>工作原理</h2>
+          <p>Licit 每天多次通过OECE官方公开采购API检查SEACE V3。我们将每条新通知与您的配置进行比对，过滤噪音，仅通过您偏好的渠道发送有用的信息。</p>
+        </div>
+        <div class="steps" style="grid-template-columns:1fr;gap:16px">
+          <div class="step" style="border-bottom:1px solid var(--border);padding-bottom:16px"><div class="num">1</div><h3>监控</h3><p>SEACE V3 + 小额合同 + Peru Compras</p></div>
+          <div class="step" style="border-bottom:1px solid var(--border);padding-bottom:16px"><div class="num">2</div><h3>筛选</h3><p>去重并按品类、采购方和金额排序。</p></div>
+          <div class="step"><div class="num">3</div><h3>告警</h3><p>通过WhatsApp、Telegram或邮件发送机会。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alt-section">
+      <div class="wrap alt-inner" style="direction:rtl">
+        <div style="direction:ltr">
+          <div class="alt-label">简单设置</div>
+          <h2>智能筛选</h2>
+          <p>选择您想接收的招标类型、地区和金额范围。不到2分钟即可设置好第一条告警。</p>
+        </div>
+        <div style="direction:ltr">
+          <div class="filter-demo">
+            <div class="filter-bar">
+              <select><option selected>所有品类</option><option>商品</option><option>服务</option></select>
+              <select><option selected>所有地区</option><option>利马</option><option>阿雷基帕</option></select>
+              <select><option selected>任意金额</option><option>从S/50,000起</option><option>从S/200,000起</option></select>
+            </div>
+            <div class="filter-list">
+              <div class="filter-row"><span class="tag">商品</span><span>医疗设备 · 地区医院</span><span style="font-weight:700">S/ 420,000</span></div>
+              <div class="filter-row"><span class="tag green">服务</span><span>环境咨询 · GR Cusco</span><span style="font-weight:700">S/ 95,000</span></div>
+              <div class="filter-row"><span class="tag">商品</span><span>五金材料 · 医院</span><span style="font-weight:700">S/ 25,000</span></div>
+            </div>
+            <div class="filter-count">24条招标中显示3条</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="feed">
+      <div class="wrap">
+        <div class="sec-header"><h2>最新信号</h2><p>供应商在Licit发现新消息时会收到的通知示例。</p></div>
+        <div class="changelog">
+          <div class="cl-item"><div class="cl-date">今天</div><div class="cl-content"><h3>公开招标 · 计算机设备</h3><p>省政府启动采购流程，金额S/280,000。截止：20天。</p><div class="cl-tags"><span>SEACE V3</span><span>商品</span><span>省政府</span></div></div></div>
+          <div class="cl-item"><div class="cl-date">昨天</div><div class="cl-content"><h3>简化招标 · 环境咨询</h3><p>Cusco大区政府。金额：S/95,000。截止：12天。</p><div class="cl-tags"><span>SEACE V3</span><span>服务</span><span>GR Cusco</span></div></div></div>
+          <div class="cl-item"><div class="cl-date">2天前</div><div class="cl-content"><h3>小额合同 · 材料供应</h3><p>公立医院。金额：S/25,000。中小型企业快速流程。</p><div class="cl-tags"><span>小额合同</span><span>商品</span></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="wrap">
+        <div class="sec-header"><h2>方案</h2><p>以索尔计价。无长期合同。随时取消。</p></div>
+        <div class="pricing-toggle-wrap">
+          <span>月付</span>
+          <div class="toggle-track" id="pricingToggle3"></div>
+          <span>年付</span>
+          <span class="toggle-save">节省约18%</span>
+        </div>
+        <div class="pricing-grid" id="pricingGrid3">
+          <div class="pc"><div class="pname">入门版</div><h3>单一品类</h3><div class="price pm">S/ 49 <small>/月</small></div><div class="price py">S/ 40 <small>/月</small></div><div class="py">年付 (S/ 480)</div><ul><li>一个品类</li><li>每日告警</li><li>SEACE + 小额合同</li><li>月度导出</li></ul><a class="btn btn-secondary" href="#">开始</a></div>
+          <div class="pc highlight"><div class="pname" style="color:var(--accent)">最受欢迎</div><h3>专业版</h3><div class="price pm">S/ 149 <small>/月</small></div><div class="price py">S/ 125 <small>/月</small></div><div class="py">年付 (S/ 1,500)</div><ul><li>多品类 + 关键词</li><li>实时WhatsApp告警</li><li>追踪指定采购方</li><li>每周摘要</li></ul><a class="btn btn-primary" href="#">免费试用</a></div>
+          <div class="pc"><div class="pname">投资组合版</div><h3>多RUC</h3><div class="price pm">S/ 399 <small>/月</small></div><div class="price py">S/ 349 <small>/月</small></div><div class="py">年付 (S/ 4,188)</div><ul><li>多个RUC</li><li>指定采购方和地区</li><li>Webhook / API</li><li>自定义规则</li></ul><a class="btn btn-secondary" href="#">联系我们</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap"><div class="sec-header"><h2>常见问题</h2></div>
+        <div class="faq-grid">
+          <div class="faq-item"><h3>Licit 适合谁？</h3><p>适合希望向政府销售的商品、服务、咨询和工程供应商。</p></div>
+          <div class="faq-item"><h3>需要RNP吗？</h3><p>是的，您需要在国家供应商注册处有效注册才能与政府签订合同。</p></div>
+          <div class="faq-item"><h3>会取代我的团队吗？</h3><p>不会。它发现机会。您的团队决定并准备投标。</p></div>
+          <div class="faq-item"><h3>告警速度？</h3><p>每天多次检查SEACE。告警在几分钟到几小时内到达。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-block"><div class="wrap"><h2>立即开始使用 Licit</h2><div class="tiny">查看信号、比较方案，决定Licit是否适合您的团队。</div><div class="hero-actions" style="margin-top:20px"><a class="btn btn-primary" href="#feed">查看信号</a><a class="btn btn-secondary" href="#pricing">比较方案</a></div></div></section>
+  </main>
+
   <footer data-lang="es" class="wrap">Licit es un producto de Alvento para proveedores que necesitan visibilidad temprana de las contrataciones del Estado peruano.</footer>
   <footer data-lang="en" class="wrap">Licit is an Alvento product for suppliers who need early visibility into Peruvian State procurement.</footer>
+  <footer data-lang="cn" class="wrap">Licit 是Alvento的产品，为需要早期了解秘鲁政府采购信息的供应商提供服务。</footer>
 
   <script>
     (function(){
+      var LANGS = ['es', 'en', 'cn'];
+      var LANG_NAMES = ['ES', 'EN', '中文'];
       var lang = 'es';
       var toggle = document.getElementById('langToggle');
       var mains = document.querySelectorAll('main');
       var footers = document.querySelectorAll('footer.wrap');
+      var navTranslations = {
+        es: ['Producto', 'Señales', 'Planes', 'FAQ'],
+        en: ['Product', 'Signals', 'Pricing', 'FAQ'],
+        cn: ['产品', '信号', '定价', '常见问题']
+      };
+      var navBtnText = { es: 'Probar gratis', en: 'Free trial', cn: '免费试用' };
 
       function showLang(l) {
         lang = l;
-        document.documentElement.className = 'lang-' + l;
         if (toggle) {
           var spans = toggle.querySelectorAll('span');
-          spans.forEach(function(s){ s.classList.toggle('active'); });
+          spans.forEach(function(s, i) {
+            s.classList.toggle('active', i === LANGS.indexOf(l));
+          });
         }
         mains.forEach(function(m) {
           m.style.display = m.getAttribute('data-lang') === l ? 'block' : 'none';
@@ -510,28 +649,24 @@
         var links = document.querySelector('.nav-links');
         var navBtn = document.querySelector('.nav-r .btn');
         if (links) {
-          if (l === 'en') {
-            links.children[0].textContent = 'Product';
-            links.children[1].textContent = 'Signals';
-            links.children[2].textContent = 'Pricing';
-            links.children[3].textContent = 'FAQ';
-            if (navBtn) navBtn.textContent = 'Free trial';
-          } else {
-            links.children[0].textContent = 'Producto';
-            links.children[1].textContent = 'Señales';
-            links.children[2].textContent = 'Planes';
-            links.children[3].textContent = 'FAQ';
-            if (navBtn) navBtn.textContent = 'Probar gratis';
+          var t = navTranslations[l] || navTranslations.es;
+          for (var i = 0; i < Math.min(links.children.length, t.length); i++) {
+            links.children[i].textContent = t[i];
           }
         }
+        if (navBtn) navBtn.textContent = navBtnText[l] || navBtnText.es;
       }
 
       if (toggle) {
-        toggle.addEventListener('click', function(){ showLang(lang === 'es' ? 'en' : 'es'); });
+        toggle.addEventListener('click', function(){
+          var idx = LANGS.indexOf(lang);
+          showLang(LANGS[(idx + 1) % LANGS.length]);
+        });
       }
       showLang('es');
 
       function syncPricing(srcBtn, srcGrid, dstBtnId, dstGridId) {
+        if (!srcBtn) return;
         srcBtn.addEventListener('click', function() {
           this.classList.toggle('active');
           srcGrid.classList.toggle('show-yearly');
@@ -543,12 +678,19 @@
           }
         });
       }
-      var p1 = document.getElementById('pricingToggle');
-      var g1 = document.getElementById('pricingGrid');
-      if (p1 && g1) syncPricing(p1, g1, 'pricingToggle2', 'pricingGrid2');
-      var p2 = document.getElementById('pricingToggle2');
-      var g2 = document.getElementById('pricingGrid2');
-      if (p2 && g2) syncPricing(p2, g2, 'pricingToggle', 'pricingGrid');
+      syncPricing(document.getElementById('pricingToggle'), document.getElementById('pricingGrid'), 'pricingToggle2', 'pricingGrid2');
+      syncPricing(document.getElementById('pricingToggle2'), document.getElementById('pricingGrid2'), 'pricingToggle', 'pricingGrid');
+      syncPricing(document.getElementById('pricingToggle3'), document.getElementById('pricingGrid3'), 'pricingToggle', 'pricingGrid');
+
+      // Backend API integration
+      var API_BASE = 'https://satisfied-embrace-production-63cf.up.railway.app';
+      fetch(API_BASE + '/api/health').then(function(r){ return r.json(); }).then(function(d){
+        var ids = ['liveCount', 'liveCountEn', 'liveCountCn'];
+        ids.forEach(function(id){
+          var el = document.getElementById(id);
+          if (el && d.seenTenders) el.textContent = d.seenTenders;
+        });
+      }).catch(function(){});
     })();
   </script>
 </body>

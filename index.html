@@ -194,6 +194,8 @@
     .cta-block .tiny { color: var(--text-2); font-size: 0.92rem; margin-bottom: 24px; }
     footer { padding: 24px 0 48px; color: var(--text-3); font-size: 0.82rem; text-align: center; border-top: 1px solid var(--border); }
 
+    #subModal input:focus { border-color: var(--accent); }
+
     @media (max-width: 860px) {
       .grid-3, .steps, .pricing-grid, .alt-inner, .faq-grid, .cl-item { grid-template-columns: 1fr; }
       .alt-inner { gap: 32px; }
@@ -687,11 +689,7 @@
         var selects = demo.querySelectorAll('select');
         var rows = demo.querySelectorAll('.filter-row');
         var countEl = demo.querySelector('.filter-count');
-        var catOpts = [
-          null,
-          ['Bien','Goods','商品'],
-          ['Servicio','Service','服务']
-        ];
+        var catOpts = [null, ['Bien','Goods','商品'], ['Servicio','Service','服务']];
         selects.forEach(function(s) {
           s.addEventListener('change', function() {
             var catIdx = selects[0].selectedIndex;
@@ -713,22 +711,64 @@
           });
         });
       });
-            countEl.textContent = (countEl.getAttribute('data-template') || 'Showing {v} of {t}').replace('{v}', visible).replace('{t}', countEl.getAttribute('data-total'));
-          });
+
+      // Subscribe modal
+      var modal = document.createElement('div');
+      modal.id = 'subModal';
+      modal.innerHTML = '<div style="position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeSub()"><div style="background:var(--surface);border-radius:14px;padding:28px;max-width:400px;width:100%;box-shadow:0 24px 56px rgba(0,0,0,0.2)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><h2 style="margin:0;font-size:1.1rem" id="subTitle">Probar Licit gratis</h2><span onclick="closeSub()" style="cursor:pointer;color:var(--text-3);font-size:1.2rem">✕</span></div><p style="margin:0 0 16px;color:var(--text-2);font-size:0.85rem" id="subDesc">Déjanos tu correo y te enviaremos alertas de prueba.</p><input type="email" id="subEmail" placeholder="tu@correo.pe" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.9rem;background:var(--bg);color:var(--text);margin-bottom:12px;outline:none"><div style="display:flex;gap:10px"><button class="btn btn-primary" style="flex:1" onclick="submitSub()" id="subBtn">Enviar</button><button class="btn btn-secondary" onclick="closeSub()" id="subCancel">Cancelar</button></div><p style="margin:12px 0 0;font-size:0.75rem;color:var(--text-3)" id="subStatus"></p></div></div>';
+      modal.style.display = 'none';
+      document.body.appendChild(modal);
+
+      var API_BASE = 'https://satisfied-embrace-production-63cf.up.railway.app';
+      var subTexts = {
+        es: { title: 'Probar Licit gratis', desc: 'Déjanos tu correo y te enviaremos alertas de prueba.', btn: 'Enviar', cancel: 'Cancelar', sent: '¡Listo! Revisa tu correo.', error: 'Error al enviar. Intenta de nuevo.' },
+        en: { title: 'Try Licit free', desc: 'Leave your email and we\'ll send you trial alerts.', btn: 'Send', cancel: 'Cancel', sent: 'Done! Check your email.', error: 'Error sending. Try again.' },
+        cn: { title: '免费试用 Licit', desc: '留下您的邮箱，我们将向您发送试用告警。', btn: '发送', cancel: '取消', sent: '完成！请查收邮件。', error: '发送失败，请重试。' }
+      };
+
+      window.closeSub = function() { modal.style.display = 'none'; };
+      window.openSub = function() {
+        var t = subTexts[lang] || subTexts.es;
+        document.getElementById('subTitle').textContent = t.title;
+        document.getElementById('subDesc').textContent = t.desc;
+        document.getElementById('subBtn').textContent = t.btn;
+        document.getElementById('subCancel').textContent = t.cancel;
+        document.getElementById('subStatus').textContent = '';
+        document.getElementById('subEmail').value = '';
+        modal.style.display = '';
+      };
+      window.submitSub = function() {
+        var email = document.getElementById('subEmail').value.trim();
+        if (!email) return;
+        var st = document.getElementById('subStatus');
+        st.textContent = '...';
+        fetch(API_BASE + '/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email }),
+        }).then(function(r){ return r.json(); }).then(function(d){
+          st.textContent = (subTexts[lang] || subTexts.es).sent;
+        }).catch(function(){
+          st.textContent = (subTexts[lang] || subTexts.es).error;
         });
+      };
+
+      // Link subscribe buttons: all with href="#" (pricing cards) + nav CTA + "Ver planes" buttons
+      document.querySelectorAll('.pc .btn').forEach(function(b) {
+        b.addEventListener('click', function(e){ e.preventDefault(); openSub(); });
+      });
+      document.querySelectorAll('a[href="#pricing"]').forEach(function(b) {
+        b.addEventListener('click', function(e){ e.preventDefault(); openSub(); });
       });
 
       // Backend API integration
-      var API_BASE = 'https://satisfied-embrace-production-63cf.up.railway.app';
       fetch(API_BASE + '/api/health', { mode: 'cors' }).then(function(r){ return r.json(); }).then(function(d){
-        var ids = ['liveCount', 'liveCountEn', 'liveCountCn'];
-        ids.forEach(function(id){
+        ['liveCount', 'liveCountEn', 'liveCountCn'].forEach(function(id){
           var el = document.getElementById(id);
           if (el && d.seenTenders != null) el.textContent = d.seenTenders;
         });
-      }).catch(function(err){
-        console.warn('[Licit] API fetch failed:', err);
-      });
+      }).catch(function(err){ console.warn('[Licit] API:', err); });
+    })();
   </script>
 </body>
 </html>

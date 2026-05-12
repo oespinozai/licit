@@ -302,16 +302,16 @@
         <div style="direction:ltr">
           <div class="filter-demo">
             <div class="filter-bar">
-              <select><option selected>Todos los objetos</option><option>Bienes</option><option>Servicios</option></select>
-              <select><option selected>Todos los departamentos</option><option>Lima</option><option>Arequipa</option></select>
-              <select><option selected>Cualquier monto</option><option>Desde S/50,000</option><option>Desde S/200,000</option></select>
+              <select class="f-obj"><option selected>Todos los objetos</option><option>Bienes</option><option>Servicios</option></select>
+              <select class="f-dept"><option selected>Todos los departamentos</option><option>Lima</option><option>Arequipa</option></select>
+              <select class="f-min"><option selected>Cualquier monto</option><option>Desde S/50,000</option><option>Desde S/200,000</option></select>
             </div>
             <div class="filter-list">
-              <div class="filter-row"><span class="tag">Bien</span><span>Equipos médicos · Hospital Regional</span><span style="font-weight:700">S/ 420,000</span></div>
-              <div class="filter-row"><span class="tag green">Servicio</span><span>Consultoría ambiental · GR Cusco</span><span style="font-weight:700">S/ 95,000</span></div>
-              <div class="filter-row"><span class="tag">Bien</span><span>Materiales ferretería · Hospital</span><span style="font-weight:700">S/ 25,000</span></div>
+              <div class="filter-row" data-cat="Bien" data-amt="420000"><span class="tag">Bien</span><span>Equipos médicos · Hospital Regional</span><span style="font-weight:700">S/ 420,000</span></div>
+              <div class="filter-row" data-cat="Servicio" data-amt="95000"><span class="tag green">Servicio</span><span>Consultoría ambiental · GR Cusco</span><span style="font-weight:700">S/ 95,000</span></div>
+              <div class="filter-row" data-cat="Bien" data-amt="25000"><span class="tag">Bien</span><span>Materiales ferretería · Hospital</span><span style="font-weight:700">S/ 25,000</span></div>
             </div>
-            <div class="filter-count">3 de 24 convocatorias activas</div>
+            <div class="filter-count" data-total="24" data-template="Mostrando {v} de {t} convocatorias activas">3 de 24 convocatorias activas</div>
           </div>
         </div>
       </div>
@@ -429,16 +429,16 @@
         <div style="direction:ltr">
           <div class="filter-demo">
             <div class="filter-bar">
-              <select><option selected>All categories</option><option>Goods</option><option>Services</option></select>
-              <select><option selected>All regions</option><option>Lima</option><option>Arequipa</option></select>
-              <select><option selected>Any amount</option><option>From S/50,000</option><option>From S/200,000</option></select>
+              <select class="f-obj"><option selected>All categories</option><option>Goods</option><option>Services</option></select>
+              <select class="f-dept"><option selected>All regions</option><option>Lima</option><option>Arequipa</option></select>
+              <select class="f-min"><option selected>Any amount</option><option>From S/50,000</option><option>From S/200,000</option></select>
             </div>
             <div class="filter-list">
-              <div class="filter-row"><span class="tag">Goods</span><span>Medical equip. · Regional Hospital</span><span style="font-weight:700">S/ 420,000</span></div>
-              <div class="filter-row"><span class="tag green">Service</span><span>Env. consulting · GR Cusco</span><span style="font-weight:700">S/ 95,000</span></div>
-              <div class="filter-row"><span class="tag">Goods</span><span>Hardware supplies · Hospital</span><span style="font-weight:700">S/ 25,000</span></div>
+              <div class="filter-row" data-cat="Goods" data-amt="420000"><span class="tag">Goods</span><span>Medical equip. · Regional Hospital</span><span style="font-weight:700">S/ 420,000</span></div>
+              <div class="filter-row" data-cat="Service" data-amt="95000"><span class="tag green">Service</span><span>Env. consulting · GR Cusco</span><span style="font-weight:700">S/ 95,000</span></div>
+              <div class="filter-row" data-cat="Goods" data-amt="25000"><span class="tag">Goods</span><span>Hardware supplies · Hospital</span><span style="font-weight:700">S/ 25,000</span></div>
             </div>
-            <div class="filter-count">3 of 24 active tenders</div>
+            <div class="filter-count" data-total="24" data-template="Showing {v} of {t} active tenders">3 of 24 active tenders</div>
           </div>
         </div>
       </div>
@@ -556,16 +556,16 @@
         <div style="direction:ltr">
           <div class="filter-demo">
             <div class="filter-bar">
-              <select><option selected>所有品类</option><option>商品</option><option>服务</option></select>
-              <select><option selected>所有地区</option><option>利马</option><option>阿雷基帕</option></select>
-              <select><option selected>任意金额</option><option>从S/50,000起</option><option>从S/200,000起</option></select>
+              <select class="f-obj"><option selected>所有品类</option><option>商品</option><option>服务</option></select>
+              <select class="f-dept"><option selected>所有地区</option><option>利马</option><option>阿雷基帕</option></select>
+              <select class="f-min"><option selected>任意金额</option><option>从S/50,000起</option><option>从S/200,000起</option></select>
             </div>
             <div class="filter-list">
-              <div class="filter-row"><span class="tag">商品</span><span>医疗设备 · 地区医院</span><span style="font-weight:700">S/ 420,000</span></div>
-              <div class="filter-row"><span class="tag green">服务</span><span>环境咨询 · GR Cusco</span><span style="font-weight:700">S/ 95,000</span></div>
-              <div class="filter-row"><span class="tag">商品</span><span>五金材料 · 医院</span><span style="font-weight:700">S/ 25,000</span></div>
+              <div class="filter-row" data-cat="商品" data-amt="420000"><span class="tag">商品</span><span>医疗设备 · 地区医院</span><span style="font-weight:700">S/ 420,000</span></div>
+              <div class="filter-row" data-cat="服务" data-amt="95000"><span class="tag green">服务</span><span>环境咨询 · GR Cusco</span><span style="font-weight:700">S/ 95,000</span></div>
+              <div class="filter-row" data-cat="商品" data-amt="25000"><span class="tag">商品</span><span>五金材料 · 医院</span><span style="font-weight:700">S/ 25,000</span></div>
             </div>
-            <div class="filter-count">24条招标中显示3条</div>
+            <div class="filter-count" data-total="24" data-template="显示 {v}/{t} 条招标">24条招标中显示3条</div>
           </div>
         </div>
       </div>
@@ -681,6 +681,42 @@
       syncPricing(document.getElementById('pricingToggle'), document.getElementById('pricingGrid'), 'pricingToggle2', 'pricingGrid2');
       syncPricing(document.getElementById('pricingToggle2'), document.getElementById('pricingGrid2'), 'pricingToggle', 'pricingGrid');
       syncPricing(document.getElementById('pricingToggle3'), document.getElementById('pricingGrid3'), 'pricingToggle', 'pricingGrid');
+
+      // Filter demo interactivity
+      document.querySelectorAll('.filter-demo').forEach(function(demo) {
+        var selects = demo.querySelectorAll('select');
+        var rows = demo.querySelectorAll('.filter-row');
+        var countEl = demo.querySelector('.filter-count');
+        var catOpts = [
+          null,
+          ['Bien','Goods','商品'],
+          ['Servicio','Service','服务']
+        ];
+        selects.forEach(function(s) {
+          s.addEventListener('change', function() {
+            var catIdx = selects[0].selectedIndex;
+            var minIdx = selects[2].selectedIndex;
+            var visible = 0;
+            rows.forEach(function(r) {
+              var show = true;
+              if (catIdx > 0) {
+                var cats = catOpts[catIdx] || [];
+                if (cats.indexOf(r.getAttribute('data-cat')) === -1) show = false;
+              }
+              if (minIdx === 1 && parseInt(r.getAttribute('data-amt')) < 50000) show = false;
+              if (minIdx === 2 && parseInt(r.getAttribute('data-amt')) < 200000) show = false;
+              r.style.display = show ? '' : 'none';
+              if (show) visible++;
+            });
+            var tpl = countEl.getAttribute('data-template') || 'Showing {v} of {t}';
+            countEl.textContent = tpl.replace('{v}', visible).replace('{t}', countEl.getAttribute('data-total'));
+          });
+        });
+      });
+            countEl.textContent = (countEl.getAttribute('data-template') || 'Showing {v} of {t}').replace('{v}', visible).replace('{t}', countEl.getAttribute('data-total'));
+          });
+        });
+      });
 
       // Backend API integration
       var API_BASE = 'https://satisfied-embrace-production-63cf.up.railway.app';

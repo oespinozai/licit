@@ -4,10 +4,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#09090b">
-<title>Licit — Inteligencia de contrataciones públicas</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Licit - Fianzas SEACE para corredores de seguros</title>
+<meta name="description" content="Software para corredores de seguros: detecta ganadores de adjudicaciones SEACE en tiempo real y vende mas cartas fianza en Peru. Solicita acceso.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<link rel="canonical" href="https://licit.alvento.uk/">
+<link rel="alternate" hreflang="es" href="https://licit.alvento.uk/?lang=es">
+<link rel="alternate" hreflang="en" href="https://licit.alvento.uk/?lang=en">
+<link rel="alternate" hreflang="zh" href="https://licit.alvento.uk/?lang=zh">
+<link rel="alternate" hreflang="x-default" href="https://licit.alvento.uk/">
+<meta property="og:site_name" content="Licit">
+<meta property="og:title" content="Licit - Fianzas SEACE para corredores de seguros">
+<meta property="og:description" content="Detecta ganadores de SEACE en tiempo real y vende mas cartas fianza en Peru. Software para corredores de seguros.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://licit.alvento.uk/">
+<meta property="og:image" content="https://licit.alvento.uk/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Licit - Gestor de fianzas SEACE para corredores de seguros">
+<meta property="og:locale" content="es_PE">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Licit - Fianzas SEACE para corredores de seguros">
+<meta name="twitter:description" content="Detecta ganadores de SEACE en tiempo real y vende mas cartas fianza en Peru. Software para corredores de seguros.">
+<meta name="twitter:image" content="https://licit.alvento.uk/og.png">
+<meta name="twitter:image:alt" content="Licit - Gestor de fianzas SEACE para corredores de seguros">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Licit",
+  "url": "https://licit.alvento.uk",
+  "logo": "https://licit.alvento.uk/og.png",
+  "description": "Gestor de fianzas SEACE para corredores de seguros en Peru.",
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Alvento Ltd",
+    "url": "https://alvento.uk"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Licit",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Detecta ganadores de adjudicaciones SEACE en Peru en tiempo real y gestiona el flujo completo de cartas fianza para corredores de seguros.",
+  "url": "https://licit.alvento.uk",
+  "image": "https://licit.alvento.uk/og.png",
+  "inLanguage": [
+    "es",
+    "en",
+    "zh"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "2500",
+    "priceCurrency": "PEN",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "2500",
+      "priceCurrency": "PEN",
+      "unitCode": "MON"
+    },
+    "availability": "https://schema.org/InStock",
+    "url": "https://licit.alvento.uk/#pricing"
+  },
+  "featureList": [
+    "Monitoreo SEACE cada 15 minutos",
+    "Extraccion de contactos de ganadores (RUC, email, telefono)",
+    "Solicitudes de carta fianza ilimitadas",
+    "Alertas por WhatsApp y correo",
+    "Soporte multi-usuario para corredurias"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "Alvento Ltd",
+    "url": "https://alvento.uk"
+  }
+}
+</script>
 <style>
 :root{--bg:#09090b;--surface:#18181b;--surface-raised:#222225;--text:#f4f4f5;--text-2:#a1a1aa;--text-3:#52525b;--border:#27272a;--accent:#0A2FFF;--accent-h:#3355FF;--accent-dim:rgba(10,47,255,0.15);--accent-glow:rgba(10,47,255,0.08);--success:#22c55e;--font:'Plus Jakarta Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--radius:10px;--max:1100px}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -174,7 +252,7 @@ footer p{font-size:.75rem;color:var(--text-3)}
 </div>
 <div class="nav-r">
 <div class="lang-toggle" id="langToggle"><span class="active">ES</span><span>EN</span><span>中文</span></div>
-<a class="btn btn-sm" href="#" id="navCta" data-lang="es">Probar gratis</a><a class="btn btn-sm" href="#" id="navCta" data-lang="en">Free trial</a><a class="btn btn-sm" href="#" id="navCta" data-lang="cn">免费试用</a>
+<a class="btn btn-sm" href="/login" id="navCta" data-lang="es">Probar gratis</a><a class="btn btn-sm" href="/login" id="navCta" data-lang="en">Free trial</a><a class="btn btn-sm" href="/login" id="navCta" data-lang="cn">免费试用</a>
 </div>
 </div>
 </nav>
@@ -184,9 +262,9 @@ footer p{font-size:.75rem;color:var(--text-3)}
 <div class="hero-bg"><div class="dot-grid"></div></div>
 <div class="wrap hero-inner">
 <div class="hero-content">
-<span class="hero-tag" data-lang="es">Monitoreo de adjudicaciones SEACE</span><span class="hero-tag" data-lang="en">SEACE award monitoring</span><span class="hero-tag" data-lang="cn">SEACE中标监控</span>
-<h1 class="hero-title" data-lang="es">Entérate qué empresa ganó la licitación<br>antes de los <span style="color:var(--accent)">7 días</span></h1><h1 class="hero-title" data-lang="en">Know which company won the tender<br>within the <span style="color:var(--accent)">7-day window</span></h1><h1 class="hero-title" data-lang="cn">第一时间知道哪家公司中标<br><span style="color:var(--accent)">7天窗口期</span>内联系</h1>
-<p class="hero-lead" data-lang="es">Monitoreamos el SEACE y te avisamos al instante cuando una empresa gana una licitación. Tienes 7 días para contactarlos.</p><p class="hero-lead" data-lang="en">We monitor SEACE and alert you instantly when a company wins a tender. You have 7 days to contact them.</p><p class="hero-lead" data-lang="cn">我们监控SEACE系统，当有公司中标时立即通知您。您有7天时间联系他们。</p>
+<span class="hero-tag" data-lang="es">Fianzas para corredores</span><span class="hero-tag" data-lang="en">Surety workflow for brokers</span><span class="hero-tag" data-lang="cn">经纪人保函工作流</span>
+<h1 class="hero-title" data-lang="es">Gana cada carta fianza<br>de las licitaciones del <span style="color:var(--accent)">Estado</span></h1><h1 class="hero-title" data-lang="en">Win every surety bond<br>from state <span style="color:var(--accent)">tenders</span></h1><h1 class="hero-title" data-lang="cn">赢得每一份国家<br>招标<span style="color:var(--accent)">保函</span></h1>
+<p class="hero-lead" data-lang="es">Licit detecta cada empresa que gana una adjudicación en el SEACE, con contacto enriquecido, para que consigas la fianza primero. Una venta por bond te paga el software muchas veces.</p><p class="hero-lead" data-lang="en">Licit detects every company that wins a SEACE award, with enriched contact data, so you reach them first. One placed bond pays for the software many times over.</p><p class="hero-lead" data-lang="cn">Licit检测到每一个在SEACE中标的公司，并提供丰富的联系信息，使您首先联系他们。一份保函销售就能多次抵消软件成本。</p>
 <div class="hero-btn-row">
 <a class="btn" href="#demo" data-lang="es">Ver demo</a><a class="btn" href="#demo" data-lang="en">View demo</a><a class="btn" href="#demo" data-lang="cn">查看演示</a>
 <a class="btn btn-outline" href="#pricing" data-lang="es">Ver planes</a><a class="btn btn-outline" href="#pricing" data-lang="en">View plans</a><a class="btn btn-outline" href="#pricing" data-lang="cn">查看方案</a>
@@ -208,12 +286,12 @@ footer p{font-size:.75rem;color:var(--text-3)}
 <div class="sec-head">
 <span class="tag" data-lang="es">Valor</span><span class="tag" data-lang="en">Value</span><span class="tag" data-lang="cn">价值</span>
 <h2 data-lang="es">Por qué Licit</h2><h2 data-lang="en">Why Licit</h2><h2 data-lang="cn">为什么选择 Licit</h2>
-<p data-lang="es">Cada día se adjudican licitaciones públicas en Perú. La mayoría de subcontratistas se entera cuando ya pasaron los 7 días.</p><p data-lang="en">Every day public tenders are awarded in Peru. Most subcontractors find out after the 7-day window has passed.</p><p data-lang="cn">秘鲁每天都有公开招标结果公布。大多数分包商在7天窗口期过后才知道。</p>
+<p data-lang="es">Cada adjudicación SEACE representa una oportunidad de carta fianza. Licit te pone en contacto primero con el ganador, para que armes el paquete CESCE y cobres tu comisión.</p><p data-lang="en">Every SEACE award is a surety-bond opportunity. Licit connects you with the winner first, so you assemble the bond package and earn your commission.</p><p data-lang="cn">每一份SEACE中标都是一份保函机会。Licit让您首先与中标方联系，以便您组装保函包并赚取佣金。</p>
 </div>
 <div class="grid-3">
-<div class="card"><div class="ico">01</div><h3 data-lang="es">Alertas instantáneas</h3><h3 data-lang="en">Instant alerts</h3><h3 data-lang="cn">即时通知</h3><p data-lang="es">Te avisamos en minutos cuando el Estado adjudica una licitación. No cuando ya es tarde.</p><p data-lang="en">We alert you within minutes when the State awards a tender. Not when it's too late.</p><p data-lang="cn">国家发布中标结果后，我们在几分钟内通知您。</p></div>
-<div class="card"><div class="ico">02</div><h3 data-lang="es">Ganador identificado</h3><h3 data-lang="en">Winner identified</h3><h3 data-lang="cn">中标方信息</h3><p data-lang="es">Cada alerta incluye la empresa ganadora, monto adjudicado y entidad convocante.</p><p data-lang="en">Every alert includes the winning company, awarded amount, and contracting entity.</p><p data-lang="cn">每条通知都包含中标公司、中标金额和招标单位。</p></div>
-<div class="card"><div class="ico">03</div><h3 data-lang="es">Cuenta regresiva</h3><h3 data-lang="en">Countdown</h3><h3 data-lang="cn">倒计时</h3><p data-lang="es">Ves exactamente cuántos días quedan para contactar al ganador antes de que se consolide.</p><p data-lang="en">See exactly how many days remain to contact the winner before the award is finalised.</p><p data-lang="cn">精确查看联系中标方还剩多少天。</p></div>
+<div class="card"><div class="ico">01</div><h3 data-lang="es">Cada adjudicación, al instante</h3><h3 data-lang="en">Every award, instantly</h3><h3 data-lang="cn">每份中标，即时通知</h3><p data-lang="es">Detectamos cada adjudicación en el SEACE en minutos. Eres el primero en saberlo, antes que la competencia.</p><p data-lang="en">We detect every SEACE award in minutes. You're first to know, before competitors.</p><p data-lang="cn">我们在几分钟内检测到每份SEACE中标。您首先知道，领先竞争对手。</p></div>
+<div class="card"><div class="ico">02</div><h3 data-lang="es">Ganador y contacto listos</h3><h3 data-lang="en">Winner and contact ready</h3><h3 data-lang="cn">中标方和联系信息已准备</h3><p data-lang="es">Cada alerta trae el ganador, RUC, monto, entidad y contacto enriquecido. Llama, empieza la negociación de la fianza.</p><p data-lang="en">Every alert includes the winner, RUC, amount, entity, and enriched contact. Call, start the bond negotiation.</p><p data-lang="cn">每条通知都包含中标方、RUC、金额、单位和丰富的联系信息。打电话，开始保函谈判。</p></div>
+<div class="card"><div class="ico">03</div><h3 data-lang="es">Paquete CESCE en un clic</h3><h3 data-lang="en">Bond package, one click</h3><h3 data-lang="cn">一键生成保函包</h3><p data-lang="es">Licit arma el flujo de onboarding y el paquete de documentos para enviar a CESCE. Tú negocias, colocas la fianza y cobras.</p><p data-lang="en">Licit assembles the onboarding flow and document package to send to the surety insurer. You negotiate, place the bond, collect commission.</p><p data-lang="cn">Licit组装入职流程和文件包以发送给担保保险人。您负责谈判、投保和收取佣金。</p></div>
 </div>
 </div>
 </section>
@@ -223,7 +301,7 @@ footer p{font-size:.75rem;color:var(--text-3)}
 <div class="sec-head">
 <span class="tag">WhatsApp</span>
 <h2 data-lang="es">Alerta en tiempo real</h2><h2 data-lang="en">Real-time alert</h2><h2 data-lang="cn">实时通知</h2>
-<p data-lang="es">Así se ve una alerta cuando Licit detecta una adjudicación nueva.</p><p data-lang="en">This is what an alert looks like when Licit detects a new award.</p><p data-lang="cn">这是Licit检测到新中标时发送的通知。</p>
+<p data-lang="es">Así se ve una alerta cuando Licit detecta una nueva oportunidad de fianza en SEACE. Llamadas, contactos y montos listos para que empieces la venta.</p><p data-lang="en">This is what an alert looks like when Licit detects a new surety opportunity in SEACE. Calls, contacts, and amounts ready for you to start the sale.</p><p data-lang="cn">这是Licit在SEACE中检测到新保函机会时的通知。电话、联系方式和金额已准备好让您开始销售。</p>
 </div>
 <div class="demo-grid">
 <div class="wa-card">
@@ -237,14 +315,14 @@ footer p{font-size:.75rem;color:var(--text-3)}
 <div class="wa-row"><span class="wa-label">Ventana</span><span id="waWindow" style="color:var(--success);font-weight:600">6 días restantes</span></div>
 <div class="wa-row"><span class="wa-label">OCID</span><span class="wa-id">ocds-dgv273-seacev3-2026</span></div>
 </div>
-<a class="wa-link" href="#">Ver en SEACE →</a>
+<a class="wa-link" href="/login">Ver en SEACE →</a>
 </div>
 </div>
 <div>
 <div class="card" style="height:100%">
 <div class="ico">📊</div>
 <h3 data-lang="es">Monitoreo activo</h3><h3 data-lang="en">Active monitoring</h3><h3 data-lang="cn">实时监控</h3>
-<p data-lang="es" style="margin-bottom:16px">Revisamos el SEACE cada 15 minutos vía la API oficial del OECE. Filtramos solo adjudicaciones y calculamos la ventana de 7 días.</p><p data-lang="en" style="margin-bottom:16px">We check SEACE every 15 minutes via the official OECE API. We filter only awards and calculate the 7-day window.</p><p data-lang="cn" style="margin-bottom:16px">我们每15分钟通过OECE官方API检查SEACE系统。仅筛选中标信息并计算7天窗口期。</p>
+<p data-lang="es" style="margin-bottom:16px">Revisamos el SEACE cada 15 minutos vía la API oficial del OECE. Cada adjudicación es una oportunidad de carta fianza para ti. Los datos enriquecidos te ayudan a contactar primero y cerrar la venta.</p><p data-lang="en" style="margin-bottom:16px">We check SEACE every 15 minutes via the official OECE API. Every award is a surety-bond opportunity for you. Enriched data helps you contact first and close the sale.</p><p data-lang="cn" style="margin-bottom:16px">我们每15分钟通过OECE官方API检查SEACE系统。每份中标都是您的保函销售机会。丰富的数据帮助您首先联系并成交。</p>
 <div style="font-family:var(--mono);font-size:.72rem;color:var(--text-3);display:flex;gap:24px;flex-wrap:wrap">
 <span data-lang="es"><span style="color:var(--text)">·</span> Adjudicaciones monitoreadas: <span id="liveCount" style="color:var(--accent)">—</span></span><span data-lang="en"><span style="color:var(--text)">·</span> Awards tracked: <span id="liveCountEn" style="color:var(--accent)">—</span></span><span data-lang="cn"><span style="color:var(--text)">·</span> 已跟踪中标: <span id="liveCountCn" style="color:var(--accent)">—</span></span>
 </div>
@@ -261,9 +339,9 @@ footer p{font-size:.75rem;color:var(--text-3)}
 <h2 data-lang="es">Tres pasos simples</h2><h2 data-lang="en">Three simple steps</h2><h2 data-lang="cn">三步简单开始</h2>
 </div>
 <div class="steps">
-<div class="step"><div class="num">1</div><h3 data-lang="es">Monitoreo</h3><h3 data-lang="en">Monitor</h3><h3 data-lang="cn">监控</h3><p data-lang="es">Revisamos el SEACE V3 + Contratos Menores cada 15 minutos.</p><p data-lang="en">We check SEACE V3 + Minor Contracts every 15 minutes.</p><p data-lang="cn">每15分钟检查SEACE V3和小额合同。</p></div>
-<div class="step"><div class="num">2</div><h3 data-lang="es">Detección</h3><h3 data-lang="en">Detection</h3><h3 data-lang="cn">检测</h3><p data-lang="es">Filtramos solo adjudicaciones y extraemos ganador, monto y fecha.</p><p data-lang="en">We filter only awards and extract winner, amount, and date.</p><p data-lang="cn">仅筛选中标结果，提取中标方、金额和日期。</p></div>
-<div class="step"><div class="num">3</div><h3 data-lang="es">Alerta</h3><h3 data-lang="en">Alert</h3><h3 data-lang="cn">通知</h3><p data-lang="es">Te enviamos la adjudicación con los datos para que contactes al ganador.</p><p data-lang="en">We send you the award with the data you need to contact the winner.</p><p data-lang="cn">向您发送中标信息，方便您联系中标方。</p></div>
+<div class="step"><div class="num">1</div><h3 data-lang="es">Monitoreamos SEACE</h3><h3 data-lang="en">We monitor SEACE</h3><h3 data-lang="cn">我们监控SEACE</h3><p data-lang="es">Revisamos el SEACE cada 15 minutos vía API oficial del OECE. Detectamos todas las adjudicaciones en tiempo real.</p><p data-lang="en">We check SEACE every 15 minutes via the official OECE API. We detect all awards in real time.</p><p data-lang="cn">我们每15分钟通过OECE官方API检查SEACE。我们实时检测所有中标。</p></div>
+<div class="step"><div class="num">2</div><h3 data-lang="es">Identificamos el ganador</h3><h3 data-lang="en">We identify the winner</h3><h3 data-lang="cn">我们识别中标方</h3><p data-lang="es">Extraemos ganador, RUC, monto, entidad y contacto enriquecido. Todo listo para que llames y empieces la venta.</p><p data-lang="en">We extract winner, RUC, amount, entity, and enriched contact. Ready for you to call and start the sale.</p><p data-lang="cn">我们提取中标方、RUC、金额、单位和丰富的联系信息。随时准备好让您打电话开始销售。</p></div>
+<div class="step"><div class="num">3</div><h3 data-lang="es">Tú colocas la fianza</h3><h3 data-lang="en">You place the bond</h3><h3 data-lang="cn">您投保保函</h3><p data-lang="es">Contactas al ganador, negocias, armas el paquete CESCE y cobras tu comisión. Licit gestiona todo en una vista clara.</p><p data-lang="en">You contact the winner, negotiate, assemble the bond package, and earn your commission. Licit manages everything in one clear view.</p><p data-lang="cn">您联系中标方、谈判、组装保函包并赚取佣金。Licit在一个清晰的视图中管理所有内容。</p></div>
 </div>
 </div>
 </section>
@@ -286,49 +364,31 @@ footer p{font-size:.75rem;color:var(--text-3)}
 <div class="wrap">
 <div class="sec-head">
 <span class="tag" data-lang="es">Planes</span><span class="tag" data-lang="en">Pricing</span><span class="tag" data-lang="cn">方案</span>
-<h2 data-lang="es">Elige tu plan</h2><h2 data-lang="en">Choose your plan</h2><h2 data-lang="cn">选择方案</h2>
+<h2 data-lang="es">Un plan, hecho para corredores</h2><h2 data-lang="en">One plan, built for brokers</h2><h2 data-lang="cn">一个为经纪人设计的方案</h2>
 </div>
 <div class="pricing-grid">
-<div class="pc">
-<div class="pname" data-lang="es">Básico</div><div class="pname" data-lang="en">Starter</div><div class="pname" data-lang="cn">入门版</div>
-<h3 data-lang="es">10 leads/mes</h3><h3 data-lang="en">10 leads/mo</h3><h3 data-lang="cn">10条线索/月</h3>
-<div class="price"><span class="price-currency">S/</span><span class="price-amount">149</span><span class="price-period" data-lang="es">/mes</span><span class="price-period" data-lang="en">/mo</span><span class="price-period" data-lang="cn">/月</span></div>
-<p class="price-desc" data-lang="es">Para subcontratistas que quieren empezar a ganar leads de adjudicaciones.</p><p class="price-desc" data-lang="en">For subcontractors who want to start winning award leads.</p><p class="price-desc" data-lang="cn">适合希望开始获取中标线索的分包商。</p>
-<ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">10 leads de adjudicaciones</span><span data-lang="en">10 award leads</span><span data-lang="cn">10条中标线索</span></li>
-<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">Alertas por email</span><span data-lang="en">Email alerts</span><span data-lang="cn">邮件通知</span></li>
-<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">Ganador y monto identificados</span><span data-lang="en">Winner & amount identified</span><span data-lang="cn">中标方和金额信息</span></li></ul>
-<a class="btn btn-outline btn-full" href="#" data-plan="basico" data-lang="es">Empezar</a><a class="btn btn-outline btn-full" href="#" data-plan="basico" data-lang="en">Start</a><a class="btn btn-outline btn-full" href="#" data-plan="basico" data-lang="cn">开始</a>
-</div>
-<div class="pc popular">
-<div class="pname" data-lang="es">★ Más popular</div><div class="pname" data-lang="en">★ Most popular</div><div class="pname" data-lang="cn">★ 最受欢迎</div>
-<h3 data-lang="es">50 leads/mes</h3><h3 data-lang="en">50 leads/mo</h3><h3 data-lang="cn">50条线索/月</h3>
-<div class="price"><span class="price-currency">S/</span><span class="price-amount">399</span><span class="price-period" data-lang="es">/mes</span><span class="price-period" data-lang="en">/mo</span><span class="price-period" data-lang="cn">/月</span></div>
-<p class="price-desc" data-lang="es">Para contratistas que buscan leads constantes con alertas WhatsApp.</p><p class="price-desc" data-lang="en">For contractors who want steady leads with WhatsApp alerts.</p><p class="price-desc" data-lang="cn">适合需要稳定线索和WhatsApp通知的承包商。</p>
-<ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">50 leads de adjudicaciones</span><span data-lang="en">50 award leads</span><span data-lang="cn">50条中标线索</span></li>
-<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">Alertas WhatsApp en tiempo real</span><span data-lang="en">Real-time WhatsApp alerts</span><span data-lang="cn">实时WhatsApp通知</span></li>
-<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">7 días de prueba gratis</span><span data-lang="en">7-day free trial</span><span data-lang="cn">7天免费试用</span></li></ul>
-<a class="btn btn-full" href="#" data-plan="pro" data-lang="es">Probar gratis</a><a class="btn btn-full" href="#" data-plan="pro" data-lang="en">Free trial</a><a class="btn btn-full" href="#" data-plan="pro" data-lang="cn">免费试用</a>
-</div>
-<div class="pc">
-<div class="pname" data-lang="es">Portfolio</div><div class="pname" data-lang="en">Portfolio</div><div class="pname" data-lang="cn">企业版</div>
-<h3 data-lang="es">Leads ilimitados</h3><h3 data-lang="en">Unlimited leads</h3><h3 data-lang="cn">无限线索</h3>
-<div class="price"><span class="price-currency">S/</span><span class="price-amount">899</span><span class="price-period" data-lang="es">/mes</span><span class="price-period" data-lang="en">/mo</span><span class="price-period" data-lang="cn">/月</span></div>
-<p class="price-desc" data-lang="es">Para equipos grandes con necesidades de integración personalizada.</p><p class="price-desc" data-lang="en">For large teams with custom integration needs.</p><p class="price-desc" data-lang="cn">适合需要定制集成的大型团队。</p>
-<ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">Leads ilimitados</span><span data-lang="en">Unlimited leads</span><span data-lang="cn">无限线索</span></li>
-<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">API para integración</span><span data-lang="en">API integration</span><span data-lang="cn">API集成</span></li>
-<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">Multi-RUC</span><span data-lang="en">Multi-RUC</span><span data-lang="cn">多RUC</span></li></ul>
-<a class="btn btn-outline btn-full" href="#" data-plan="portfolio" data-lang="es">Contactar</a><a class="btn btn-outline btn-full" href="#" data-plan="portfolio" data-lang="en">Contact</a><a class="btn btn-outline btn-full" href="#" data-plan="portfolio" data-lang="cn">联系我们</a>
+<div class="pc popular" style="grid-column:2">
+<div class="pname" data-lang="es">Plan Licit</div><div class="pname" data-lang="en">Licit Plan</div><div class="pname" data-lang="cn">Licit方案</div>
+<h3 data-lang="es">Para tu cartera de clientes</h3><h3 data-lang="en">For your client portfolio</h3><h3 data-lang="cn">为您的客户组合</h3>
+<div class="price"><span class="price-currency">S/</span><span class="price-amount">2,500</span><span class="price-period" data-lang="es">/mes</span><span class="price-period" data-lang="en">/mo</span><span class="price-period" data-lang="cn">/月</span></div>
+<p class="price-desc" data-lang="es">Monitoreo ilimitado de adjudicaciones en SEACE. Una venta cubre el software muchas veces.</p><p class="price-desc" data-lang="en">Unlimited SEACE award monitoring. One bond sale covers the software many times over.</p><p class="price-desc" data-lang="cn">无限的SEACE中标监控。一份保函销售就能多次抵消软件成本。</p>
+<ul><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">Monitoreo SEACE en tiempo real, cada 15 minutos</span><span data-lang="en">Real-time SEACE monitoring, every 15 minutes</span><span data-lang="cn">实时SEACE监控，每15分钟一次</span></li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">Ganadores con contacto enriquecido (RUC, email, teléfono)</span><span data-lang="en">Winners with enriched contact data (RUC, email, phone)</span><span data-lang="cn">中标方的丰富联系信息（RUC、邮箱、电话）</span></li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">Flujo de onboarding + paquete CESCE en un clic</span><span data-lang="en">Onboarding flow + bond package in one click</span><span data-lang="cn">入职流程 + 一键生成保函包</span></li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span data-lang="es">Soporte para tu cartera de clientes ilimitada</span><span data-lang="en">Support for unlimited client portfolio</span><span data-lang="cn">支持无限客户组合</span></li></ul>
+<a class="btn btn-full" href="/login" data-plan="pro" data-lang="es">Empezar</a><a class="btn btn-full" href="/login" data-plan="pro" data-lang="en">Get started</a><a class="btn btn-full" href="/login" data-plan="pro" data-lang="cn">开始使用</a>
 </div>
 </div>
+<p style="text-align:center;margin-top:24px;color:var(--text-2);font-size:.85rem" data-lang="es">Corredores piloto: gratis durante el período piloto.</p><p style="text-align:center;margin-top:24px;color:var(--text-2);font-size:.85rem" data-lang="en">Design partners: free during the pilot period.</p><p style="text-align:center;margin-top:24px;color:var(--text-2);font-size:.85rem" data-lang="cn">设计合作伙伴：试点期间免费。</p><p style="text-align:center;margin-top:8px;color:var(--text-2);font-size:.78rem" data-lang="es">Documentos tratados de forma segura, conforme a la Ley N° 29733 de protección de datos. Licit no toca la fianza, la prima ni la comisión: eso es tuyo.</p><p style="text-align:center;margin-top:8px;color:var(--text-2);font-size:.78rem" data-lang="en">Documents handled securely under Peru's Data Protection Law (Ley N° 29733). Licit never touches the bond, premium or commission — that stays with you.</p><p style="text-align:center;margin-top:8px;color:var(--text-2);font-size:.78rem" data-lang="cn">文件依照秘鲁数据保护法（第29733号法律）安全处理。Licit 从不经手保函、保费或佣金，这些完全归您。</p>
 </div>
 </section>
 
 <section class="cta">
 <div class="wrap cta-inner">
 <div class="cta-glow"></div>
-<h2 data-lang="es">Empieza a ganar <em>leads de adjudicaciones</em></h2><h2 data-lang="en">Start winning <em>award leads</em></h2><h2 data-lang="cn">开始获取 <em>中标线索</em></h2>
-<p data-lang="es">Únete a los subcontratistas que ya monitorean adjudicaciones en tiempo real.</p><p data-lang="en">Join the subcontractors already monitoring awards in real time.</p><p data-lang="cn">加入已经实时监控中标信息的分包商行列。</p>
-<a class="btn btn-lg" href="#" id="ctaBtn" data-lang="es">Probar gratis</a><a class="btn btn-lg" href="#" id="ctaBtn" data-lang="en">Free trial</a><a class="btn btn-lg" href="#" id="ctaBtn" data-lang="cn">免费试用</a>
+<h2 data-lang="es">Empieza a vender <em>cartas fianza</em> hoy</h2><h2 data-lang="en">Start selling <em>surety bonds</em> today</h2><h2 data-lang="cn">立即开始销售<em>保函</em></h2>
+<p data-lang="es">Únete a los corredores que ya están ganando cada oportunidad de fianza que publica el SEACE.</p><p data-lang="en">Join the brokers already winning every surety opportunity published by SEACE.</p><p data-lang="cn">加入已经赢得SEACE发布的每一份保函机会的经纪人。</p>
+<a class="btn btn-lg" href="/login" id="ctaBtn" data-lang="es">Probar gratis</a><a class="btn btn-lg" href="/login" id="ctaBtn" data-lang="en">Free trial</a><a class="btn btn-lg" href="/login" id="ctaBtn" data-lang="cn">免费试用</a>
 </div>
 </section>
 </main>
@@ -336,10 +396,10 @@ footer p{font-size:.75rem;color:var(--text-3)}
 <footer>
 <div class="wrap footer-inner">
 <span class="logo">licit<span class="dot">.</span></span>
-<p data-lang="es">© 2026 Licit — Inteligencia de contrataciones públicas</p><p data-lang="en">© 2026 Licit — Public procurement intelligence</p><p data-lang="cn">© 2026 Licit — 公共采购情报</p>
+<p data-lang="es">© 2026 Licit — Software de fianzas para corredores</p><p data-lang="en">© 2026 Licit — Surety workflow software for brokers</p><p data-lang="cn">© 2026 Licit — 经纪人保函工作流软件</p>
 <div class="footer-links">
-<a href="#" data-lang="es">Privacidad</a><a href="#" data-lang="en">Privacy</a><a href="#" data-lang="cn">隐私</a>
-<a href="#" data-lang="es">Términos</a><a href="#" data-lang="en">Terms</a><a href="#" data-lang="cn">条款</a>
+<a href="/login" data-lang="es">Privacidad</a><a href="/login" data-lang="en">Privacy</a><a href="/login" data-lang="cn">隐私</a>
+<a href="/login" data-lang="es">Términos</a><a href="/login" data-lang="en">Terms</a><a href="/login" data-lang="cn">条款</a>
 </div>
 </div>
 </footer>
@@ -375,14 +435,14 @@ var modal = document.createElement('div');
 modal.id = 'subModal';
 modal.className = 'modal-overlay';
 modal.style.display = 'none';
-modal.innerHTML = '<div class="modal-box" onclick="event.stopPropagation()"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h2 id="subTitle">Probar Licit gratis</h2><span onclick="closeSub()" style="cursor:pointer;color:var(--text-3);font-size:1.2rem">✕</span></div><p id="subDesc">Recibirás 7 días de prueba gratuita del plan Pro.</p><input type="email" id="subEmail" placeholder="tu@correo.pe"><div class="modal-row"><button class="btn" style="flex:1" onclick="submitSub()" id="subBtn">Continuar</button><button class="btn btn-outline" onclick="closeSub()" id="subCancel">Cancelar</button></div><p style="margin:12px 0 0;font-size:.75rem;color:var(--text-3)" id="subStatus"></p></div>';
+modal.innerHTML = '<div class="modal-box" onclick="event.stopPropagation()"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h2 id="subTitle">Empieza con Licit</h2><span onclick="closeSub()" style="cursor:pointer;color:var(--text-3);font-size:1.2rem">✕</span></div><p id="subDesc">Acceso para corredores piloto. Recibe las primeras adjudicaciones de tu zona.</p><input type="email" id="subEmail" placeholder="tu@correo.pe"><div class="modal-row"><button class="btn" style="flex:1" onclick="submitSub()" id="subBtn">Continuar</button><button class="btn btn-outline" onclick="closeSub()" id="subCancel">Cancelar</button></div><p style="margin:12px 0 0;font-size:.75rem;color:var(--text-3)" id="subStatus"></p></div>';
 document.body.appendChild(modal);
 
 var API_BASE = 'https://satisfied-embrace-production-63cf.up.railway.app';
 var subTexts = {
-  es: { title: 'Probar Licit gratis', desc: 'Recibirás 7 días de prueba gratuita del plan Pro.', btn: 'Continuar', cancel: 'Cancelar', error: 'Error. Intenta de nuevo.' },
-  en: { title: 'Try Licit free', desc: 'You\'ll receive a 7-day free trial of the Pro plan.', btn: 'Continue', cancel: 'Cancel', error: 'Error. Try again.' },
-  cn: { title: '免费试用 Licit', desc: '您将获得Pro方案的7天免费试用。', btn: '继续', cancel: '取消', error: '错误，请重试。' }
+  es: { title: 'Empieza con Licit', desc: 'Acceso para corredores piloto. Recibe las primeras adjudicaciones de tu zona.', btn: 'Continuar', cancel: 'Cancelar', error: 'Error. Intenta de nuevo.' },
+  en: { title: 'Get started with Licit', desc: 'Pilot access for brokers. Receive first awards in your area.', btn: 'Continue', cancel: 'Cancel', error: 'Error. Try again.' },
+  cn: { title: '开始使用 Licit', desc: '经纪人试点访问。接收您所在地区的首批中标。', btn: '继续', cancel: '取消', error: '错误，请重试。' }
 };
 var selectedPlan = 'pro';
 

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://licit.alvento.uk/sitemap.xml
